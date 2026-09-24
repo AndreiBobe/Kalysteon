@@ -666,6 +666,114 @@ main {
   font-size: 0.55rem;
 }
 
+/* ===== STORES ===== */
+.stores-section {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUpFade 0.7s 0.55s var(--transition-smooth) forwards;
+}
+.direct-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.64rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+.direct-eyebrow::before,
+.direct-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 44px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.direct-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  letter-spacing: 1.6px;
+  line-height: 1.1;
+  color: var(--text-light);
+  margin: 0;
+}
+.direct-title em {
+  font-style: normal;
+  color: var(--gold-bright);
+}
+.direct-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  margin: 0.55rem 0 0;
+}
+.direct-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gold-bright);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 0.75rem 2.1rem;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--transition-smooth);
+}
+.direct-cta:hover {
+  background: rgba(212,175,55,0.1);
+  border-color: var(--gold-border-hover);
+  box-shadow: 0 6px 24px rgba(212,175,55,0.14);
+  transform: translateY(-2px);
+}
+.stores-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 2.6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(212,175,55,0.14);
+}
+.strip-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+.strip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: color 0.2s, opacity 0.2s;
+}
+.strip-link img { width: 13px; height: 13px; display: block; opacity: 0.6; transition: opacity 0.2s; }
+.strip-link:hover { color: var(--gold-bright); opacity: 1; }
+.strip-link:hover img { opacity: 1; }
+@media (max-width: 720px) {
+  .direct-eyebrow::before, .direct-eyebrow::after { width: 22px; }
+  .stores-strip { gap: 0.45rem 1rem; }
+}
 footer {
   position: relative;
   z-index: 15;
@@ -767,7 +875,7 @@ footer {
       <div class="nav-dd-menu">
         <a class="nav-dd-item" href="products.html#coll-card-frostholm"><span class="nav-dd-icon">❄</span><span data-en="Frosthölm Collection" data-fr="Collection Frosthölm">Frosthölm Collection</span></a>
         <a class="nav-dd-item" href="products.html#coll-card-8k"><span class="nav-dd-icon">⛰</span><span data-en="8K Terrain Packs" data-fr="Packs Terrain 8K">8K Terrain Packs</span></a>
-        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Arctic Landscapes" data-fr="Paysages Arctiques">Arctic Landscapes</span></a>
+        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Complete Landscapes" data-fr="Paysages Complets">Complete Landscapes</span></a>
         <a class="nav-dd-item" href="products.html#coll-card-bundles"><span class="nav-dd-icon">&#9635;</span><span data-en="Asset Bundles" data-fr="Asset Bundles">Asset Bundles</span></a>
         <div class="nav-dd-divider"></div>
         <a class="nav-dd-item nav-dd-reviews" href="reviews.html"><span class="nav-dd-icon">★</span><span data-en="Client Reviews" data-fr="Avis Clients">Client Reviews</span></a>
@@ -1017,6 +1125,19 @@ footer {
       </div>
     </div>
   </div>
+
+  <div class="stores-section">
+    <div class="direct-eyebrow" data-en="Direct from the studio" data-fr="En direct du studio">Direct from the studio</div>
+    <h2 class="direct-title"><em data-en="The best price" data-fr="Le meilleur prix">The best price</em> <span data-en="is here." data-fr="est ici.">is here.</span></h2>
+    <p class="direct-sub" data-en="No platform fees. Up to 30% off in bundles." data-fr="Sans frais de plateforme. Jusqu'à 30% en bundle.">No platform fees. Up to 30% off in bundles.</p>
+    <a class="direct-cta" href="products.html" data-en="See the packs" data-fr="Voir les packs">See the packs</a>
+    <div class="stores-strip">
+      <span class="strip-label" data-en="Also on" data-fr="Aussi sur">Also on</span>
+      <a class="strip-link" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener"><img src="https://cdn.simpleicons.org/unrealengine/9BB0D0" alt="" aria-hidden="true">Fab</a>
+      <a class="strip-link" href="https://assetstore.unity.com/publishers/104184" target="_blank" rel="noopener"><img src="https://cdn.simpleicons.org/unity/9BB0D0" alt="" aria-hidden="true">Unity Asset Store</a>
+      <a class="strip-link" href="https://www.artstation.com/kalysteon/store" target="_blank" rel="noopener"><img src="https://cdn.simpleicons.org/artstation/9BB0D0" alt="" aria-hidden="true">ArtStation</a>
+    </div>
+  </div>
 </main>
 
 <footer>
@@ -1024,7 +1145,7 @@ footer {
   <div class="footer-links">
     <a class="footer-link" href="https://www.fab.com/sellers/Kalysteon" target="_blank">Fab</a>
     <a class="footer-link" href="https://assetstore.unity.com/publishers/104184" target="_blank">Unity</a>
-    <a class="footer-link" href="https://www.artstation.com/andreibobe/store" target="_blank">ArtStation</a>
+    <a class="footer-link" href="https://www.artstation.com/kalysteon/store" target="_blank">ArtStation</a>
   </div>
 </footer>
 
