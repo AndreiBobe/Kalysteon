@@ -291,6 +291,7 @@ main {
 .ns-slide--stratum    { background: radial-gradient(ellipse 85% 75% at 76% 50%, #06282C 0%, #020B18 65%); }
 .ns-slide--bundles    { background: radial-gradient(ellipse 85% 75% at 70% 45%, #22150A 0%, #020B18 65%); }
 .ns-slide--arctic     { background: radial-gradient(ellipse 85% 75% at 62% 28%, #091528 0%, #020B18 65%); }
+.ns-slide--tutorials  { background: radial-gradient(ellipse 85% 75% at 70% 45%, #1B1033 0%, #020B18 65%); }
 
 /* grid layer */
 .ns-grid {
@@ -322,6 +323,7 @@ main {
 .ns-slide--stratum    .ns-glow { background: radial-gradient(ellipse 40% 60% at 76% 50%, rgba(94,211,216,0.16) 0%, transparent 70%); }
 .ns-slide--bundles    .ns-glow { background: radial-gradient(ellipse 45% 55% at 70% 45%, rgba(232,131,91,0.11) 0%, transparent 70%); }
 .ns-slide--arctic     .ns-glow { background: radial-gradient(ellipse 45% 50% at 60% 28%, rgba(160,200,220,0.09) 0%, transparent 70%); }
+.ns-slide--tutorials  .ns-glow { background: radial-gradient(ellipse 45% 55% at 70% 45%, rgba(192,132,252,0.13) 0%, transparent 70%); }
 
 /* ── slot image — fond droit avec fondu gauche ──
    Placer les images dans img/slides/
@@ -346,6 +348,7 @@ main {
 .ns-stratum-art { position:absolute; top:50%; right:5%; width:min(440px,44%); aspect-ratio:440/340; transform:translateY(-50%); z-index:3; opacity:0; transition:opacity .8s ease; }
 .ns-slide.active .ns-stratum-art { opacity:1; }
 .ns-slide--stratum .ns-hl { color:#5ED3D8; }
+.ns-slide--tutorials .ns-hl { color:#C084FC; }
 .nsa-links { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
 .nsa-ring { fill:none; stroke:rgba(94,211,216,.22); stroke-width:1; stroke-dasharray:3 7; transform-origin:220px 170px; animation:nsaSpin 38s linear infinite; }
 .nsa-ring--b { stroke:rgba(94,211,216,.12); animation-duration:60s; animation-direction:reverse; }
@@ -874,8 +877,8 @@ footer {
       <a class="nav-link nav-dropdown-trigger" href="products.html" data-en="Products" data-fr="Produits">Products</a>
       <div class="nav-dd-menu">
         <a class="nav-dd-item" href="products.html#coll-card-frostholm"><span class="nav-dd-icon">❄</span><span data-en="Frosthölm Collection" data-fr="Collection Frosthölm">Frosthölm Collection</span></a>
-        <a class="nav-dd-item" href="products.html#coll-card-8k"><span class="nav-dd-icon">⛰</span><span data-en="8K Terrain Packs" data-fr="Packs Terrain 8K">8K Terrain Packs</span></a>
-        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Complete Landscapes" data-fr="Paysages Complets">Complete Landscapes</span></a>
+        <a class="nav-dd-item" href="products.html#coll-card-8k"><span class="nav-dd-icon">⛰</span><span data-en="Landscape Packs" data-fr="Landscape Packs">Landscape Packs</span></a>
+        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Complete Worlds" data-fr="Mondes Complets">Complete Worlds</span></a>
         <a class="nav-dd-item" href="products.html#coll-card-bundles"><span class="nav-dd-icon">&#9635;</span><span data-en="Asset Bundles" data-fr="Asset Bundles">Asset Bundles</span></a>
         <div class="nav-dd-divider"></div>
         <a class="nav-dd-item nav-dd-reviews" href="reviews.html"><span class="nav-dd-icon">★</span><span data-en="Client Reviews" data-fr="Avis Clients">Client Reviews</span></a>
@@ -955,9 +958,34 @@ footer {
     <div class="ns-track" id="nsTrack">
 
       <!-- ══════════════════════════════════════
-           SLIDE 1 : Lancement de Stratum
+           SLIDE 1 : Tutoriels YouTube
+           Image : img/slides/slide-tutorials.jpg (16:9, min 1280×720).
+           Tant qu'elle n'existe pas, on retombe sur la miniature du dernier
+           tuto YouTube pour que la slide ne soit jamais vide.
       ══════════════════════════════════════ -->
-      <div class="ns-slide ns-slide--stratum active">
+      <div class="ns-slide ns-slide--tutorials active">
+        <div class="ns-grid"></div>
+        <img class="ns-img" src="img/slides/slide-tutorials.jpg" alt="" style="object-position:50% 40%" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/X_6t6l31QFk/maxresdefault.jpg'">
+        <div class="ns-glow"></div>
+        <div class="ns-scan"></div>
+        <div class="ns-corners">
+          <span class="ns-corner ns-corner--tl"></span>
+          <span class="ns-corner ns-corner--tr"></span>
+          <span class="ns-corner ns-corner--bl"></span>
+          <span class="ns-corner ns-corner--br"></span>
+        </div>
+        <div class="ns-content">
+          <div class="ns-badge" data-en="Free tutorials" data-fr="Tutoriels gratuits">Free tutorials</div>
+          <div class="ns-title" data-en="LEARN GAEA 2<br>STEP BY STEP" data-fr="APPRENEZ GAEA 2<br>PAS À PAS">LEARN GAEA 2<br>STEP BY STEP</div>
+          <div class="ns-sub" data-en="Realistic mountains, cliffs, stylized and dark fantasy terrain. Every project file is &lt;span class='ns-hl'&gt;free to download&lt;/span&gt;." data-fr="Montagnes réalistes, falaises, terrains stylisés et dark fantasy. Chaque projet est &lt;span class='ns-hl'&gt;téléchargeable gratuitement&lt;/span&gt;.">Realistic mountains, cliffs, stylized and dark fantasy terrain. Every project file is <span class="ns-hl">free to download</span>.</div>
+          <a class="ns-cta" href="tutorials.html" data-en="Watch the tutorials →" data-fr="Voir les tutoriels →">Watch the tutorials →</a>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SLIDE 2 : Lancement de Stratum
+      ══════════════════════════════════════ -->
+      <div class="ns-slide ns-slide--stratum">
         <div class="ns-grid"></div>
         <div class="ns-stratum-art" aria-hidden="true">
           <svg class="nsa-links" viewBox="0 0 440 340" preserveAspectRatio="none">
@@ -995,7 +1023,7 @@ footer {
       </div>
 
       <!-- ══════════════════════════════════════
-           SLIDE 2 : 5 nouveaux Asset Bundles
+           SLIDE 3 : 5 nouveaux Asset Bundles
            Image  : img/slides/slide-bundles.jpg (16:9, min 1280×720)
       ══════════════════════════════════════ -->
       <div class="ns-slide ns-slide--bundles">
@@ -1018,7 +1046,7 @@ footer {
       </div>
 
       <!-- ══════════════════════════════════════
-           SLIDE 3 : Bespoke Environments
+           SLIDE 4 : Bespoke Environments
            Image  : img/slides/slide-commission.jpg
       ══════════════════════════════════════ -->
       <div class="ns-slide ns-slide--commission">
@@ -1041,7 +1069,7 @@ footer {
       </div>
 
       <!-- ══════════════════════════════════════
-           SLIDE 4 : Arctic Landscapes
+           SLIDE 5 : Arctic World
            Image  : img/slides/slide-arctic.jpg
       ══════════════════════════════════════ -->
       <div class="ns-slide ns-slide--arctic">
@@ -1057,9 +1085,9 @@ footer {
         </div>
         <div class="ns-content">
           <div class="ns-badge" data-en="New Release" data-fr="Nouvelle Sortie">New Release</div>
-          <div class="ns-title" data-en="ARCTIC<br>LANDSCAPES" data-fr="ARCTIC<br>LANDSCAPES">ARCTIC<br>LANDSCAPES</div>
-          <div class="ns-sub" data-en="Discover the latest high-fidelity environment pack. Optimised for &lt;span class='ns-hl'&gt;Unreal Engine 5 &amp;amp; Unity&lt;/span&gt;. 5 versions included." data-fr="Découvrez le dernier pack d'environnements haute fidélité. Optimisé pour &lt;span class='ns-hl'&gt;Unreal Engine 5 et Unity&lt;/span&gt;. 5 versions incluses.">Discover the latest high-fidelity environment pack. Optimised for <span class="ns-hl">Unreal Engine 5 &amp; Unity</span>. 5 versions included.</div>
-          <a class="ns-cta" href="products.html#coll-card-arctic" data-en="View the Pack →" data-fr="Voir le pack →">View the Pack →</a>
+          <div class="ns-title" data-en="ARCTIC<br>WORLD" data-fr="ARCTIC<br>WORLD">ARCTIC<br>WORLD</div>
+          <div class="ns-sub" data-en="Discover the latest high-fidelity complete world. Optimised for &lt;span class='ns-hl'&gt;Unreal Engine 5 &amp;amp; Unity&lt;/span&gt;. 5 versions included." data-fr="Découvrez le dernier monde complet haute fidélité. Optimisé pour &lt;span class='ns-hl'&gt;Unreal Engine 5 et Unity&lt;/span&gt;. 5 versions incluses.">Discover the latest high-fidelity complete world. Optimised for <span class="ns-hl">Unreal Engine 5 &amp; Unity</span>. 5 versions included.</div>
+          <a class="ns-cta" href="products.html#coll-card-arctic" data-en="View the World →" data-fr="Voir le monde →">View the World →</a>
         </div>
       </div>
 
@@ -1095,7 +1123,7 @@ footer {
     </template>
 
     <!-- counter -->
-    <div class="ns-counter"><span id="nsCurrent">1</span> / <span id="nsTotal">4</span></div>
+    <div class="ns-counter"><span id="nsCurrent">1</span> / <span id="nsTotal">5</span></div>
 
     <!-- arrows -->
     <button class="ns-arrow ns-arrow-prev" id="nsArrowPrev" aria-label="Previous">&#8592;</button>
@@ -1110,6 +1138,7 @@ footer {
       <button class="ns-dot" data-idx="1" aria-label="Slide 2"></button>
       <button class="ns-dot" data-idx="2" aria-label="Slide 3"></button>
       <button class="ns-dot" data-idx="3" aria-label="Slide 4"></button>
+      <button class="ns-dot" data-idx="4" aria-label="Slide 5"></button>
     </div>
 
     <!-- progress bar -->

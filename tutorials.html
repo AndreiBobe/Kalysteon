@@ -233,6 +233,12 @@ header { display: flex; align-items: center; justify-content: space-between; pad
 
 /* Optional newsletter invite (separate from the free download) */
 .tut-nl { margin-top: 1.5rem; padding: 1.2rem 1.3rem; border: 1px solid var(--border-mid); border-radius: var(--radius-md); background: rgba(255,255,255,0.02); text-align: center; }
+/* L'invite newsletter reste masquée tant que le projet n'a pas été téléchargé,
+   puis se déplie juste sous le bouton (moment de meilleure réceptivité). */
+.tut-nl.pending { display: none; }
+.tut-nl.reveal { animation: tutNlIn 0.42s cubic-bezier(0.2,0.9,0.4,1.05) both; }
+@keyframes tutNlIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tut-nl.reveal { animation: none; } }
 .tut-nl-head { font-family: var(--display); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; color: var(--text); margin-bottom: 0.35rem; }
 .tut-nl-sub { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; max-width: 440px; margin: 0 auto 0.95rem; }
 .tut-nl-form { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto; }
@@ -290,8 +296,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: fle
       <a class="nav-link nav-dropdown-trigger" href="products.html" data-en="Products" data-fr="Produits">Products</a>
       <div class="nav-dd-menu">
         <a class="nav-dd-item" href="products.html#coll-card-frostholm"><span class="nav-dd-icon">❄</span><span data-en="Frosthölm Collection" data-fr="Collection Frosthölm">Frosthölm Collection</span></a>
-        <a class="nav-dd-item" href="products.html#coll-card-8k"><span class="nav-dd-icon">⛰</span><span data-en="8K Terrain Packs" data-fr="Packs Terrain 8K">8K Terrain Packs</span></a>
-        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Complete Landscapes" data-fr="Paysages Complets">Complete Landscapes</span></a>
+        <a class="nav-dd-item" href="products.html#coll-card-8k"><span class="nav-dd-icon">⛰</span><span data-en="Landscape Packs" data-fr="Landscape Packs">Landscape Packs</span></a>
+        <a class="nav-dd-item" href="products.html#coll-card-arctic"><span class="nav-dd-icon">🏔</span><span data-en="Complete Worlds" data-fr="Mondes Complets">Complete Worlds</span></a>
         <a class="nav-dd-item" href="products.html#coll-card-bundles"><span class="nav-dd-icon">&#9635;</span><span data-en="Asset Bundles" data-fr="Asset Bundles">Asset Bundles</span></a>
         <div class="nav-dd-divider"></div>
         <a class="nav-dd-item nav-dd-reviews" href="reviews.html"><span class="nav-dd-icon">★</span><span data-en="Client Reviews" data-fr="Avis Clients">Client Reviews</span></a>
@@ -386,7 +392,6 @@ footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: fle
 
 <footer>
   <div class="footer-copy">© 2026 Kalysteon · <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a></div>
-  <div class="footer-response"><span class="dot"></span><span data-en="Response within 48h" data-fr="Réponse sous 48h">Response within 48h</span></div>
 </footer>
 
 <!-- VIDEO MODAL (player + description + gated download) -->
@@ -449,11 +454,24 @@ const YT_CHANNEL = 'https://www.youtube.com/@kalysteon';
 
 const TUTORIALS = [
   {
+    yt: 'X_6t6l31QFk',
+    cat: 'gaea',
+    slug: 'dark-fantasy-spikes-gaea-2',
+    download: 'https://drive.google.com/uc?export=download&id=1BwgHUNYSHf31Ma6-Dtw2G4BmL1eMHJe4',
+    artstation: 'https://www.artstation.com/artwork/XaaEv3',
+    duration: '11:58',
+    date_en: 'Oct 2026', date_fr: 'Octobre 2026',
+    title_en: 'Let\'s make dark fantasy spiked mountains for your game',
+    title_fr: 'Créons des montagnes à pics dark fantasy pour votre jeu',
+    desc_en: 'Gaea is great at realistic mountains. Today, let\'s make them evil.\n\nIn this tutorial, I\'ll show you how to build dark fantasy spiked mountains in Gaea 2: jagged peaks, sharp rock spikes, scorched colors and a creepy pine forest. Perfect for Halloween, dark fantasy worlds or any game that needs a mountain that looks like it wants you dead. 100% procedural with no external software.\n\nYou\'ll learn how to get sharp spikes by blending a Mountain with a Voronoi, how to control detail with the Graphic EQ, how to stack two erosions, and how to add depth with AO without using any mesh, all the way to the final colors and lighting.',
+    desc_fr: 'Gaea excelle dans les montagnes réalistes. Aujourd\'hui, rendons-les maléfiques.\n\nDans ce tutoriel, je vous montre comment créer des montagnes à pics dark fantasy dans Gaea 2 : sommets déchiquetés, pics rocheux acérés, couleurs calcinées et une forêt de pins inquiétante. Parfait pour Halloween, les univers dark fantasy ou tout jeu qui a besoin d\'une montagne qui a l\'air de vous vouloir du mal. 100% procédural, sans logiciel externe.\n\nVous apprendrez à obtenir des pics acérés en mélangeant un Mountain avec un Voronoi, à contrôler le détail avec le Graphic EQ, à superposer deux érosions, et à ajouter de la profondeur avec l\'AO sans utiliser le moindre mesh, jusqu\'aux couleurs et à l\'éclairage final.'
+  },
+  {
     yt: 'E2CBQ3nKmKo',
     cat: 'gaea',
     slug: 'realistic-cliffs-gaea-2',
     download: 'https://drive.google.com/uc?export=download&id=1TYqKHLUxhrxBsAakx7CfaCqwvhAYXj6g',
-    // artstation: à ajouter dès que le post breakdown est en ligne.
+    artstation: 'https://www.artstation.com/artwork/lExBBk',
     duration: '22:01',
     date_en: 'Aug 2026', date_fr: 'Août 2026',
     title_en: 'How to make cliffs that actually look like rock',
@@ -596,11 +614,32 @@ function renderDownload(t) {
   var a = document.createElement('a');
   a.className = 'tut-dl-btn';
   a.href = t.download; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('download', '');
-  a.innerHTML = '<span>↓</span><span data-en="Download the project (free)" data-fr="Télécharger le projet (gratuit)">' + (LANG === 'fr' ? 'Télécharger le projet (gratuit)' : 'Download the project (free)') + '</span>';
+  a.innerHTML = '<span>↓</span><span data-en="Download the project" data-fr="Télécharger le projet">' + (LANG === 'fr' ? 'Télécharger le projet' : 'Download the project') + '</span>';
   box.appendChild(a);
 
-  // 2) Optional newsletter invite — fully separate from the download.
-  box.appendChild(buildNewsletterInvite(t));
+  // 2) Optional newsletter invite — masquée jusqu'au clic sur le téléchargement,
+  //    pour alléger la modale et ne demander l'email qu'une fois le projet donné.
+  var nl = buildNewsletterInvite(t);
+  nl.classList.add('pending');
+  box.appendChild(nl);
+
+  a.addEventListener('click', function reveal() {
+    a.removeEventListener('click', reveal);
+    nl.classList.remove('pending');
+    nl.classList.add('reveal');
+    // Le bloc apparaît sous la ligne de flottaison de la modale : on y amène
+    // l'utilisateur, sinon il ne voit jamais la proposition. On descend tout
+    // en bas du corps de la modale (l'invite en est le dernier élément), ce
+    // qui évite de la laisser rognée par le padding comme le ferait un
+    // scrollIntoView aligné sur le bas.
+    // Lire offsetHeight force le navigateur à refaire le layout tout de suite,
+    // donc scrollHeight tient déjà compte du bloc qui sort de display:none.
+    // Sans ça le scroll vise une cible trop courte et s'arrête en chemin.
+    var scroller = nl.closest('.tut-modal-body');
+    void nl.offsetHeight;
+    if (scroller) scroller.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' });
+    else nl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  });
 }
 
 function buildNewsletterInvite(t) {
