@@ -434,7 +434,7 @@ document.getElementById('hero')?.classList.add('visible');
     fetch('https://hook.eu1.make.com/rtz1wnhvskyf6v9grinjc9vfohw8bfrj', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'newsletter', email: email, lang: lang, source: 'newsletter-form' })
+      body: JSON.stringify({ type: 'newsletter', email: email, lang: lang, source: 'newsletter-form', ks_token: 'ks7Hq2vR9d' })
     })
     .then(function(r) {
       if (r.ok) {

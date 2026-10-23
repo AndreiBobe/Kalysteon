@@ -683,7 +683,7 @@ function subscribeNewsletter(t, email, btn, msg, form) {
   fetch('https://hook.eu1.make.com/rtz1wnhvskyf6v9grinjc9vfohw8bfrj', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: 'newsletter', email: email, lang: lang, source: 'tutorial-modal' })
+    body: JSON.stringify({ type: 'newsletter', email: email, lang: lang, source: 'tutorial-modal', ks_token: 'ks7Hq2vR9d' })
   })
     .then(function (r) { if (!r.ok) throw new Error('failed'); })
     .then(function () {

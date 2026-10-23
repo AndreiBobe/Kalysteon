@@ -1448,6 +1448,9 @@ header        { animation: pgSlideDown 0.7s cubic-bezier(0.2,0.9,0.4,1.1) both; 
       <!-- FORM CONTENT -->
       <div id="form-inner">
         <form id="main-form" action="https://hook.eu1.make.com/rtz1wnhvskyf6v9grinjc9vfohw8bfrj" method="POST">
+          <!-- Anti-spam: token checked by the Make filter + honeypot left empty by humans -->
+          <input type="hidden" name="ks_token" value="ks7Hq2vR9d">
+          <input type="text" name="website" id="hp-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <input type="hidden" name="preset" id="hidden-preset" value="">
           <input type="hidden" name="estimated_price" id="hidden-price" value="">
           <input type="hidden" name="estimated_price_raw" id="hidden-price-raw" value="">
@@ -2565,6 +2568,7 @@ var VIZ = {
   xl: { sq:'vsq-xl', lbl:'vlbl-xl', legsq:'vlegsq-xl', legtxt:'vlegtext-xl', coords:[5,5,190,190]   }
 };
 
+var PAGE_T0         = Date.now();
 var currentPreset   = null;
 var panelTimer      = null;
 var LANG            = 'en';
@@ -3521,6 +3525,9 @@ function submitForm() {
     setTimeout(showSuccess, wait);
   }
   if (form.action.indexOf('YOUR_FORM_ID') !== -1) { onDone(); return; }
+  /* Bot caught: honeypot filled or form submitted within 5s of page load. Fake success, send nothing. */
+  var hp = document.getElementById('hp-website');
+  if ((hp && hp.value) || (Date.now() - PAGE_T0) < 5000) { onDone(); return; }
   fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} })
     .then(function(r) {
       if (r.ok) { onDone(); }
