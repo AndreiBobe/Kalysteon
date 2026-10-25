@@ -2,139 +2,115 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Support · Kalysteon</title>
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.webp">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.webp">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Kalysteon support: answers about packs, licences, Stratum and commissions, plus step-by-step tutorials.">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="legal.css">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #010810; --surface: #051322; --surface2: #091B32; --surface3: #0E2240;
-  --gold: #C9A84C; --gold-bright: #F2D777; --gold-dark: #8B6914;
-  --border: rgba(201,168,76,0.35); --border-mid: rgba(201,168,76,0.22); --border-dark: rgba(0,3,10,0.90);
-  --accent: #C9A84C; --accent-bright: #F2D777;
-  --accent-dim: rgba(201,168,76,0.09); --accent-glow: rgba(201,168,76,0.18);
-  --text: #EEE8D6; --text-muted: #7085A0; --text-dim: #364860;
-  --jade: #1DC97A; --jade-bright: #2FEDA0; --jade-dark: #0A8C48;
-  --radius-lg: 16px; --radius-md: 12px; --radius-sm: 8px; --radius-xs: 6px;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
-  --display: 'Rajdhani', sans-serif;
+/* ═══ SUPPORT PAGE (S2) ═══
+   Site header/footer come from legal.css. Search + FAQ in three topics + latest tutorials. */
+:root { --sp-gold: #F2D777; --sp-ink: #EEE8D6; --sp-muted: #9BB0D0; --sp-dim: #7085A0; }
+body { background-color: #020A16; background-image: radial-gradient(ellipse 60% 40% at 80% 6%, rgba(201,168,76,0.08), transparent 70%), radial-gradient(ellipse 50% 30% at 6% 40%, rgba(10,30,80,0.5), transparent 70%); }
+.sp-main { position: relative; z-index: 1; color: var(--sp-ink); font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.65; }
+.sp-main [id] { scroll-margin-top: calc(var(--hdr-h, 92px) + 24px); }
+.sp-kick { display: inline-flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--sp-gold); }
+.sp-kick::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sp-gold); box-shadow: 0 0 10px rgba(242,215,119,0.8); }
+.sp-hero { display: flex; flex-direction: column; align-items: center; gap: 22px; padding-top: 120px; padding-bottom: 60px; text-align: center; }
+.sp-h1 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 72px; line-height: 0.98; letter-spacing: 0.01em; color: var(--sp-ink); }
+.sp-sub { margin: 0; max-width: 560px; font-size: 17px; color: rgba(238,232,214,0.75); }
+.sp-search { position: relative; width: 100%; max-width: 640px; margin-top: 10px; }
+.sp-search input { display: block; width: 100%; box-sizing: border-box; min-height: 62px; padding: 0 22px 0 56px; border-radius: 14px; border: 1px solid rgba(201,168,76,0.35); background: rgba(2,10,22,0.7); color: var(--sp-ink); font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; outline: none; box-shadow: 0 20px 50px -25px rgba(0,0,0,0.8); -webkit-appearance: none; appearance: none; }
+.sp-search input:focus { border-color: rgba(242,215,119,0.8); }
+.sp-search input::placeholder { color: #5B6F8C; }
+.sp-search svg { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--sp-muted); pointer-events: none; }
+
+.sp-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sp-cat { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); cursor: pointer; text-align: left; color: var(--sp-ink); font: inherit; transition: border-color 0.2s, background 0.2s; }
+.sp-cat:hover { border-color: rgba(242,215,119,0.4); }
+.sp-cat.on { border-color: var(--sp-gold); background: linear-gradient(180deg, rgba(201,168,76,0.12), rgba(201,168,76,0.03)); }
+.sp-cat-ic { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(255,255,255,0.05); color: var(--sp-gold); }
+.sp-cat-ic svg { width: 22px; height: 22px; }
+.sp-cat-txt { display: block; flex: 1 1 auto; min-width: 0; }
+.sp-cat-txt b { display: block; font-family: 'Rajdhani', sans-serif; font-size: 24px; line-height: 1.1; }
+.sp-cat-txt small { display: block; font-size: 13px; color: var(--sp-muted); }
+.sp-cat-n { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--sp-dim); }
+
+.sp-faq { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; padding-top: 60px; }
+.sp-side { position: sticky; top: calc(var(--hdr-h, 92px) + 24px); display: flex; flex-direction: column; gap: 4px; }
+.sp-side-list { display: flex; flex-direction: column; gap: 4px; }
+.sp-side a { padding: 9px 14px; border-left: 2px solid rgba(255,255,255,0.08); font-size: 14px; color: var(--sp-muted); text-decoration: none; }
+.sp-side a:hover { color: var(--sp-ink); border-left-color: var(--sp-gold); }
+.sp-panel { display: none; }
+.sp-panel.on { display: block; }
+.sp-grp { margin-bottom: 44px; }
+.sp-grp h2 { margin: 0 0 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sp-gold); }
+.sp-q { display: block; margin-bottom: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); transition: border-color 0.2s, background 0.2s; }
+.sp-q.on { border-color: rgba(242,215,119,0.35); background: rgba(201,168,76,0.05); }
+.sp-qh { position: relative; display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 18px 66px 18px 22px; border: 0; background: none; cursor: pointer; text-align: left; color: var(--sp-ink); font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; font-weight: 500; line-height: 1.5; }
+.sp-qi { position: absolute; right: 20px; top: 50%; width: 26px; height: 26px; margin-top: -13px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); color: var(--sp-gold); font-size: 15px; line-height: 24px; text-align: center; transition: transform 0.3s; }
+.sp-q.on .sp-qi { transform: rotate(45deg); border-color: rgba(242,215,119,0.5); }
+.sp-where { display: none; margin: -6px 22px 14px; padding: 3px 9px; border-radius: 6px; background: rgba(255,255,255,0.05); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sp-muted); }
+.sp-searching .sp-where { display: inline-block; }
+.sp-a { display: none; margin: 0; padding: 0 22px 20px; max-width: 720px; font-size: 15px; line-height: 1.75; color: rgba(238,232,214,0.78); }
+.sp-q.on .sp-a { display: block; }
+.sp-a a { color: var(--sp-gold); }
+/* Search mode: every topic shows, only matching questions stay */
+.sp-searching .sp-side { visibility: hidden; }
+.sp-searching .sp-panel { display: block; }
+.sp-searching .sp-q.hide, .sp-searching .sp-grp.hide { display: none; }
+.sp-searching .sp-grp h2 { display: none; }
+.sp-count { display: none; margin-bottom: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sp-muted); }
+.sp-searching .sp-count { display: block; }
+.sp-none { margin: 20px 0 0; text-align: center; font-size: 14px; color: var(--sp-dim); }
+.sp-none a { color: var(--sp-gold); }
+
+.sp-tuts-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
+.sp-tuts-head h2 { margin: 0; font-family: 'Rajdhani', sans-serif; font-size: 40px; line-height: 1.05; }
+.sp-tuts-all { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sp-gold); text-decoration: none; white-space: nowrap; }
+.sp-tuts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.sp-tut { display: block; color: var(--sp-ink); text-decoration: none; }
+.sp-tut-img { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #071628; }
+.sp-tut-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.sp-tut:hover .sp-tut-img img { transform: scale(1.04); }
+.sp-tut-img span { position: absolute; right: 10px; bottom: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(2,10,22,0.85); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.sp-tut b { display: -webkit-box; margin-top: 12px; font-size: 15px; font-weight: 600; line-height: 1.4; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em; }
+
+@media (max-width: 1100px) {
+  .sp-faq { grid-template-columns: 200px 1fr; gap: 32px; }
 }
-html { scroll-behavior: smooth; }
-body {
-  background-color: #020A16;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(10,30,80,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(6,20,55,0.45) 0%, transparent 50%);
-  color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+@media (max-width: 860px) {
+  .sp-cats { grid-template-columns: 1fr; gap: 10px; }
+  .sp-cat { padding: 14px 16px; }
+  .sp-faq { grid-template-columns: 1fr; padding-top: 36px; }
+  .sp-side { display: none; }
+  .sp-tuts { grid-template-columns: 1fr; }
 }
-
-/* ── HEADER ── */
-header { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 2.5rem; border-bottom: 1px solid rgba(201,168,76,0.55); position: sticky; top: 0; background: linear-gradient(135deg, rgba(2,8,20,0.98) 0%, rgba(6,18,50,0.98) 40%, rgba(10,28,65,0.98) 65%, rgba(2,8,20,0.98) 100%); backdrop-filter: blur(20px); z-index: 100; box-shadow: 0 1px 30px rgba(201,168,76,0.08), 0 4px 20px rgba(0,0,0,0.6); }
-.logo { font-family: var(--display); font-weight: 700; font-size: 1.8rem; letter-spacing: 0.08em; line-height: normal; color: var(--text); text-decoration: none; }
-.logo span { color: var(--accent); }
-.header-right { display: flex; align-items: center; gap: 1.5rem; }
-.lang-sep { color: var(--text-dim); font-size: 0.7rem; }
-.lang-toggle { display: flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(201,168,76,0.45); border-radius: 40px; padding: 0.2rem 0.8rem; background: rgba(0,0,0,0.3); }
-.lang-btn { background: none; border: none; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; cursor: pointer; padding: 0.2rem 0.4rem; transition: color 0.15s; text-transform: uppercase; }
-.lang-btn.active { color: var(--accent); }
-
-/* ── NAV ── */
-.header-nav { display: flex; align-items: center; gap: 0.3rem; position: absolute; left: 50%; transform: translateX(-50%); }
-.nav-pill { position: relative; display: flex; align-items: center; }
-.nav-link { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 7px 14px; border-radius: 30px; border: 0.5px solid transparent; background: rgba(255,255,255,0.04); transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; white-space: nowrap; }
-.nav-link:hover, .nav-pill:hover > .nav-link { color: var(--gold-bright); border-color: rgba(201,168,76,0.40); box-shadow: 0 0 14px rgba(201,168,76,0.18), inset 0 0 10px rgba(201,168,76,0.07); transform: scale(1.05); }
-.nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.08); }
-.header-nav .nav-pill:nth-child(1) > .nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.50); box-shadow: 0 0 14px rgba(201,168,76,0.25), inset 0 0 10px rgba(201,168,76,0.10); background: rgba(201,168,76,0.09); }
-.header-nav .nav-pill:nth-child(2) > .nav-link.active { color: #5DEFD5; border-color: rgba(93,239,213,0.40); box-shadow: 0 0 14px rgba(93,239,213,0.20), inset 0 0 10px rgba(93,239,213,0.08); background: rgba(93,239,213,0.06); }
-.header-nav .nav-pill:nth-child(3) > .nav-link.active { color: #C084FC; border-color: rgba(168,85,247,0.40); box-shadow: 0 0 14px rgba(168,85,247,0.20), inset 0 0 10px rgba(168,85,247,0.08); background: rgba(168,85,247,0.06); }
-.header-nav .nav-pill:nth-child(4) > .nav-link.active { color: #A3E635; border-color: rgba(163,230,53,0.40); box-shadow: 0 0 14px rgba(163,230,53,0.20), inset 0 0 10px rgba(163,230,53,0.08); background: rgba(163,230,53,0.06); }
-.header-nav .nav-pill:nth-child(5) > .nav-link.active { color: #FF7A45; border-color: rgba(255,122,69,0.40); box-shadow: 0 0 14px rgba(255,122,69,0.20), inset 0 0 10px rgba(255,122,69,0.08); background: rgba(255,122,69,0.06); }
-.nav-dropdown-trigger::after { content: ' ▾'; font-size: 0.5rem; opacity: 0.65; }
-.nav-dd-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(6,14,32,0.92); backdrop-filter: blur(18px); border: 1px solid rgba(201,168,76,0.28); border-radius: 16px; padding: 0.5rem; min-width: 210px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.28s ease, transform 0.28s ease; box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 24px rgba(201,168,76,0.06); }
-.nav-dd-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
-.nav-pill:hover .nav-dd-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
-.nav-dd-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.85rem; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
-.nav-dd-item:hover { color: var(--gold-bright); background: rgba(201,168,76,0.09); }
-.nav-dd-icon { font-size: 0.9rem; width: 20px; text-align: center; flex-shrink: 0; }
-.nav-dd-divider { height: 1px; background: rgba(201,168,76,0.15); margin: 0.3rem 0.5rem; }
-.nav-dd-reviews { color: rgba(212,175,55,0.85); }
-.nav-dd-reviews:hover { color: var(--gold-bright); background: rgba(201,168,76,0.12); }
-@media (max-width: 768px) { .header-nav { display: none; } }
-
-/* ── PARTICLES ── */
-#ptx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-
-/* ── FADE IN ── */
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
-header { animation: fadeInDown 0.8s cubic-bezier(0.2,0.9,0.4,1.1) forwards; }
-.fade-in-up { opacity: 0; transform: translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.fade-in-up.visible { opacity: 1; transform: none; }
-
-/* ── HERO ── */
-.sup-hero { padding: 5.5rem 2.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
-.sup-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 65%); pointer-events: none; }
-.sup-eyebrow { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; opacity: 0.8; }
-.sup-title { font-family: var(--display); font-weight: 700; font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 0.06em; color: var(--text); line-height: 1; margin-bottom: 1rem; }
-.sup-title span { color: var(--gold); }
-.sup-rule { width: 48px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 1.4rem; }
-.sup-sub { font-family: var(--sans); font-size: 0.95rem; color: var(--text-muted); max-width: 440px; margin: 0 auto; line-height: 1.7; }
-
-/* ── CARDS GRID ── */
-.sup-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1020px; margin: 0 auto; padding: 4rem 2.5rem 6rem; position: relative; z-index: 1; }
-@media (max-width: 860px) { .sup-cards { grid-template-columns: 1fr; max-width: 480px; } }
-
-.sup-card { position: relative; border-radius: var(--radius-lg); border: 1px solid rgba(201,168,76,0.18); background: linear-gradient(145deg, rgba(9,27,50,0.80) 0%, rgba(5,19,34,0.90) 100%); padding: 2.2rem 2rem 2rem; text-decoration: none; display: flex; flex-direction: column; gap: 0; overflow: hidden; transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
-.sup-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity 0.28s; pointer-events: none; }
-.sup-card:hover { border-color: var(--card-color, var(--gold)); box-shadow: 0 0 0 1px var(--card-color, var(--gold)), 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--card-glow, rgba(201,168,76,0.12)); transform: translateY(-4px); }
-.sup-card:hover::before { opacity: 1; }
-
-/* Per-card accent colors */
-.sup-card-tutorials { --card-color: rgba(192,132,252,0.70); --card-glow: rgba(192,132,252,0.10); }
-.sup-card-tutorials::before { background: radial-gradient(ellipse at 50% 0%, rgba(192,132,252,0.06) 0%, transparent 70%); }
-.sup-card-faq { --card-color: rgba(201,168,76,0.70); --card-glow: rgba(201,168,76,0.12); }
-.sup-card-faq::before { background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%); }
-.sup-card-contact { --card-color: rgba(29,201,122,0.60); --card-glow: rgba(29,201,122,0.08); }
-.sup-card-contact::before { background: radial-gradient(ellipse at 50% 0%, rgba(29,201,122,0.05) 0%, transparent 70%); }
-
-.sup-card-icon { font-size: 2rem; margin-bottom: 1.4rem; line-height: 1; display: block; }
-.sup-card-tutorials .sup-card-icon { color: #C084FC; }
-.sup-card-faq .sup-card-icon { color: var(--gold-bright); }
-.sup-card-contact .sup-card-icon { color: var(--jade-bright); }
-.sup-card-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; }
-.sup-card-title { font-family: var(--display); font-weight: 700; font-size: 1.9rem; letter-spacing: 0.05em; color: var(--text); line-height: 1.05; margin-bottom: 0.9rem; }
-.sup-card-tutorials .sup-card-title { color: #C084FC; }
-.sup-card-faq .sup-card-title { color: var(--gold-bright); }
-.sup-card-contact .sup-card-title { color: var(--jade-bright); }
-.sup-card-desc { font-family: var(--sans); font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; flex: 1; }
-.sup-card-cta { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 1.8rem; color: var(--text-muted); transition: color 0.2s; }
-.sup-card:hover .sup-card-cta { color: var(--text); }
-.sup-card-tutorials:hover .sup-card-cta { color: #C084FC; }
-.sup-card-faq:hover .sup-card-cta { color: var(--gold-bright); }
-.sup-card-contact:hover .sup-card-cta { color: var(--jade-bright); }
-.sup-card-cta-arrow { transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-.sup-card:hover .sup-card-cta-arrow { transform: translateX(4px); }
-
-/* ── FOOTER ── */
-footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; position: relative; z-index: 1; }
-.footer-copy { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-dim); }
-.footer-copy a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
-.footer-copy a:hover { color: var(--accent); }
-.footer-response { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.5rem; }
-.dot { width: 6px; height: 6px; background: #2ECC71; border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-@media (max-width: 600px) { footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; } .sup-cards { padding: 2.5rem 1.25rem 4rem; } }
+@media (max-width: 768px) {
+  .sp-hero { padding-top: 96px; padding-bottom: 40px; }
+  .sp-h1 { font-size: 40px; max-width: 280px; }
+  .sp-qh > span:first-child { display: block; min-height: 3em; }
+  .sp-sub { font-size: 16px; }
+  .sp-search input { min-height: 54px; font-size: 15px; }
+  .sp-qh { font-size: 15px; padding: 16px 58px 16px 18px; }
+  .sp-qi { right: 16px; }
+  .sp-a { padding: 0 18px 18px; }
+  .sp-tuts-head { flex-direction: column; align-items: flex-start; }
+  .sp-tuts-head h2 { font-size: 32px; }
+}
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
-<link rel="stylesheet" href="mobile-nav.css">
+  <link rel="stylesheet" href="mobile-nav.css">
 </head>
 <body>
 
-<canvas id="ptx"></canvas>
+<canvas id="particle-canvas"></canvas>
+<div class="k-dust" aria-hidden="true"></div>
 
-<header>
-  <a href="index.html" class="logo">KALYS<span>T</span>EON</a>
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="Kalysteon, home"><img class="logo-img" src="img/logo.png" alt=""><span>KALYS<span class="logo-t">T</span>EON</span></a>
   <nav class="header-nav">
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="products.html" data-en="Products" data-fr="Produits">Products</a>
@@ -150,146 +126,245 @@ footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: fle
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="stratum.html#str-why"><span class="nav-dd-icon">◆</span><span data-en="What is it" data-fr="C'est quoi">What is it</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-pipeline"><span class="nav-dd-icon">⇄</span><span data-en="How it works" data-fr="Fonctionnement">How it works</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#overview"><span class="nav-dd-icon">◆</span><span data-en="Overview" data-fr="Aperçu">Overview</span></a>
+        <a class="nav-dd-item" href="stratum.html#features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
+        <a class="nav-dd-item" href="stratum.html#story"><span class="nav-dd-icon">“</span><span data-en="Story" data-fr="L&#x27;histoire">Story</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="stratum.html#str-download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-faq"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
+        <a class="nav-dd-item" href="stratum.html#pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
+        <a class="nav-dd-item" href="stratum.html#notes"><span class="nav-dd-icon">≡</span><span data-en="Patch notes" data-fr="Notes de version">Patch notes</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="commission.html#configure"><span class="nav-dd-icon">⛰</span><span data-en="Custom Terrain" data-fr="Terrain Custom">Custom Terrain</span></a>
-        <a class="nav-dd-item" href="commission.html#configure"><span class="nav-dd-icon">◆</span><span data-en="Hero Assets" data-fr="Hero Assets">Hero Assets</span></a>
+        <a class="nav-dd-item" href="commission.html#worlds"><span class="nav-dd-icon">⛰</span><span data-en="What I build" data-fr="Ce que je construis">What I build</span></a>
+        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How it works" data-fr="Comment ça se passe">How it works</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How It Works" data-fr="Comment ça marche">How It Works</span></a>
+        <a class="nav-dd-item" href="commission.html#brief"><span class="nav-dd-icon">✎</span><span data-en="Start a brief" data-fr="Lancer un brief">Start a brief</span></a>
+        <a class="nav-dd-item" href="support.html#commissions"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Narrative" data-fr="Récit">Narrative</span></a>
+        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Story" data-fr="Récit">Story</span></a>
         <a class="nav-dd-item" href="about.html#namelore"><span class="nav-dd-icon">Ω</span><span data-en="Etymology" data-fr="Étymologie">Etymology</span></a>
+        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tools" data-fr="Outils">Tools</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tech Stack" data-fr="Stack Technique">Tech Stack</span></a>
-        <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="contact.html#contact"><span class="nav-dd-icon">◉</span><span data-en="Newsletter" data-fr="Newsletter">Newsletter</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
+        <a class="nav-dd-item" href="about.html#socials"><span class="nav-dd-icon">@</span><span data-en="Socials" data-fr="Réseaux">Socials</span></a>
       </div>
     </div>
     <div class="nav-pill">
-      <a class="nav-link active nav-dropdown-trigger" href="support.html" data-en="Support" data-fr="Support">Support</a>
+      <a class="nav-link nav-dropdown-trigger active" href="support.html" data-en="Support" data-fr="Support">Support</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="faq.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
-        <div class="nav-dd-divider"></div>
+        <a class="nav-dd-item" href="support.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
         <a class="nav-dd-item" href="tutorials.html"><span class="nav-dd-icon">▶</span><span data-en="Tutorials" data-fr="Tutoriels">Tutorials</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="mailto:contact@kalysteon.com"><span class="nav-dd-icon">✉</span><span data-en="Email Direct" data-fr="Email Direct">Email Direct</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
       </div>
     </div>
   </nav>
-  <div class="header-right">
-    <div class="lang-toggle">
-      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
-      <span class="lang-sep">/</span>
-      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
-    </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-btn-en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="lang-btn-fr" onclick="setLang('fr')">FR</button>
   </div>
 </header>
 
-<!-- ── HERO ── -->
-<section class="sup-hero fade-in-up">
-  <p class="sup-eyebrow" data-en="Kalysteon · Support" data-fr="Kalysteon · Support">Kalysteon · Support</p>
-  <h1 class="sup-title" data-en="How can I <span>help?</span>" data-fr="Comment puis-je <span>vous aider ?</span>">How can I <span>help?</span></h1>
-  <div class="sup-rule"></div>
-  <p class="sup-sub" data-en="Tutorials, answers to common questions, or a direct line. Everything you need is below." data-fr="Tutoriels, réponses aux questions courantes, ou un contact direct. Tout ce qu'il vous faut est ici.">Tutorials, answers to common questions, or a direct line. Everything you need is below.</p>
+<main class="sp-main">
+<section class="wrap sp-hero">
+  <span class="sp-kick">Support</span>
+  <h1 class="sp-h1" data-en="How can I help you?" data-fr="Comment puis-je vous aider ?">How can I help you?</h1>
+  <p class="sp-sub" data-en="Search a question, or pick a topic below." data-fr="Cherchez une question, ou choisissez un sujet.">Search a question, or pick a topic below.</p>
+  <div class="sp-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="sp-search-input" autocomplete="off" placeholder="Licence, Unity, refund, revisions…" data-ph-en="Licence, Unity, refund, revisions…" data-ph-fr="Licence, Unity, remboursement, révisions…" aria-label="Search the FAQ"></div>
 </section>
 
-<!-- ── CARDS ── -->
-<div class="sup-cards">
+<section class="wrap">
+  <div class="sp-cats" role="tablist"><button type="button" class="sp-cat" data-cat="products" role="tab" aria-selected="false"><span class="sp-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9zM12 12 21 7.5M12 12v9.5M12 12 3 7.5"/></svg></span><span class="sp-cat-txt"><b data-en="Products" data-fr="Produits">Products</b><small data-en="Packs, licences, downloads." data-fr="Packs, licences, fichiers.">Packs, licences, downloads.</small></span><span class="sp-cat-n">10</span></button><button type="button" class="sp-cat" data-cat="stratum" role="tab" aria-selected="false"><span class="sp-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 4.5-9 4.5-9-4.5zM3 12l9 4.5 9-4.5M3 16.5 12 21l9-4.5"/></svg></span><span class="sp-cat-txt"><b data-en="Stratum" data-fr="Stratum">Stratum</b><small data-en="The pipeline tool." data-fr="L&#x27;outil de pipeline.">The pipeline tool.</small></span><span class="sp-cat-n">7</span></button><button type="button" class="sp-cat" data-cat="commissions" role="tab" aria-selected="false"><span class="sp-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20l5-9 3 4 2-3 4 8"/></svg></span><span class="sp-cat-txt"><b data-en="Commissions" data-fr="Commissions">Commissions</b><small data-en="Custom terrains and worlds." data-fr="Terrains sur mesure.">Custom terrains and worlds.</small></span><span class="sp-cat-n">10</span></button></div>
+  <div class="sp-faq" id="sp-faq">
+    <nav class="sp-side" aria-label="FAQ"><div class="sp-side-list" data-cat="products"><a href="#products-0"><span data-en="Buying and downloading" data-fr="Achat et téléchargement">Buying and downloading</span></a><a href="#products-1"><span data-en="Licences" data-fr="Licences">Licences</span></a><a href="#products-2"><span data-en="Compatibility and updates" data-fr="Versions et mises à jour">Compatibility and updates</span></a></div><div class="sp-side-list" data-cat="stratum"><a href="#stratum-0"><span data-en="Getting started" data-fr="Démarrer">Getting started</span></a><a href="#stratum-1"><span data-en="Licences and updates" data-fr="Licences et mises à jour">Licences and updates</span></a><a href="#stratum-2"><span data-en="Something wrong?" data-fr="Un problème ?">Something wrong?</span></a></div><div class="sp-side-list" data-cat="commissions"><a href="#commissions-0"><span data-en="Before starting" data-fr="Avant de commencer">Before starting</span></a><a href="#commissions-1"><span data-en="Price and payment" data-fr="Prix et paiement">Price and payment</span></a><a href="#commissions-2"><span data-en="During the project" data-fr="Pendant le projet">During the project</span></a></div></nav>
+    <div>
+      <span class="sp-count" id="sp-count" role="status"></span>
+      <div class="sp-panel" data-cat="products" role="tabpanel"><div class="sp-grp" id="products-0"><h2 data-en="Buying and downloading" data-fr="Achat et téléchargement">Buying and downloading</h2><div class="sp-q" data-text="What do I get when I buy on the site? Qu&#x27;est-ce que je reçois en achetant sur le site ? All three versions at once: the Unreal Engine 5 pack, the Unity package and the raw files (heightmaps, textures, meshes). Frosthölm packs ship in their Unreal version for now. Les trois versions d&#x27;un coup : le pack Unreal Engine 5, le package Unity et les fichiers bruts (heightmaps, textures, meshes). Les packs Frosthölm sont pour l&#x27;instant livrés en Unreal."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What do I get when I buy on the site?" data-fr="Qu&#x27;est-ce que je reçois en achetant sur le site ?">What do I get when I buy on the site?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Buying and downloading" data-fr="Produits · Achat et téléchargement">Products · Buying and downloading</span><p class="sp-a" data-en="All three versions at once: the Unreal Engine 5 pack, the Unity package and the raw files (heightmaps, textures, meshes). Frosthölm packs ship in their Unreal version for now." data-fr="Les trois versions d&amp;#x27;un coup : le pack Unreal Engine 5, le package Unity et les fichiers bruts (heightmaps, textures, meshes). Les packs Frosthölm sont pour l&amp;#x27;instant livrés en Unreal.">All three versions at once: the Unreal Engine 5 pack, the Unity package and the raw files (heightmaps, textures, meshes). Frosthölm packs ship in their Unreal version for now.</p></div><div class="sp-q" data-text="Site or Fab, Unity Asset Store, ArtStation? Le site ou Fab, Unity Asset Store, ArtStation ? On the site you get the three versions and deal with me directly. On the marketplaces, their own terms and licences apply. Sur le site, vous recevez les trois versions et vous traitez directement avec moi. Sur les plateformes, ce sont leurs conditions et leurs licences qui s&#x27;appliquent."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Site or Fab, Unity Asset Store, ArtStation?" data-fr="Le site ou Fab, Unity Asset Store, ArtStation ?">Site or Fab, Unity Asset Store, ArtStation?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Buying and downloading" data-fr="Produits · Achat et téléchargement">Products · Buying and downloading</span><p class="sp-a" data-en="On the site you get the three versions and deal with me directly. On the marketplaces, their own terms and licences apply." data-fr="Sur le site, vous recevez les trois versions et vous traitez directement avec moi. Sur les plateformes, ce sont leurs conditions et leurs licences qui s&amp;#x27;appliquent.">On the site you get the three versions and deal with me directly. On the marketplaces, their own terms and licences apply.</p></div><div class="sp-q" data-text="I didn&#x27;t receive my download links. Je n&#x27;ai pas reçu mes liens de téléchargement. Check your spam folder first. If nothing shows up within 10 minutes of your purchase, write to contact@kalysteon.com with your order email. Vérifiez d&#x27;abord vos spams. Si rien n&#x27;arrive dans les 10 minutes après l&#x27;achat, écrivez à contact@kalysteon.com avec votre email de commande."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="I didn&#x27;t receive my download links." data-fr="Je n&#x27;ai pas reçu mes liens de téléchargement.">I didn't receive my download links.</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Buying and downloading" data-fr="Produits · Achat et téléchargement">Products · Buying and downloading</span><p class="sp-a" data-en="Check your spam folder first. If nothing shows up within 10 minutes of your purchase, write to &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt; with your order email." data-fr="Vérifiez d&amp;#x27;abord vos spams. Si rien n&amp;#x27;arrive dans les 10 minutes après l&amp;#x27;achat, écrivez à &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt; avec votre email de commande.">Check your spam folder first. If nothing shows up within 10 minutes of your purchase, write to <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a> with your order email.</p></div><div class="sp-q" data-text="Do you offer refunds? Proposez-vous des remboursements ? Digital products aren&#x27;t taken back once delivered. If a file is faulty or doesn&#x27;t match its description, tell me: I fix or replace it, and if I can&#x27;t, you get a refund. Un produit numérique livré n&#x27;est pas repris. Si un fichier est défectueux ou ne correspond pas à sa description, dites-le-moi : je le corrige ou le remplace, sinon vous êtes remboursé."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Do you offer refunds?" data-fr="Proposez-vous des remboursements ?">Do you offer refunds?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Buying and downloading" data-fr="Produits · Achat et téléchargement">Products · Buying and downloading</span><p class="sp-a" data-en="Digital products aren&amp;#x27;t taken back once delivered. If a file is faulty or doesn&amp;#x27;t match its description, tell me: I fix or replace it, and if I can&amp;#x27;t, you get a refund." data-fr="Un produit numérique livré n&amp;#x27;est pas repris. Si un fichier est défectueux ou ne correspond pas à sa description, dites-le-moi : je le corrige ou le remplace, sinon vous êtes remboursé.">Digital products aren&#x27;t taken back once delivered. If a file is faulty or doesn&#x27;t match its description, tell me: I fix or replace it, and if I can&#x27;t, you get a refund.</p></div></div><div class="sp-grp" id="products-1"><h2 data-en="Licences" data-fr="Licences">Licences</h2><div class="sp-q" data-text="Personal or commercial licence? Licence personnelle ou commerciale ? Personal covers non-commercial use: learning, personal projects, portfolio, prototypes, free games with no monetisation. Commercial covers everything, including sold or monetised games, client work, films and ads, for you, your team and your contractors. La personnelle couvre l&#x27;usage non commercial : apprentissage, projets perso, portfolio, prototypes, jeux gratuits non monétisés. La commerciale couvre tout, dont les jeux vendus ou monétisés, le travail client, les films et les pubs, pour vous, votre équipe et vos prestataires."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Personal or commercial licence?" data-fr="Licence personnelle ou commerciale ?">Personal or commercial licence?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Licences" data-fr="Produits · Licences">Products · Licences</span><p class="sp-a" data-en="Personal covers non-commercial use: learning, personal projects, portfolio, prototypes, free games with no monetisation. Commercial covers everything, including sold or monetised games, client work, films and ads, for you, your team and your contractors." data-fr="La personnelle couvre l&amp;#x27;usage non commercial : apprentissage, projets perso, portfolio, prototypes, jeux gratuits non monétisés. La commerciale couvre tout, dont les jeux vendus ou monétisés, le travail client, les films et les pubs, pour vous, votre équipe et vos prestataires.">Personal covers non-commercial use: learning, personal projects, portfolio, prototypes, free games with no monetisation. Commercial covers everything, including sold or monetised games, client work, films and ads, for you, your team and your contractors.</p></div><div class="sp-q" data-text="Can I switch to commercial later? Puis-je passer en commerciale plus tard ? Yes. Pay the price difference by writing to contact@kalysteon.com. Oui. Il suffit de régler la différence de prix en écrivant à contact@kalysteon.com."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Can I switch to commercial later?" data-fr="Puis-je passer en commerciale plus tard ?">Can I switch to commercial later?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Licences" data-fr="Produits · Licences">Products · Licences</span><p class="sp-a" data-en="Yes. Pay the price difference by writing to &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt;." data-fr="Oui. Il suffit de régler la différence de prix en écrivant à &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt;.">Yes. Pay the price difference by writing to <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a>.</p></div><div class="sp-q" data-text="What isn&#x27;t allowed? Qu&#x27;est-ce qui est interdit ? Reselling or sharing the source files, even modified, putting them in a marketplace or asset library, and using them to train an AI model. Revendre ou partager les fichiers sources, même modifiés, les mettre dans une marketplace ou une bibliothèque d&#x27;assets, et les utiliser pour entraîner une IA."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What isn&#x27;t allowed?" data-fr="Qu&#x27;est-ce qui est interdit ?">What isn't allowed?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Licences" data-fr="Produits · Licences">Products · Licences</span><p class="sp-a" data-en="Reselling or sharing the source files, even modified, putting them in a marketplace or asset library, and using them to train an AI model." data-fr="Revendre ou partager les fichiers sources, même modifiés, les mettre dans une marketplace ou une bibliothèque d&amp;#x27;assets, et les utiliser pour entraîner une IA.">Reselling or sharing the source files, even modified, putting them in a marketplace or asset library, and using them to train an AI model.</p></div></div><div class="sp-grp" id="products-2"><h2 data-en="Compatibility and updates" data-fr="Versions et mises à jour">Compatibility and updates</h2><div class="sp-q" data-text="Which engine versions are supported? Quelles versions de moteur sont supportées ? Packs are built and tested for Unreal Engine 5 and Unity 6. Much older versions aren&#x27;t guaranteed. Conçus et testés pour Unreal Engine 5 et Unity 6. Les vieilles versions ne sont pas garanties."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Which engine versions are supported?" data-fr="Quelles versions de moteur sont supportées ?">Which engine versions are supported?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Compatibility and updates" data-fr="Produits · Versions et mises à jour">Products · Compatibility and updates</span><p class="sp-a" data-en="Packs are built and tested for Unreal Engine 5 and Unity 6. Much older versions aren&amp;#x27;t guaranteed." data-fr="Conçus et testés pour Unreal Engine 5 et Unity 6. Les vieilles versions ne sont pas garanties.">Packs are built and tested for Unreal Engine 5 and Unity 6. Much older versions aren&#x27;t guaranteed.</p></div><div class="sp-q" data-text="Are updates included? Les mises à jour sont-elles incluses ? Yes. When a pack is updated, existing buyers get the new version at no extra cost. Oui. Quand un pack est mis à jour, vous recevez la nouvelle version sans frais."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Are updates included?" data-fr="Les mises à jour sont-elles incluses ?">Are updates included?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Compatibility and updates" data-fr="Produits · Versions et mises à jour">Products · Compatibility and updates</span><p class="sp-a" data-en="Yes. When a pack is updated, existing buyers get the new version at no extra cost." data-fr="Oui. Quand un pack est mis à jour, vous recevez la nouvelle version sans frais.">Yes. When a pack is updated, existing buyers get the new version at no extra cost.</p></div><div class="sp-q" data-text="Can I use a pack in several projects? Puis-je utiliser un pack dans plusieurs projets ? Yes, both licences cover an unlimited number of projects. Oui, les deux licences couvrent un nombre de projets illimité."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Can I use a pack in several projects?" data-fr="Puis-je utiliser un pack dans plusieurs projets ?">Can I use a pack in several projects?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Products · Compatibility and updates" data-fr="Produits · Versions et mises à jour">Products · Compatibility and updates</span><p class="sp-a" data-en="Yes, both licences cover an unlimited number of projects." data-fr="Oui, les deux licences couvrent un nombre de projets illimité.">Yes, both licences cover an unlimited number of projects.</p></div></div></div><div class="sp-panel" data-cat="stratum" role="tabpanel"><div class="sp-grp" id="stratum-0"><h2 data-en="Getting started" data-fr="Démarrer">Getting started</h2><div class="sp-q" data-text="What software do I need? De quels logiciels ai-je besoin ? Stratum drives Gaea, Houdini, Unreal Engine and Unity; it does not replace them. You need your own licences for the ones in your pipeline. Stratum pilote Gaea, Houdini, Unreal Engine et Unity, il ne les remplace pas. Il vous faut vos propres licences pour ceux de votre pipeline."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What software do I need?" data-fr="De quels logiciels ai-je besoin ?">What software do I need?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Getting started" data-fr="Stratum · Démarrer">Stratum · Getting started</span><p class="sp-a" data-en="Stratum drives Gaea, Houdini, Unreal Engine and Unity; it does not replace them. You need your own licences for the ones in your pipeline." data-fr="Stratum pilote Gaea, Houdini, Unreal Engine et Unity, il ne les remplace pas. Il vous faut vos propres licences pour ceux de votre pipeline.">Stratum drives Gaea, Houdini, Unreal Engine and Unity; it does not replace them. You need your own licences for the ones in your pipeline.</p></div><div class="sp-q" data-text="Which versions are supported? Quelles versions sont supportées ? Current, widely used versions of Gaea, Houdini, Unreal and Unity. If you hit a compatibility issue, tell me. Les versions actuelles et courantes de Gaea, Houdini, Unreal et Unity. Si vous tombez sur un souci de compatibilité, dites-le-moi."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Which versions are supported?" data-fr="Quelles versions sont supportées ?">Which versions are supported?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Getting started" data-fr="Stratum · Démarrer">Stratum · Getting started</span><p class="sp-a" data-en="Current, widely used versions of Gaea, Houdini, Unreal and Unity. If you hit a compatibility issue, tell me." data-fr="Les versions actuelles et courantes de Gaea, Houdini, Unreal et Unity. Si vous tombez sur un souci de compatibilité, dites-le-moi.">Current, widely used versions of Gaea, Houdini, Unreal and Unity. If you hit a compatibility issue, tell me.</p></div><div class="sp-q" data-text="Is there documentation? Y a-t-il une documentation ? Full documentation is on its way, and Stratum tutorials are coming to the Tutorials page. Une documentation complète arrive, et des tutoriels Stratum vont rejoindre la page Tutoriels."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Is there documentation?" data-fr="Y a-t-il une documentation ?">Is there documentation?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Getting started" data-fr="Stratum · Démarrer">Stratum · Getting started</span><p class="sp-a" data-en="Full documentation is on its way, and Stratum tutorials are coming to the Tutorials page." data-fr="Une documentation complète arrive, et des tutoriels Stratum vont rejoindre la page Tutoriels.">Full documentation is on its way, and Stratum tutorials are coming to the Tutorials page.</p></div></div><div class="sp-grp" id="stratum-1"><h2 data-en="Licences and updates" data-fr="Licences et mises à jour">Licences and updates</h2><div class="sp-q" data-text="Free, Indie or Studio? Free, Indie ou Studio ? Free is for personal, non-commercial use. Indie and Studio include commercial use, and Studio covers a team within one studio. Details are on the Stratum page. Free : usage personnel, non commercial. Indie et Studio incluent l&#x27;usage commercial, et Studio couvre une équipe dans un même studio. Le détail est sur la page Stratum."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Free, Indie or Studio?" data-fr="Free, Indie ou Studio ?">Free, Indie or Studio?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Licences and updates" data-fr="Stratum · Licences et mises à jour">Stratum · Licences and updates</span><p class="sp-a" data-en="Free is for personal, non-commercial use. Indie and Studio include commercial use, and Studio covers a team within one studio. Details are on the Stratum page." data-fr="Free : usage personnel, non commercial. Indie et Studio incluent l&amp;#x27;usage commercial, et Studio couvre une équipe dans un même studio. Le détail est sur la page Stratum.">Free is for personal, non-commercial use. Indie and Studio include commercial use, and Studio covers a team within one studio. Details are on the Stratum page.</p></div><div class="sp-q" data-text="How do I get updates? Comment recevoir les mises à jour ? Stratum tells you in the app when a new version is out; download it from the Stratum page. A paid licence includes one year of updates, and the software keeps working after that. Stratum vous prévient quand une version sort ; elle se télécharge sur la page Stratum. Une licence payante inclut un an de mises à jour, et le logiciel marche toujours après."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="How do I get updates?" data-fr="Comment recevoir les mises à jour ?">How do I get updates?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Licences and updates" data-fr="Stratum · Licences et mises à jour">Stratum · Licences and updates</span><p class="sp-a" data-en="Stratum tells you in the app when a new version is out; download it from the Stratum page. A paid licence includes one year of updates, and the software keeps working after that." data-fr="Stratum vous prévient quand une version sort ; elle se télécharge sur la page Stratum. Une licence payante inclut un an de mises à jour, et le logiciel marche toujours après.">Stratum tells you in the app when a new version is out; download it from the Stratum page. A paid licence includes one year of updates, and the software keeps working after that.</p></div><div class="sp-q" data-text="Who handles payment and refunds? Qui gère le paiement et les remboursements ? Paid licences are sold through Lemon Squeezy, which handles payment, invoices, taxes and refund requests. Les licences payantes sont vendues par Lemon Squeezy, qui gère le paiement, la facture, les taxes et les demandes de remboursement."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Who handles payment and refunds?" data-fr="Qui gère le paiement et les remboursements ?">Who handles payment and refunds?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Licences and updates" data-fr="Stratum · Licences et mises à jour">Stratum · Licences and updates</span><p class="sp-a" data-en="Paid licences are sold through Lemon Squeezy, which handles payment, invoices, taxes and refund requests." data-fr="Les licences payantes sont vendues par Lemon Squeezy, qui gère le paiement, la facture, les taxes et les demandes de remboursement.">Paid licences are sold through Lemon Squeezy, which handles payment, invoices, taxes and refund requests.</p></div></div><div class="sp-grp" id="stratum-2"><h2 data-en="Something wrong?" data-fr="Un problème ?">Something wrong?</h2><div class="sp-q" data-text="I found a bug. J&#x27;ai trouvé un bug. Use the &quot;Report a problem&quot; button in Stratum, or write to contact@kalysteon.com with a description and your setup. Utilisez le bouton « Signaler un problème » dans Stratum, ou écrivez à contact@kalysteon.com avec une description et votre configuration."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="I found a bug." data-fr="J&#x27;ai trouvé un bug.">I found a bug.</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Stratum · Something wrong?" data-fr="Stratum · Un problème ?">Stratum · Something wrong?</span><p class="sp-a" data-en="Use the &amp;quot;Report a problem&amp;quot; button in Stratum, or write to &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt; with a description and your setup." data-fr="Utilisez le bouton « Signaler un problème » dans Stratum, ou écrivez à &lt;a href=&quot;mailto:contact@kalysteon.com&quot;&gt;contact@kalysteon.com&lt;/a&gt; avec une description et votre configuration.">Use the &quot;Report a problem&quot; button in Stratum, or write to <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a> with a description and your setup.</p></div></div></div><div class="sp-panel" data-cat="commissions" role="tabpanel"><div class="sp-grp" id="commissions-0"><h2 data-en="Before starting" data-fr="Avant de commencer">Before starting</h2><div class="sp-q" data-text="What do you build? Que construisez-vous ? Three kinds of worlds: a custom terrain, a complete world, or a hero asset, delivered playable in Unreal Engine 5 or Unity. Trois univers : un terrain sur mesure, un monde complet ou un asset hero, livrés jouables dans Unreal Engine 5 ou Unity."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What do you build?" data-fr="Que construisez-vous ?">What do you build?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Before starting" data-fr="Commissions · Avant de commencer">Commissions · Before starting</span><p class="sp-a" data-en="Three kinds of worlds: a custom terrain, a complete world, or a hero asset, delivered playable in Unreal Engine 5 or Unity." data-fr="Trois univers : un terrain sur mesure, un monde complet ou un asset hero, livrés jouables dans Unreal Engine 5 ou Unity.">Three kinds of worlds: a custom terrain, a complete world, or a hero asset, delivered playable in Unreal Engine 5 or Unity.</p></div><div class="sp-q" data-text="What do I need to provide? Que dois-je fournir ? Just tell me about your project: the game, the mood, what the player does there. References help, but the brief is five questions, no jargon. Parlez-moi simplement de votre projet : le jeu, l&#x27;ambiance, ce que le joueur y fait. Des références aident, mais le brief tient en cinq questions, sans jargon."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What do I need to provide?" data-fr="Que dois-je fournir ?">What do I need to provide?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Before starting" data-fr="Commissions · Avant de commencer">Commissions · Before starting</span><p class="sp-a" data-en="Just tell me about your project: the game, the mood, what the player does there. References help, but the brief is five questions, no jargon." data-fr="Parlez-moi simplement de votre projet : le jeu, l&amp;#x27;ambiance, ce que le joueur y fait. Des références aident, mais le brief tient en cinq questions, sans jargon.">Just tell me about your project: the game, the mood, what the player does there. References help, but the brief is five questions, no jargon.</p></div><div class="sp-q" data-text="Do you work with teams? Travaillez-vous avec des équipes ? Yes, mostly indie developers, from solo creators to studios with a budget. Oui, surtout des développeurs indés, du créateur solo au studio qui a un budget."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Do you work with teams?" data-fr="Travaillez-vous avec des équipes ?">Do you work with teams?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Before starting" data-fr="Commissions · Avant de commencer">Commissions · Before starting</span><p class="sp-a" data-en="Yes, mostly indie developers, from solo creators to studios with a budget." data-fr="Oui, surtout des développeurs indés, du créateur solo au studio qui a un budget.">Yes, mostly indie developers, from solo creators to studios with a budget.</p></div></div><div class="sp-grp" id="commissions-1"><h2 data-en="Price and payment" data-fr="Prix et paiement">Price and payment</h2><div class="sp-q" data-text="How much does it cost? Combien ça coûte ? Every project gets its own quote, set together after the brief. It states the content, the price, the included revisions, the timeline and the rights. Chaque projet a son devis, fixé ensemble après le brief. Il précise le contenu, le prix, les révisions incluses, le délai et les droits."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="How much does it cost?" data-fr="Combien ça coûte ?">How much does it cost?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Price and payment" data-fr="Commissions · Prix et paiement">Commissions · Price and payment</span><p class="sp-a" data-en="Every project gets its own quote, set together after the brief. It states the content, the price, the included revisions, the timeline and the rights." data-fr="Chaque projet a son devis, fixé ensemble après le brief. Il précise le contenu, le prix, les révisions incluses, le délai et les droits.">Every project gets its own quote, set together after the brief. It states the content, the price, the included revisions, the timeline and the rights.</p></div><div class="sp-q" data-text="How does payment work? Comment se passe le paiement ? A 50% deposit to start, the remaining 50% at final approval, before the final files are delivered. 50 % d&#x27;acompte pour démarrer, le solde à la validation finale, avant la livraison des fichiers."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="How does payment work?" data-fr="Comment se passe le paiement ?">How does payment work?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Price and payment" data-fr="Commissions · Prix et paiement">Commissions · Price and payment</span><p class="sp-a" data-en="A 50% deposit to start, the remaining 50% at final approval, before the final files are delivered." data-fr="50 % d&amp;#x27;acompte pour démarrer, le solde à la validation finale, avant la livraison des fichiers.">A 50% deposit to start, the remaining 50% at final approval, before the final files are delivered.</p></div><div class="sp-q" data-text="What if I cancel? Et si j&#x27;annule ? Once work has started, the deposit covers the work done, and the previews already sent cannot be used. Une fois le travail lancé, l&#x27;acompte couvre le travail engagé, et les aperçus déjà envoyés ne peuvent pas être utilisés."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What if I cancel?" data-fr="Et si j&#x27;annule ?">What if I cancel?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · Price and payment" data-fr="Commissions · Prix et paiement">Commissions · Price and payment</span><p class="sp-a" data-en="Once work has started, the deposit covers the work done, and the previews already sent cannot be used." data-fr="Une fois le travail lancé, l&amp;#x27;acompte couvre le travail engagé, et les aperçus déjà envoyés ne peuvent pas être utilisés.">Once work has started, the deposit covers the work done, and the previews already sent cannot be used.</p></div></div><div class="sp-grp" id="commissions-2"><h2 data-en="During the project" data-fr="Pendant le projet">During the project</h2><div class="sp-q" data-text="How long does it take? Combien de temps ça prend ? Usually 1 to 4 weeks depending on the scope. The exact timeline is confirmed in the quote, before any work starts. En général de 1 à 4 semaines selon le périmètre. Le délai exact est confirmé dans le devis, avant le début du travail."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="How long does it take?" data-fr="Combien de temps ça prend ?">How long does it take?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · During the project" data-fr="Commissions · Pendant le projet">Commissions · During the project</span><p class="sp-a" data-en="Usually 1 to 4 weeks depending on the scope. The exact timeline is confirmed in the quote, before any work starts." data-fr="En général de 1 à 4 semaines selon le périmètre. Le délai exact est confirmé dans le devis, avant le début du travail.">Usually 1 to 4 weeks depending on the scope. The exact timeline is confirmed in the quote, before any work starts.</p></div><div class="sp-q" data-text="How many revision rounds? Combien de tours de révision ? Set in the quote, usually 2 rounds on the shape and 2 on the details. Extra rounds are quoted separately. Fixés dans le devis, en général 2 tours sur la forme et 2 sur le détail. Les tours en plus sont chiffrés à part."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="How many revision rounds?" data-fr="Combien de tours de révision ?">How many revision rounds?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · During the project" data-fr="Commissions · Pendant le projet">Commissions · During the project</span><p class="sp-a" data-en="Set in the quote, usually 2 rounds on the shape and 2 on the details. Extra rounds are quoted separately." data-fr="Fixés dans le devis, en général 2 tours sur la forme et 2 sur le détail. Les tours en plus sont chiffrés à part.">Set in the quote, usually 2 rounds on the shape and 2 on the details. Extra rounds are quoted separately.</p></div><div class="sp-q" data-text="What do I receive? Que vais-je recevoir ? Everything set up in your engine, plus terrain files, FBX meshes and textures. Raw software project files are only included if agreed. Tout réglé dans votre moteur, plus les fichiers de terrain, les meshes FBX et les textures. Les fichiers projet bruts ne sont inclus que sur accord."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="What do I receive?" data-fr="Que vais-je recevoir ?">What do I receive?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · During the project" data-fr="Commissions · Pendant le projet">Commissions · During the project</span><p class="sp-a" data-en="Everything set up in your engine, plus terrain files, FBX meshes and textures. Raw software project files are only included if agreed." data-fr="Tout réglé dans votre moteur, plus les fichiers de terrain, les meshes FBX et les textures. Les fichiers projet bruts ne sont inclus que sur accord.">Everything set up in your engine, plus terrain files, FBX meshes and textures. Raw software project files are only included if agreed.</p></div><div class="sp-q" data-text="Who owns the result? À qui appartient le résultat ? Once fully paid, you get a commercial licence, and exclusivity if the quote includes it. I may show the work in my portfolio unless agreed otherwise. Après paiement complet, vous recevez une licence commerciale, et l&#x27;exclusivité si le devis la prévoit. Je peux montrer le travail dans mon portfolio, sauf accord contraire."><button type="button" class="sp-qh" aria-expanded="false"><span data-en="Who owns the result?" data-fr="À qui appartient le résultat ?">Who owns the result?</span><span class="sp-qi" aria-hidden="true">+</span></button><span class="sp-where" data-en="Commissions · During the project" data-fr="Commissions · Pendant le projet">Commissions · During the project</span><p class="sp-a" data-en="Once fully paid, you get a commercial licence, and exclusivity if the quote includes it. I may show the work in my portfolio unless agreed otherwise." data-fr="Après paiement complet, vous recevez une licence commerciale, et l&amp;#x27;exclusivité si le devis la prévoit. Je peux montrer le travail dans mon portfolio, sauf accord contraire.">Once fully paid, you get a commercial licence, and exclusivity if the quote includes it. I may show the work in my portfolio unless agreed otherwise.</p></div></div></div>
+      <p class="sp-none"><span data-en="No answer here? Write to me:" data-fr="Pas de réponse ici ? Écrivez-moi :">No answer here? Write to me:</span> <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a></p>
+    </div>
+  </div>
+</section>
 
-  <a href="tutorials.html" class="sup-card sup-card-tutorials fade-in-up">
-    <span class="sup-card-icon">▶</span>
-    <p class="sup-card-label" data-en="Learn" data-fr="Apprendre">Learn</p>
-    <h2 class="sup-card-title" data-en="Tutorials" data-fr="Tutoriels">Tutorials</h2>
-    <p class="sup-card-desc" data-en="Step-by-step videos on Gaea, Houdini, Unreal and more. Free downloads included with each video." data-fr="Vidéos pas-à-pas sur Gaea, Houdini, Unreal et plus encore. Fichiers gratuits inclus avec chaque vidéo.">Step-by-step videos on Gaea, Houdini, Unreal and more. Free downloads included with each video.</p>
-    <span class="sup-card-cta"><span data-en="Watch tutorials" data-fr="Voir les tutoriels">Watch tutorials</span> <span class="sup-card-cta-arrow">→</span></span>
-  </a>
+<section class="wrap" style="padding-top: 130px; padding-bottom: 120px">
+  <div class="sp-tuts-head"><div style="display: flex; flex-direction: column; gap: 14px"><span class="sp-kick" data-en="Learn by video" data-fr="Apprendre en vidéo">Learn by video</span><h2 data-en="Latest tutorials" data-fr="Derniers tutoriels">Latest tutorials</h2></div><a class="sp-tuts-all" href="tutorials.html"><span data-en="All tutorials" data-fr="Tous les tutoriels">All tutorials</span> →</a></div>
+  <div class="sp-tuts"><a class="sp-tut" href="tutorials.html#dark-fantasy-spikes-gaea-2"><span class="sp-tut-img"><img src="https://i.ytimg.com/vi/X_6t6l31QFk/hqdefault.jpg" alt="" loading="lazy"><span>11:58</span></span><b data-en="Let&#x27;s make dark fantasy spiked mountains for your game" data-fr="Créons des montagnes à pics dark fantasy pour votre jeu">Let's make dark fantasy spiked mountains for your game</b></a><a class="sp-tut" href="tutorials.html#realistic-cliffs-gaea-2"><span class="sp-tut-img"><img src="https://i.ytimg.com/vi/E2CBQ3nKmKo/hqdefault.jpg" alt="" loading="lazy"><span>22:01</span></span><b data-en="How to make cliffs that actually look like rock" data-fr="Comment faire des falaises qui ressemblent vraiment à de la roche">How to make cliffs that actually look like rock</b></a><a class="sp-tut" href="tutorials.html#stylized-terrain-gaea-2"><span class="sp-tut-img"><img src="https://i.ytimg.com/vi/O8Kp8S5td00/hqdefault.jpg" alt="" loading="lazy"><span>17:32</span></span><b data-en="You can make stylized terrain in Gaea 2" data-fr="Vous pouvez faire du terrain stylisé dans Gaea 2">You can make stylized terrain in Gaea 2</b></a></div>
+</section>
+</main>
 
-  <a href="faq.html" class="sup-card sup-card-faq fade-in-up">
-    <span class="sup-card-icon">?</span>
-    <p class="sup-card-label" data-en="Answers" data-fr="Réponses">Answers</p>
-    <h2 class="sup-card-title">FAQ</h2>
-    <p class="sup-card-desc" data-en="Licensing, compatibility, file formats, refund policy. Quick answers to the most common questions." data-fr="Licences, compatibilité, formats de fichiers, remboursements. Réponses rapides aux questions les plus courantes.">Licensing, compatibility, file formats, refund policy. Quick answers to the most common questions.</p>
-    <span class="sup-card-cta"><span data-en="Browse FAQ" data-fr="Parcourir la FAQ">Browse FAQ</span> <span class="sup-card-cta-arrow">→</span></span>
-  </a>
-
-  <a href="mailto:contact@kalysteon.com" class="sup-card sup-card-contact fade-in-up">
-    <span class="sup-card-icon">✉</span>
-    <p class="sup-card-label" data-en="Contact" data-fr="Contact">Contact</p>
-    <h2 class="sup-card-title" data-en="Email Direct" data-fr="Email Direct">Email Direct</h2>
-    <p class="sup-card-desc" data-en="Didn't find your answer? Reach out directly and I'll get back to you." data-fr="Vous n'avez pas trouvé de réponse ? Contactez-moi directement, je vous répondrai.">Didn't find your answer? Reach out directly and I'll get back to you.</p>
-    <span class="sup-card-cta"><span data-en="Send an email" data-fr="Envoyer un email">Send an email</span> <span class="sup-card-cta-arrow">→</span></span>
-  </a>
-
-</div>
-
-<footer>
-  <div class="footer-copy">© 2026 Kalysteon · <a href="mailto:contact@kalysteon.com">contact@kalysteon.com</a></div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a class="ft-logo" href="index.html" aria-label="Kalysteon, home">KALYS<span>T</span>EON</a>
+        <p class="ft-desc" data-en="Environment art for games. Terrain packs, tools and commissions." data-fr="Des environnements pour le jeu vidéo. Packs de terrains, outils et commissions.">Environment art for games. Terrain packs, tools and commissions.</p>
+        <div class="ft-icons">
+          <a class="ft-icon" href="https://www.artstation.com/kalysteon" target="_blank" rel="noopener" aria-label="ArtStation"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 17.723l2.027 3.505a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"></path></svg></a>
+          <a class="ft-icon" href="https://www.youtube.com/@Kalysteon" target="_blank" rel="noopener" aria-label="YouTube"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="m10 9.2 5 2.8-5 2.8z"></path></svg></a>
+          <a class="ft-icon" href="https://www.instagram.com/kalysteon/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="0.6"></circle></svg></a>
+          <a class="ft-icon" href="https://www.tiktok.com/@kalysteon" target="_blank" rel="noopener" aria-label="TikTok"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.4 2.6 2.4 4.6 5 4.8"></path></svg></a>
+          <a class="ft-icon" href="https://x.com/Kalysteon" target="_blank" rel="noopener" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4.2L20 20h-4.2z"></path><path d="M20 4l-6.6 7.2"></path><path d="M4 20l6.6-7.2"></path></svg></a>
+          <a class="ft-icon" href="https://www.linkedin.com/in/andreibobe/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 10.5V17"></path><path d="M8 7.2v.1"></path><path d="M12 17v-6.5"></path><path d="M12 13.5a2.5 2.5 0 0 1 5 0V17"></path></svg></a>
+          <a class="ft-icon" href="https://www.facebook.com/profile.php?id=61563883627493" target="_blank" rel="noopener" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a class="ft-icon" href="https://www.reddit.com/user/Kalysteon/" target="_blank" rel="noopener" aria-label="Reddit"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="14.6" rx="8" ry="5.6"></ellipse><circle cx="4.6" cy="10.4" r="1.7"></circle><circle cx="19.4" cy="10.4" r="1.7"></circle><path d="M12 9l1.3-5.2 4 1"></path><circle cx="18.7" cy="5" r="1.3"></circle><circle cx="9" cy="13.6" r="0.6" fill="currentColor"></circle><circle cx="15" cy="13.6" r="0.6" fill="currentColor"></circle><path d="M9.3 16.8c1.6 1.1 3.8 1.1 5.4 0"></path></svg></a>
+        </div>
+        <div class="ft-stores">
+          <a class="ft-store" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener">Fab <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://assetstore.unity.com/publishers/104184" target="_blank" rel="noopener">Unity Asset Store <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://www.artstation.com/kalysteon/store" target="_blank" rel="noopener">ArtStation <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="ft-cols">
+        <nav class="ft-col" aria-label="Explore" data-aria-en="Explore" data-aria-fr="Explorer">
+          <h4 data-en="Explore" data-fr="Explorer">Explore</h4>
+          <a class="ft-link" href="products.html" data-en="Products" data-fr="Produits">Products</a>
+          <a class="ft-link" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
+          <a class="ft-link" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
+          <a class="ft-link" href="tutorials.html" data-en="Tutorials" data-fr="Tutoriels">Tutorials</a>
+          <a class="ft-link" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
+        </nav>
+        <nav class="ft-col" aria-label="Info" data-aria-en="Info" data-aria-fr="Infos">
+          <h4 data-en="Info" data-fr="Infos">Info</h4>
+          <a class="ft-link" href="about.html#contact" data-en="Contact" data-fr="Contact">Contact</a>
+          <a class="ft-link" href="support.html" data-en="FAQ" data-fr="FAQ">FAQ</a>
+          <a class="ft-link" href="cgv.html" data-en="Terms of sale" data-fr="CGV">Terms of sale</a>
+          <a class="ft-link" href="mentions-legales.html" data-en="Legal notice" data-fr="Mentions légales">Legal notice</a>
+          <a class="ft-link" href="confidentialite.html" data-en="Privacy" data-fr="Confidentialité">Privacy</a>
+        </nav>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Kalysteon · Andrei Bobe</span>
+      <a class="ft-link" href="mailto:contact@kalysteon.com">contact@kalysteon.com</a>
+    </div>
+  </div>
 </footer>
 
-<div id="mobile-nav-portal"></div>
-
 <script>
-/* ── Lang ── */
-const LANG_KEY = 'kly_lang';
-function setLang(l) {
-  localStorage.setItem(LANG_KEY, l);
-  document.querySelectorAll('[data-en]').forEach(el => {
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      el.placeholder = el.dataset[l] || el.dataset.en;
-    } else {
-      el.innerHTML = el.dataset[l] || el.dataset.en;
-    }
+// Langue (innerHTML: answers keep their links), placeholders follow
+var spLang = 'en';
+function setLang(lang) {
+  spLang = lang;
+  localStorage.setItem('kalysteon-lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(function (el) {
+    var txt = el.getAttribute('data-' + lang);
+    if (txt !== null) el.innerHTML = txt;
   });
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  document.querySelectorAll('[data-ph-en]').forEach(function (el) {
+    el.setAttribute('placeholder', el.getAttribute('data-ph-' + lang));
+  });
+  document.querySelectorAll('.lang-btn').forEach(function (btn) { btn.classList.toggle('active', btn.id === 'lang-btn-' + lang); });
+  if (window.spSearch) window.spSearch();
 }
-(function() {
-  const saved = localStorage.getItem(LANG_KEY) || (navigator.language.startsWith('fr') ? 'fr' : 'en');
-  setLang(saved);
+setLang(localStorage.getItem('kalysteon-lang') || 'en');
+
+// Header height, for anchors
+(function () {
+  var header = document.querySelector('header.site-header');
+  if (!header) return;
+  var set = function () { document.documentElement.style.setProperty('--hdr-h', header.offsetHeight + 'px'); };
+  set();
+  window.addEventListener('resize', set);
+  window.addEventListener('load', set);
 })();
 
-/* ── Fade in ── */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
-
-/* ── Particles ── */
-(function(){
-  const c = document.getElementById('ptx');
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  let W, H, pts = [];
-  function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  for (let i = 0; i < 55; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, vx: (Math.random()-.5)*.18, vy: (Math.random()-.5)*.18, r: Math.random()*.9+.3, o: Math.random()*.35+.08 });
-  function tick() {
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x<0) p.x=W; if (p.x>W) p.x=0;
-      if (p.y<0) p.y=H; if (p.y>H) p.y=0;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(201,168,76,${p.o})`; ctx.fill();
+// Particles, Kalysteon gold
+(function () {
+  var canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [], w, h;
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+  for (var i = 0; i < 70; i++) particles.push({
+    x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.3 + 0.4,
+    vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
+    a: Math.random() * 0.45 + 0.15, da: (Math.random() > 0.5 ? 1 : -1) * 0.0025
+  });
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.a += p.da;
+      if (p.a < 0.08) p.da = Math.abs(p.da);
+      if (p.a > 0.5) p.da = -Math.abs(p.da);
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(212, 175, 55, ' + p.a.toFixed(3) + ')';
+      ctx.fill();
     });
-    requestAnimationFrame(tick);
+    requestAnimationFrame(animate);
   }
-  tick();
+  animate();
+})();
+
+// FAQ: three topics, accordions, search across everything
+(function () {
+  var faq = document.getElementById('sp-faq');
+  if (!faq) return;
+  var cats = document.querySelectorAll('.sp-cat');
+  var panels = document.querySelectorAll('.sp-panel');
+  var sides = document.querySelectorAll('.sp-side-list');
+  var input = document.getElementById('sp-search-input');
+  var count = document.getElementById('sp-count');
+  function showCat(id, scroll) {
+    cats.forEach(function (c) { c.classList.toggle('on', c.dataset.cat === id); c.setAttribute('aria-selected', c.dataset.cat === id ? 'true' : 'false'); });
+    panels.forEach(function (p) { p.classList.toggle('on', p.dataset.cat === id); });
+    sides.forEach(function (s) { s.style.display = s.dataset.cat === id ? '' : 'none'; });
+    if (scroll) faq.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  cats.forEach(function (c) {
+    c.addEventListener('click', function () {
+      if (input.value) { input.value = ''; search(); }
+      showCat(c.dataset.cat, false);
+      if (history.replaceState) history.replaceState(null, '', '#' + c.dataset.cat);
+    });
+  });
+  faq.querySelectorAll('.sp-qh').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var q = b.closest('.sp-q');
+      var open = !q.classList.contains('on');
+      q.classList.toggle('on', open);
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+  function search() {
+    var q = norm(input.value.trim());
+    faq.classList.toggle('sp-searching', !!q);
+    var n = 0;
+    faq.querySelectorAll('.sp-q').forEach(function (el) {
+      var hit = !q || norm(el.dataset.text).indexOf(q) >= 0;
+      el.classList.toggle('hide', !hit);
+      if (q && hit) n++;
+    });
+    faq.querySelectorAll('.sp-grp').forEach(function (g) { g.classList.toggle('hide', !!q && !g.querySelector('.sp-q:not(.hide)')); });
+    cats.forEach(function (c) { c.classList.toggle('on', !q && c.dataset.cat === (document.querySelector('.sp-panel.on') || {}).dataset.cat); });
+    var fr = spLang === 'fr';
+    count.textContent = n + (fr ? (n === 1 ? ' réponse' : ' réponses') : (n === 1 ? ' answer' : ' answers'));
+  }
+  window.spSearch = search;
+  input.addEventListener('input', search);
+  // #products, #stratum, #commissions (and the old FAQ's #software)
+  var h = location.hash.slice(1);
+  if (h === 'software') h = 'stratum';
+  if (document.querySelector('.sp-cat[data-cat="' + h + '"]')) {
+    showCat(h, false);
+    window.addEventListener('load', function () { faq.scrollIntoView({ behavior: 'instant', block: 'start' }); });
+  } else {
+    showCat('products', false);
+  }
 })();
 </script>
-<script src="mobile-nav.js"></script>
+  <script src="mobile-nav.js"></script>
 </body>
 </html>

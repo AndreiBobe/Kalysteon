@@ -2,535 +2,357 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Stratum · Kalysteon</title>
 <meta name="description" content="Stratum by Kalysteon, the terrain pipeline software. Gaea, Houdini, Unreal Engine 5 and Unity, automated end to end. Free download for Windows.">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.webp">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.webp">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500&family=Rajdhani:wght@400;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="legal.css">
 <style>
-@property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-@keyframes rotateBorder { to { --angle: 360deg; } }
-@keyframes slideUpFade { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes shimmerText { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
-@keyframes statusPulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(94,207,183,0.55); } 50% { opacity: 0.55; box-shadow: 0 0 0 6px rgba(94,207,183,0); } }
-@keyframes arrowFlow { 0% { transform: translateX(-3px); opacity: 0.3; } 50% { opacity: 1; } 100% { transform: translateX(3px); opacity: 0.3; } }
-@keyframes appFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@keyframes layerReveal { 0% { opacity: 0; transform: translateX(-12px); } 100% { opacity: 1; transform: translateX(0); } }
+/* ═══ STRATUM PAGE (S5) ═══
+   Site header/footer come from legal.css. Teal is Stratum's own accent; gold stays Kalysteon's. */
+:root { --st: #1FB8AB; --st-hi: #5DEFD5; --st-ink: #CFFAF2; --st-line: rgba(93,239,213,0.28); --st-soft: rgba(93,239,213,0.06); --bad: #F07A8A; --note: #F2A15C; --dim2: #7085A0; --muted2: #9BB0D0; }
+body { background-color: #020A16; background-image: radial-gradient(ellipse 60% 40% at 78% 8%, rgba(31,184,171,0.10), transparent 70%), radial-gradient(ellipse 50% 30% at 6% 30%, rgba(10,30,80,0.45), transparent 70%); }
+.header-nav .nav-pill:nth-child(n) > .nav-link.nav-stratum.active { color: var(--st-hi); }
+.st-mono { font-family: 'IBM Plex Mono', monospace; }
+.st-disp { font-family: 'Rajdhani', sans-serif; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #010810; --surface: #051322; --surface2: #091B32; --surface3: #0E2240;
-  --gold: #C9A84C; --gold-bright: #F2D777; --gold-dark: #8B6914;
-  --border: rgba(201,168,76,0.35); --border-mid: rgba(201,168,76,0.22); --border-dark: rgba(0,3,10,0.90);
-  --accent: #C9A84C; --accent-bright: #F2D777;
-  --accent-dim: rgba(201,168,76,0.09); --accent-glow: rgba(201,168,76,0.18);
-  --text: #EEE8D6; --text-muted: #7085A0; --text-dim: #364860;
-  --radius-lg: 16px; --radius-md: 12px; --radius-sm: 8px; --radius-xs: 6px;
-  --mono: 'IBM Plex Mono', monospace; --sans: 'IBM Plex Sans', sans-serif;
-  --display: 'Rajdhani', sans-serif;
+/* Tab bar under the site header */
+.st-tabs { position: sticky; top: var(--hdr-h, 92px); z-index: 40; background: rgba(2,10,22,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(31,184,171,0.18); }
+.st-tabs-in { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.st-tabs-l { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.st-brand { display: flex; align-items: center; gap: 10px; padding-right: 18px; border-right: 1px solid rgba(255,255,255,0.08); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.2em; color: var(--st-hi); }
+.st-brand img { width: 26px; height: 26px; }
+.st-tablist { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.st-tablist::-webkit-scrollbar { display: none; }
+.st-tab { display: inline-flex; align-items: center; gap: 9px; min-height: 58px; padding: 0 18px; border: 0; border-bottom: 2px solid transparent; background: none; cursor: pointer; white-space: nowrap; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim2); transition: color .25s, border-color .25s; text-decoration: none; }
+.st-tab:hover { color: var(--text-light, #EEE8D6); }
+.st-tab[aria-selected="true"] { color: #EEE8D6; border-bottom-color: var(--st-hi); }
+.st-tab small { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--dim2); }
 
-  /* ── STRATUM brand palette ── */
-  --str: #1FB8AB;
-  --str-bright: #5DEFD5;
-  --str-deep: #0E5852;
-  --str-dim: rgba(31,184,171,0.10);
-  --str-border: rgba(31,184,171,0.30);
-  --str-glow: rgba(93,239,213,0.22);
-  --str-text-on: #001815;
+/* Buttons */
+.st-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 9px; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background .2s, border-color .2s, color .2s; text-decoration: none; }
+.st-btn svg { width: 16px; height: 16px; }
+.st-btn-p { color: #03201D; background: var(--st-hi); border: 1px solid var(--st-hi); }
+.st-btn-p:hover { color: #03201D; background: #8FF5E3; }
+.st-btn-g { color: #EEE8D6; background: rgba(255,255,255,0.03); border: 1px solid var(--st-line); }
+.st-btn-g:hover { color: #EEE8D6; border-color: var(--st-hi); }
+.st-btn-sm { min-height: 38px; padding: 0 16px; font-size: 11px; }
+.st-link { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--st-hi); }
+.st-link:hover { color: #EEE8D6; }
 
-  /* ── DCC stage colors (matching the app) ── */
-  --stage-gaea:    #E8C04F;
-  --stage-houdini: #E89C3F;
-  --stage-ue:      #B589F0;
-  --stage-unity:   #5BA4F5;
-  --str-online:    #5ECFB7;
+/* Shared type */
+.st-kick { display: inline-flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--st-hi); }
+.st-kick::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--st-hi); box-shadow: 0 0 10px var(--st-hi); }
+.st-h2 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.02; letter-spacing: 0.02em; color: #EEE8D6; }
+.st-h2-xl { font-size: 56px; }
+.st-h2-l { font-size: 50px; }
+.st-lead { margin: 0; font-size: 16px; line-height: 1.7; color: rgba(238,232,214,0.78); }
+.st-cap { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(238,232,214,0.55); }
+.st-note { font-family: 'Caveat', cursive; font-weight: 700; font-size: 27px; line-height: 1.05; color: var(--note); }
+.st-card { border-radius: 14px; border: 1px solid rgba(255,255,255,0.07); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); }
+.st-head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.st-panel[hidden] { display: none; }
+.st-panel { animation: slideUpFade .45s cubic-bezier(.2,.9,.4,1.05) both; }
+
+/* Hero */
+.st-hero { position: relative; height: 860px; max-height: calc(100vh - var(--hdr-h, 92px) - 59px); min-height: 620px; overflow: hidden; }
+.st-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.st-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,10,22,0.92) 0%, rgba(2,10,22,0.55) 38%, rgba(2,10,22,0.05) 70%), linear-gradient(0deg, #020A16 0%, rgba(2,10,22,0) 38%); }
+.st-hero-in { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+.st-hero-by { display: flex; align-items: center; gap: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #C9A84C; }
+.st-hero-by img { width: 46px; height: 46px; }
+.st-title-wrap { position: relative; width: fit-content; }
+.st-title { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 150px; line-height: 0.88; letter-spacing: 0.05em; background: linear-gradient(180deg, rgba(242,153,84,0.95) 0%, rgba(242,153,84,0.55) 18%, rgba(242,153,84,0) 42%), linear-gradient(105deg, #1FB8AB 6%, #5DEFD5 30%, #EAFFFB 44%, #5DEFD5 58%, #1FB8AB 86%); background-size: 100% 100%, 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: stShim 7s linear infinite; }
+@keyframes stShim { 0% { background-position: 0 0, 200% 0; } 100% { background-position: 0 0, -200% 0; } }
+.st-ver { position: absolute; right: -10px; bottom: -38px; transform: rotate(-8deg); font-family: 'Caveat', cursive; font-weight: 700; font-size: 52px; line-height: 1; color: var(--note); text-shadow: 0 0 18px rgba(242,161,92,0.3); }
+.st-slogan { margin: 18px 0 0; font-family: 'Rajdhani', sans-serif; font-weight: 500; font-size: 32px; line-height: 1.15; letter-spacing: 0.01em; color: #EEE8D6; max-width: 760px; }
+.st-hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.st-hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted2); }
+.st-hero-cap { position: absolute; right: 48px; bottom: 34px; z-index: 2; }
+
+/* Statement */
+.st-state-wrap { padding-top: 150px; padding-bottom: 130px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; }
+.st-state { margin: 0; max-width: 980px; font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 68px; line-height: 1; letter-spacing: 0.01em; color: #EEE8D6; }
+
+/* Demo window */
+.st-demo { position: relative; padding-top: 78px; }
+.st-demo-note { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; align-items: flex-start; gap: 4px; pointer-events: none; }
+.st-demo-note span { transform: rotate(-2deg); white-space: nowrap; }
+.st-demo-note svg { width: 74px; height: 72px; margin-top: 14px; }
+.shot { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--st-line); background: #061418; box-shadow: 0 40px 90px -30px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.4); }
+.shot-bar { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(3,14,18,0.9); }
+.shot-bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.16); }
+.shot-bar span { margin-left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim2); }
+.shot-bar .demo-badge { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--st-hi); }
+.shot-bar .demo-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #5ECFB7; box-shadow: 0 0 8px #5ECFB7; }
+.demo-box { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, rgba(31,184,171,0.10), transparent 70%), linear-gradient(180deg, #071a1f, #04121a); }
+.demo-box iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; background: #0b1220; }
+.demo-play { position: absolute; inset: 0; margin: auto; width: max-content; height: max-content; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #021A18; background: var(--st-hi); border: 0; border-radius: 9px; padding: 13px 22px; cursor: pointer; }
+.demo-play:hover { background: #8FF5E3; }
+.demo-box.live .demo-play { display: none; }
+.demo-modal { position: fixed; inset: 0; z-index: 1000; background: rgba(1,6,14,0.86); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px; overflow: auto; }
+.demo-modal[hidden] { display: none; }
+.demo-modal-in { width: min(1180px, 100%, calc((100vh - 170px) * 1.6)); animation: slideUpFade .25s ease both; }
+.demo-modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 16px; }
+.demo-modal-head h3 { margin: 0 0 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.1; color: #EEE8D6; }
+.demo-modal-head p { margin: 0; color: var(--muted2); font-size: 15px; max-width: 60ch; }
+.demo-modal-x { flex-shrink: 0; width: 40px; height: 40px; border-radius: 9px; border: 1px solid var(--st-line); background: rgba(31,184,171,0.06); color: #EEE8D6; font-size: 22px; line-height: 1; cursor: pointer; }
+.demo-modal-x:hover { border-color: var(--st-hi); color: var(--st-hi); }
+#demo-modal-box { max-height: calc(100vh - 190px); }
+
+/* Pillars */
+.st-pillars { display: grid; grid-template-columns: repeat(4, 1fr); }
+.st-pillar { display: flex; flex-direction: column; gap: 14px; padding: 34px 30px 0 0; }
+.st-pillar + .st-pillar { padding-left: 30px; border-left: 1px solid rgba(255,255,255,0.07); }
+.st-pillar b { font-family: 'Rajdhani', sans-serif; font-size: 34px; line-height: 1; letter-spacing: 0.02em; color: #EEE8D6; }
+.st-pillar p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted2); }
+.st-pillar p b { font-family: inherit; font-size: inherit; line-height: inherit; letter-spacing: 0; font-weight: 600; color: #EEE8D6; }
+
+/* Time block */
+.st-time { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; padding: 56px 60px; border-color: rgba(93,239,213,0.2); }
+.st-time h2 { font-size: 40px; line-height: 1.08; }
+.st-legend { display: flex; flex-wrap: wrap; gap: 22px; }
+.st-legend span { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+.st-legend i { width: 12px; height: 4px; border-radius: 2px; }
+.st-bar-row { display: grid; grid-template-columns: 136px 1fr; gap: 16px; align-items: center; }
+.st-bar-row > b { font-family: 'Rajdhani', sans-serif; font-size: 20px; letter-spacing: 0.02em; white-space: nowrap; color: #EEE8D6; }
+.st-bars { display: flex; flex-direction: column; gap: 7px; }
+.st-bar-hand { display: block; height: 14px; border-radius: 7px; background: linear-gradient(90deg, rgba(240,122,138,0.55), var(--bad)); }
+.st-bar-str { display: flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--st-hi); }
+.st-bar-str i { display: block; width: 7%; height: 14px; border-radius: 7px; background: var(--st-hi); }
+
+/* Made with Stratum */
+.st-strip { display: grid; grid-template-columns: repeat(4, 1fr); }
+.st-strip a { position: relative; display: block; height: 420px; overflow: hidden; }
+.st-strip img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.23,1,.32,1); }
+.st-strip a:hover img { transform: scale(1.05); }
+.st-strip a::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(2,10,22,0.85) 0%, rgba(2,10,22,0) 45%); }
+.st-strip a > span { position: absolute; left: 24px; right: 24px; bottom: 22px; z-index: 2; display: flex; flex-direction: column; gap: 4px; white-space: nowrap; }
+.st-strip small { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+.st-strip b { font-family: 'Rajdhani', sans-serif; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; color: #EEE8D6; }
+
+/* Final call */
+.st-final { padding-top: 170px; padding-bottom: 20px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.st-final img { width: 64px; height: 64px; }
+
+/* Features table */
+.st-cmp { border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008)); }
+.st-cmp-row { display: grid; grid-template-columns: 1.3fr 1fr 1.1fr 120px; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); }
+.st-cmp-row > div { padding: 20px 24px; }
+.st-cmp-row > .with { align-self: stretch; display: flex; align-items: center; gap: 10px; background: rgba(93,239,213,0.045); border-left: 1px solid rgba(93,239,213,0.14); border-right: 1px solid rgba(93,239,213,0.14); font-size: 14.5px; line-height: 1.45; font-weight: 500; color: #EEE8D6; }
+.st-cmp-row > .with > i { font-style: normal; color: var(--st-hi); }
+.st-cmp-row > .without { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.45; color: rgba(238,232,214,0.55); }
+.st-cmp-row > .without > i { font-style: normal; color: var(--bad); }
+.st-cmp-row > .see { display: flex; justify-content: center; }
+.st-cmp-head { border-top: 0; }
+.st-cmp-head > div { padding-top: 18px; padding-bottom: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+.st-cmp-feat { display: flex; gap: 16px; align-items: flex-start; }
+.st-ic { flex: 0 0 auto; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(93,239,213,0.25); background: rgba(93,239,213,0.06); color: var(--st-hi); }
+.st-ic svg { width: 20px; height: 20px; }
+.st-cmp-feat > span { display: flex; flex-direction: column; gap: 4px; }
+.st-cmp-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.1; letter-spacing: 0.03em; color: #EEE8D6; }
+.st-cmp-desc { font-size: 13px; line-height: 1.5; color: var(--dim2); }
+.st-see { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 9px; border: 1px solid rgba(93,239,213,0.3); background: none; cursor: pointer; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--st-hi); }
+.st-see:hover { border-color: var(--st-hi); }
+.st-see svg { width: 10px; height: 10px; }
+.st-cmp-total { background: rgba(255,255,255,0.02); }
+.st-cmp-total .t-bad { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 26px; color: var(--bad); text-decoration: line-through; text-decoration-thickness: 2px; }
+.st-cmp-total .with { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 26px; color: var(--st-hi); }
+
+/* Story */
+.st-story { display: grid; grid-template-columns: 260px 1fr; gap: 56px; padding: 56px 60px; border-color: rgba(242,161,92,0.22); background: linear-gradient(120deg, rgba(242,161,92,0.06), rgba(255,255,255,0.01) 55%); }
+.st-story-who { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.st-story-who img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(242,161,92,0.4); }
+.st-story-txt { display: flex; flex-direction: column; gap: 18px; }
+.st-story-txt blockquote { margin: 0; font-size: 16px; line-height: 1.85; color: rgba(238,232,214,0.86); }
+.st-story-txt blockquote b { color: #EEE8D6; }
+.st-values { display: grid; grid-template-columns: repeat(3, 1fr); }
+.st-value { display: flex; flex-direction: column; gap: 8px; padding: 30px 36px 0; }
+.st-value:first-child { padding-left: 0; }
+.st-value:last-child { padding-right: 0; }
+.st-value + .st-value { border-left: 1px solid rgba(255,255,255,0.07); }
+.st-value b { font-family: 'Rajdhani', sans-serif; font-size: 30px; line-height: 1.05; letter-spacing: 0.02em; color: #EEE8D6; }
+.st-value p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted2); }
+.st-made { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.st-made a { display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: #071628; transition: border-color .25s, transform .3s cubic-bezier(.23,1,.32,1); }
+.st-made a:hover { border-color: rgba(93,239,213,0.4); transform: translateY(-4px); }
+.st-made img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.st-made span { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px 16px; }
+.st-made small { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+.st-made b { font-family: 'Rajdhani', sans-serif; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; color: #EEE8D6; }
+
+/* Pricing */
+.st-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-top: 44px; align-items: stretch; }
+.st-tier { display: flex; flex-direction: column; gap: 16px; padding: 28px 26px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); text-align: left; }
+.st-tier.best { border-color: rgba(94,211,216,0.4); background: linear-gradient(180deg, rgba(94,211,216,0.08), rgba(255,255,255,0.01)); box-shadow: 0 30px 70px -40px rgba(94,211,216,0.5); }
+.st-tier-top { display: flex; align-items: center; justify-content: space-between; }
+.st-tier-key { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
+.st-tier-badge { padding: 4px 9px; border-radius: 6px; border: 1px solid currentColor; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.st-tier h3 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 30px; line-height: 1; color: #EEE8D6; }
+.st-tier-for { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted2); min-height: 42px; }
+.st-tier-cost { display: flex; align-items: baseline; gap: 10px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.st-tier-cost b { font-family: 'Rajdhani', sans-serif; font-size: 46px; line-height: 1; }
+.st-tier-cost small { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim2); }
+.st-tier ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.st-tier li { display: flex; gap: 10px; font-size: 14px; line-height: 1.45; color: rgba(238,232,214,0.85); }
+.st-tier li::before { content: '✓'; flex: 0 0 auto; font-weight: 600; color: var(--tc); }
+.st-tier .st-btn { width: 100%; margin-top: auto; }
+.t-free { --tc: #A4BECC; } .t-indie { --tc: #5ED3D8; } .t-studio { --tc: #E8835B; }
+.st-tier .st-tier-key, .st-tier .st-tier-badge, .st-tier-cost b { color: var(--tc); }
+.st-tier .st-btn-tier { color: #EEE8D6; background: none; border: 1px solid var(--tc); }
+.st-tier .st-btn-tier:hover { color: #EEE8D6; background: rgba(255,255,255,0.05); }
+.st-tier.best .st-btn-tier { color: #03201D; background: var(--tc); }
+.st-tier.best .st-btn-tier:hover { color: #03201D; filter: brightness(1.08); }
+.st-compare { width: 100%; max-width: 900px; margin: 26px auto 0; }
+.st-compare summary { display: flex; justify-content: center; list-style: none; cursor: pointer; }
+.st-compare summary::-webkit-details-marker { display: none; }
+.st-compare summary span { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 16px; border-radius: 9px; border: 1px solid var(--st-line); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #EEE8D6; }
+.st-compare summary span::after { content: '▾'; font-size: 10px; transition: transform .2s; }
+.st-compare[open] summary span::after { transform: rotate(180deg); }
+.st-compare-body { overflow: hidden; }
+.st-compare-scroll { margin-top: 18px; overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); }
+.st-compare table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.st-compare th, .st-compare td { padding: 12px 18px; text-align: left; border-top: 1px solid rgba(255,255,255,0.06); white-space: nowrap; }
+.st-compare thead th { border-top: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+.st-compare tbody th { font-weight: 400; color: var(--dim2); }
+.st-compare td { color: #EEE8D6; }
+.c-free { color: #A4BECC !important; } .c-indie { color: #5ED3D8 !important; } .c-studio { color: #E8835B !important; }
+.st-compare thead .c-free, .st-compare thead .c-indie, .st-compare thead .c-studio { font-weight: 600; }
+.st-compare-note { margin: 12px 0 0; text-align: center; font-size: 12.5px; color: var(--dim2); }
+
+/* Download */
+.st-dl { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; padding: 48px 52px; border-color: rgba(93,239,213,0.25); background: radial-gradient(ellipse 60% 120% at 100% 0%, rgba(31,184,171,0.14), transparent 65%), linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); }
+.st-dl-l { display: flex; gap: 28px; align-items: center; }
+.st-dl-l img { width: 96px; height: 96px; flex: 0 0 auto; }
+.st-dl-l > div { display: flex; flex-direction: column; gap: 10px; }
+.st-dl-r { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.st-dl-r .st-btn { min-height: 58px; padding: 0 34px; }
+.st-req { margin: 16px 0 0; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--dim2); }
+.st-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; }
+.st-step { display: flex; flex-direction: column; gap: 12px; padding: 26px 24px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); }
+.st-step h3 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 24px; color: #EEE8D6; }
+.st-step p { margin: 0; font-size: 14px; color: var(--muted2); }
+.st-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(93,239,213,0.4); font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--st-hi); }
+.st-step-arrow { align-self: center; color: var(--st-hi); font-size: 20px; }
+.st-tip { margin: 16px 0 0; padding: 12px 16px; border-radius: 9px; border: 1px dashed rgba(242,161,92,0.4); font-size: 13px; color: #F2C49C; text-align: center; }
+
+/* Patch notes */
+.st-pn { display: grid; grid-template-columns: 240px 1fr; gap: 64px; align-items: start; }
+.st-pn-index { position: sticky; top: calc(var(--hdr-h, 92px) + 90px); display: flex; flex-direction: column; gap: 4px; }
+.st-pn-index button { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 9px; border: 1px solid transparent; background: none; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--muted2); text-align: left; }
+.st-pn-index button:hover { color: #EEE8D6; }
+.st-pn-index button.on { color: #EEE8D6; border-color: rgba(93,239,213,0.3); background: rgba(93,239,213,0.06); }
+.st-pn-index small { font-size: 10px; color: var(--dim2); }
+.st-pn-rel { position: relative; padding: 0 0 64px 34px; border-left: 1px solid rgba(93,239,213,0.18); scroll-margin-top: calc(var(--hdr-h, 92px) + 90px); }
+.st-pn-rel:last-child { padding-bottom: 0; }
+.st-pn-rel::before { content: ''; position: absolute; left: -6px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: #020A16; border: 2px solid rgba(93,239,213,0.45); }
+.st-pn-rel:first-child::before { border-color: var(--st-hi); box-shadow: 0 0 12px rgba(93,239,213,0.5); }
+.st-pn-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+.st-pn-head h3 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; letter-spacing: 0.02em; color: #EEE8D6; }
+.st-pn-latest { padding: 4px 9px; border-radius: 6px; border: 1px solid rgba(93,239,213,0.45); font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--st-hi); }
+.st-pn-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim2); }
+.st-pn-sum { margin: 0 0 22px; font-size: 16px; line-height: 1.65; color: rgba(238,232,214,0.8); max-width: 680px; }
+.st-pn-list { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.06); }
+.st-pn-item { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.st-pn-item p { margin: 0; font-size: 15px; line-height: 1.55; color: #EEE8D6; }
+.st-pn-tag { justify-self: start; padding: 4px 9px; border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.st-pn-tag.new { color: var(--st-hi); border: 1px solid rgba(93,239,213,0.4); background: rgba(93,239,213,0.06); }
+.st-pn-tag.fix { color: var(--note); border: 1px solid rgba(242,161,92,0.4); background: rgba(242,161,92,0.06); }
+.st-pn-tag.imp { color: #B8DCF2; border: 1px solid rgba(184,220,242,0.4); background: rgba(184,220,242,0.06); }
+.st-pn-dl { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; }
+.st-pn-group + .st-pn-group, .st-pn-sum + .st-pn-group { margin-top: 26px; }
+.st-pn-group h4 { margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--st-hi); }
+
+/* Help band (every tab) */
+.st-help { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 30px; border-radius: 14px; border: 1px solid rgba(201,168,76,0.22); background: rgba(201,168,76,0.04); }
+.st-help b { display: block; font-family: 'Rajdhani', sans-serif; font-size: 22px; color: #EEE8D6; }
+.st-help p { margin: 4px 0 0; font-size: 14px; color: var(--muted2); }
+.st-help a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 38px; padding: 0 16px; border-radius: 9px; border: 1px solid rgba(201,168,76,0.45); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #F2D777; }
+.st-help a:hover { color: #F2D777; background: rgba(201,168,76,0.08); }
+
+@media (max-width: 1100px) {
+  .st-title { font-size: 120px; }
+  .st-state { font-size: 54px; }
+  .st-time { grid-template-columns: 1fr; gap: 36px; padding: 40px; }
+  .st-cmp-row { grid-template-columns: 1.2fr 1fr 1.1fr 104px; }
 }
-html { scroll-behavior: smooth; }
-body {
-  background-color: #020A16;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(10,30,80,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(6,20,55,0.45) 0%, transparent 50%);
-  color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased;
+@media (max-width: 768px) {
+  .st-tabs-in { gap: 10px; }
+  .st-brand { display: none; }
+  .st-tabs-r { display: none; }
+  .st-tab { min-height: 50px; padding: 0 12px; font-size: 13px; letter-spacing: 0.1em; }
+  .st-tab small { display: none; }
+  .st-hero { height: auto; max-height: none; min-height: 0; padding: 120px 0 72px; }
+  .st-hero::after { background: linear-gradient(0deg, #020A16 0%, rgba(2,10,22,0.65) 45%, rgba(2,10,22,0.45) 100%); }
+  .st-hero-in { gap: 16px; }
+  .st-title { font-size: clamp(64px, 19vw, 96px); }
+  .st-ver { font-size: 36px; bottom: -28px; right: -4px; }
+  .st-slogan { font-size: 24px; margin-top: 14px; }
+  .st-hero-btns { flex-direction: column; align-items: stretch; }
+  .st-hero-btns .st-btn { width: 100%; }
+  .st-hero-cap { right: 16px; bottom: 16px; }
+  .st-state-wrap { padding-top: 90px; padding-bottom: 70px; gap: 18px; }
+  .st-state { font-size: 30px; }
+  .st-h2, .st-h2-xl, .st-h2-l { font-size: 28px; }
+  .st-demo { padding-top: 64px; }
+  .st-demo-note { left: 0; transform: none; }
+  .st-demo-note span { font-size: 22px; white-space: normal; max-width: 240px; }
+  .st-demo-note svg { width: 54px; height: 54px; }
+  .st-head-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .st-pillars { grid-template-columns: 1fr 1fr; gap: 0; }
+  .st-pillar, .st-pillar + .st-pillar { padding: 26px 16px 0 0; border-left: 0; }
+  .st-pillar b { font-size: 26px; }
+  .st-time { padding: 28px 22px; }
+  .st-time h2 { font-size: 26px; }
+  .st-bar-row { grid-template-columns: 1fr; gap: 8px; }
+  .st-strip { grid-template-columns: 1fr 1fr; }
+  .st-strip a { height: 240px; }
+  .st-strip a > span { left: 14px; right: 14px; bottom: 14px; white-space: normal; }
+  .st-strip b { font-size: 17px; }
+  .st-final { padding-top: 100px; }
+  .st-cmp-head { display: none; }
+  .st-cmp-row { grid-template-columns: 1fr; }
+  .st-cmp-row > div { padding: 0 18px; }
+  .st-cmp-row > .st-cmp-cell-feat { padding-top: 20px; }
+  .st-cmp-row > .without { padding-top: 14px; }
+  .st-cmp-row > .with { margin: 12px 18px 0; padding: 12px 14px; border: 1px solid rgba(93,239,213,0.18); border-radius: 9px; }
+  .st-cmp-row > .see { justify-content: flex-start; padding: 12px 18px 20px; }
+  .st-cmp-row > .see:empty { padding: 0 0 20px; }
+  .st-cmp-total > div { padding: 16px 18px; }
+  .st-cmp-total > .with { margin: 0 18px 18px; }
+  .st-story { grid-template-columns: 1fr; gap: 28px; padding: 30px 22px; }
+  .st-story-who img { width: 110px; height: 110px; }
+  .st-values { grid-template-columns: 1fr; }
+  .st-value, .st-value:first-child, .st-value:last-child { padding: 24px 0 0; }
+  .st-value + .st-value { border-left: 0; border-top: 1px solid rgba(255,255,255,0.07); margin-top: 24px; }
+  .st-made { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .st-tiers { grid-template-columns: 1fr; }
+  .st-dl { grid-template-columns: 1fr; padding: 30px 22px; gap: 24px; }
+  .st-dl-l { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .st-dl-l img { width: 72px; height: 72px; }
+  .st-dl-r { align-items: stretch; }
+  .st-steps { grid-template-columns: 1fr; }
+  .st-step-arrow { transform: rotate(90deg); justify-self: center; }
+  .st-help { flex-direction: column; align-items: flex-start; }
+  .st-pn { grid-template-columns: 1fr; gap: 0; }
+  .st-pn-index { display: none; }
+  .st-pn-rel { padding-left: 22px; }
+  .st-pn-head h3 { font-size: 32px; }
+  .st-pn-item { grid-template-columns: 1fr; gap: 8px; }
 }
-
-/* ══════════════ HEADER (Kalysteon: gold) ══════════════ */
-header { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 2.5rem; border-bottom: 1px solid rgba(201,168,76,0.55); position: sticky; top: 0; background: linear-gradient(135deg, rgba(2,8,20,0.98) 0%, rgba(6,18,50,0.98) 40%, rgba(10,28,65,0.98) 65%, rgba(2,8,20,0.98) 100%); backdrop-filter: blur(20px); z-index: 100; box-shadow: 0 1px 30px rgba(201,168,76,0.08), 0 4px 20px rgba(0,0,0,0.6); animation: fadeInDown 0.8s cubic-bezier(0.2,0.9,0.4,1.1) forwards; }
-.logo { font-family: var(--display); font-weight: 700; font-size: 1.8rem; letter-spacing: 0.08em; color: var(--text); text-decoration: none; line-height: normal; }
-.logo span { color: var(--accent); }
-.header-right { display: flex; align-items: center; gap: 1.5rem; }
-.lang-toggle { display: flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(201,168,76,0.45); border-radius: 40px; padding: 0.2rem 0.8rem; background: rgba(0,0,0,0.3); }
-.lang-btn { background: none; border: none; color: var(--text-dim); font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; cursor: pointer; padding: 0.2rem 0.4rem; transition: color 0.15s; text-transform: uppercase; }
-.lang-btn.active { color: var(--accent); }
-.lang-sep { color: var(--text-dim); font-size: 0.7rem; }
-
-/* ── NAV ── */
-.header-nav { display: flex; align-items: center; gap: 0.3rem; position: absolute; left: 50%; transform: translateX(-50%); }
-.nav-pill { position: relative; display: flex; align-items: center; }
-.nav-link { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 7px 14px; border-radius: 30px; border: 0.5px solid transparent; background: rgba(255,255,255,0.04); transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; white-space: nowrap; }
-.nav-link:hover, .nav-pill:hover > .nav-link { color: var(--gold-bright); border-color: rgba(201,168,76,0.40); box-shadow: 0 0 14px rgba(201,168,76,0.18), inset 0 0 10px rgba(201,168,76,0.07); transform: scale(1.05); }
-.nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.08); }
-/* ── Per-nav color accents ── */
-.header-nav .nav-pill:nth-child(1) > .nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.50); box-shadow: 0 0 14px rgba(201,168,76,0.25), inset 0 0 10px rgba(201,168,76,0.10); background: rgba(201,168,76,0.09); }
-.header-nav .nav-pill:nth-child(2) > .nav-link.active { color: #5DEFD5; border-color: rgba(93,239,213,0.40); box-shadow: 0 0 14px rgba(93,239,213,0.20), inset 0 0 10px rgba(93,239,213,0.08); background: rgba(93,239,213,0.06); }
-.header-nav .nav-pill:nth-child(3) > .nav-link.active { color: #C084FC; border-color: rgba(168,85,247,0.40); box-shadow: 0 0 14px rgba(168,85,247,0.20), inset 0 0 10px rgba(168,85,247,0.08); background: rgba(168,85,247,0.06); }
-.header-nav .nav-pill:nth-child(4) > .nav-link.active { color: #A3E635; border-color: rgba(163,230,53,0.40); box-shadow: 0 0 14px rgba(163,230,53,0.20), inset 0 0 10px rgba(163,230,53,0.08); background: rgba(163,230,53,0.06); }
-.header-nav .nav-pill:nth-child(5) > .nav-link.active { color: #FF7A45; border-color: rgba(255,122,69,0.40); box-shadow: 0 0 14px rgba(255,122,69,0.20), inset 0 0 10px rgba(255,122,69,0.08); background: rgba(255,122,69,0.06); }
-/* Stratum nav is special: teal active state */
-.nav-link.active.nav-stratum { color: var(--str-bright); border-color: var(--str-border); background: var(--str-dim); box-shadow: 0 0 14px rgba(31,184,171,0.18); }
-.nav-dropdown-trigger::after { content: ' ▾'; font-size: 0.5rem; opacity: 0.65; }
-.nav-dd-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(6,14,32,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(201,168,76,0.28); border-radius: 16px; padding: 0.5rem; min-width: 210px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.28s ease, transform 0.28s ease; box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 24px rgba(201,168,76,0.06); }
-.nav-dd-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
-.nav-pill:hover .nav-dd-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
-.nav-dd-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.85rem; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
-.nav-dd-item:hover { color: var(--gold-bright); background: rgba(201,168,76,0.09); }
-.nav-dd-icon { font-size: 0.9rem; width: 20px; text-align: center; flex-shrink: 0; }
-.nav-dd-divider { height: 1px; background: rgba(201,168,76,0.15); margin: 0.3rem 0.5rem; }
-.nav-dd-reviews { color: rgba(212,175,55,0.85); }
-.nav-dd-reviews:hover { color: var(--gold-bright); background: rgba(201,168,76,0.12); }
-/* Stratum dropdown items - teal accent */
-.nav-dd-item-str:hover { color: var(--str-bright); background: var(--str-dim); }
-@media (max-width: 768px) { .header-nav { display: none; } }
-
-/* ── PARTICLE CANVAS ── */
-#ptx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-
-/* ── FOOTER (Kalysteon: gold) ── */
-footer { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2.5rem; border-top: 1px solid var(--border-mid); position: relative; z-index: 1; }
-.footer-copy { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-link { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); text-decoration: none; transition: color 0.15s; }
-.footer-link:hover { color: var(--accent); }
-
-
-:root{
---navy:#020A16;--navy-2:#05101F;--surface:#07172A;--surface-2:#0A1E33;
---gold:#C9A84C;--gold-br:#F2D777;
---teal:#1FB8AB;--teal-br:#5DEFD5;--teal-dp:#0E5852;
---gaea:#E8C04F;--houdini:#E89C3F;--unreal:#B589F0;--unity:#5BA4F5;
---muted:#8C9EB0;--dim:#4E6274;
---line:rgba(31,184,171,0.16);--line-soft:rgba(140,158,176,0.12);
---display:'Rajdhani',sans-serif;--sans:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
---r:10px;
-}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr-h,80px) + 16px)}
-main a{color:var(--teal-br);text-decoration:none}
-main a:hover{color:#8FFAE6}
-img{display:block;max-width:100%}
-
-
-/* ============ LAYOUT ============ */
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-section{position:relative}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.eyebrow::before{content:'';width:26px;height:1px;background:var(--teal);opacity:.6}
-.eyebrow.mid{justify-content:center}
-.eyebrow.mid::after{content:'';width:26px;height:1px;background:var(--teal);opacity:.6}
-h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4.4vw,50px);line-height:1.08;letter-spacing:0.005em}
-.lead{font-size:17px;line-height:1.7;color:var(--muted);max-width:56ch}
-.lead b{color:var(--text);font-weight:600}
-
-/* ============ HERO ============ */
-.hero{padding:88px 0 0;text-align:center;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(31,184,171,0.13) 0%,transparent 70%);pointer-events:none}
-.hero-inner{position:relative}
-.hero-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal-br);border:1px solid var(--line);background:rgba(31,184,171,0.06);padding:6px 15px;border-radius:30px;margin-bottom:34px}
-.hero-tag b{width:6px;height:6px;border-radius:50%;background:var(--teal-br)}
-.hero-logo{position:relative;width:132px;height:132px;margin:0 auto 20px}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(58px,12vw,148px);line-height:0.88;letter-spacing:0.05em;background:linear-gradient(180deg,rgba(242,153,84,0.95) 0%,rgba(242,153,84,0.55) 18%,rgba(242,153,84,0) 42%),linear-gradient(105deg,#1FB8AB 6%,#5DEFD5 30%,#EAFFFB 44%,#5DEFD5 58%,#1FB8AB 86%);background-size:100% 100%,220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shim 7s linear infinite}
-@keyframes shim{0%{background-position:0 0,200% 0}100%{background-position:0 0,-20% 0}}
-.hero-by{font-family:var(--mono);font-size:11.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--dim);margin-top:14px}
-.hero-by span{color:var(--gold)}
-.hero-line{font-family:var(--display);font-weight:500;font-size:clamp(21px,3.2vw,32px);line-height:1.3;color:var(--text);max-width:28ch;margin:30px auto 0}
-.hero-sub{font-size:16px;color:var(--muted);max-width:52ch;margin:16px auto 0}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
-.btn{font-family:var(--mono);font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 26px;border-radius:7px;border:1px solid transparent;cursor:pointer;transition:.18s;font-weight:500;display:inline-flex;align-items:center;gap:9px}
-.btn-p{background:var(--teal);color:#021A18;border-color:var(--teal)}
-.btn-p:hover{background:var(--teal-br);color:#021A18;transform:translateY(-1px)}
-.btn-s{background:transparent;color:var(--teal-br);border-color:var(--line)}
-.btn-s:hover{border-color:var(--teal);color:var(--teal-br);background:rgba(31,184,171,0.06)}
-.btn-lg{font-size:14px;padding:18px 38px}
-.hero-shot{margin:124px auto 0;max-width:1100px;padding:0 32px}
-.shot{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 40px 90px -30px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.02)}
-.shot-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line-soft);background:rgba(2,10,22,0.6)}
-.shot-bar i{width:9px;height:9px;border-radius:50%;background:rgba(140,158,176,0.22)}
-.shot-bar span{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;color:var(--dim);margin-left:8px;text-transform:uppercase}
-.hero-shot .slot-box{height:clamp(240px,46vw,560px)}
-.slot-box{position:relative;width:100%}
-.hero-fade{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);max-width:1180px;margin:88px auto 0}
-
-/* ============ WHY ============ */
-.why{padding:104px 0}
-.why-top{text-align:center;max-width:44ch;margin:0 auto 64px}
-.why-top h2{margin-bottom:20px}
-.why-top h2 em{font-style:normal;color:var(--teal-br)}
-.why-top p{color:var(--muted);font-size:16.5px}
-.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;max-width:940px;margin:0 auto}
-.node{border:1px solid var(--line-soft);border-radius:var(--r);background:var(--surface);padding:26px 20px;text-align:center;transition:.2s}
-.node:hover{border-color:var(--line);background:var(--surface-2)}
-.node .dot{width:34px;height:34px;border-radius:9px;margin:0 auto 14px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:0.02em}
-.node h4{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
-.node p{font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)}
-.arrow{width:100%;min-width:24px;height:1px;background:linear-gradient(90deg,rgba(140,158,176,0.1),rgba(31,184,171,0.5),rgba(140,158,176,0.1));position:relative}
-.arrow::after{content:'';position:absolute;right:0;top:-3px;border-left:6px solid rgba(31,184,171,0.75);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
-.node.opt{border-style:dashed}
-.node-pair{display:grid;gap:8px}
-.node-pair .node{padding:15px 14px;display:flex;align-items:center;gap:11px;text-align:left}
-.node-pair .dot{margin:0 0;width:28px;height:28px;font-size:12.5px;flex-shrink:0}
-.node-pair h4{font-size:14.5px;margin:0}
-.flow-note{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:var(--dim);margin-top:30px}
-
-/* ============ PIPELINE STEPS ============ */
-.steps{padding:104px 0;border-top:1px solid var(--line-soft);background:linear-gradient(180deg,rgba(31,184,171,0.035),transparent 60%)}
-.steps-head{text-align:center;margin-bottom:62px}
-.steps-head h2{margin-bottom:14px}
-.steps-head p{color:var(--muted);max-width:46ch;margin:0 auto}
-.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.step{border-top:1px solid var(--line);padding-top:26px}
-.step-n{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;color:var(--teal);margin-bottom:18px}
-.step h3{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:0.01em;margin-bottom:9px}
-.step p{color:var(--muted);font-size:15.5px}
-
-/* ============ FEATURES ============ */
-.feat{padding:104px 0;border-top:1px solid var(--line-soft)}
-.feat-head{margin-bottom:58px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.feat-head h2{max-width:20ch}
-.feat-head p{color:var(--muted);max-width:34ch;font-size:15.5px}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden}
-.fcell{background:var(--navy-2);padding:32px 28px;transition:.2s}
-.fcell:hover{background:var(--surface)}
-.fico{width:30px;height:30px;color:var(--teal);margin-bottom:20px}
-.fico svg{width:100%;height:100%;display:block}
-.fcell h4{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:0.02em;margin-bottom:7px}
-.fcell p{color:var(--muted);font-size:14.5px;line-height:1.6}
-
-/* showcase */
-.show{padding:104px 0;border-top:1px solid var(--line-soft)}
-.show+.show{border-top:none;padding-top:0}
-.show-row{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center}
-.show-row.flip>.show-txt{order:2}
-.show-txt h3{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin-bottom:16px}
-.show-txt p{color:var(--muted);font-size:16px;max-width:42ch}
-.show-txt ul{list-style:none;margin-top:24px;display:grid;gap:11px}
-.show-txt li{font-family:var(--mono);font-size:12px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);display:flex;gap:11px;align-items:baseline}
-.show-txt li::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;flex-shrink:0;transform:translateY(-2px)}
-.show .slot-box{height:clamp(230px,32vw,410px)}
-
-/* ============ PRICING ============ */
-.price{padding:104px 0;border-top:1px solid var(--line-soft);background:linear-gradient(180deg,rgba(31,184,171,0.035),transparent 55%)}
-.price-head{text-align:center;margin-bottom:58px}
-.price-head h2{margin-bottom:14px}
-.price-head p{color:var(--muted);max-width:44ch;margin:0 auto}
-.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
-.tier{border:1px solid var(--line-soft);border-radius:var(--r);background:var(--navy-2);padding:34px 28px;display:flex;flex-direction:column;gap:0;min-height:100%}
-.tier.feature{border-color:rgba(31,184,171,0.4);background:var(--surface);position:relative}
-.tier-badge{position:absolute;top:0;right:20px;font-family:var(--mono);font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);background:var(--teal);padding:4px 10px;border-radius:0 0 5px 5px}
-.tier-name{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
-.tier h3{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:0.02em;margin-bottom:6px}
-.tier-for{font-size:14px;color:var(--dim);margin-bottom:26px;min-height:2.6em}
-.tier-cost{font-family:var(--display);font-weight:700;font-size:40px;line-height:1;letter-spacing:0.01em;margin-bottom:4px}
-.tier-cost small{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:0.08em;color:var(--dim);display:block;margin-top:9px;text-transform:uppercase}
-.tier ul{list-style:none;margin:28px 0;display:grid;gap:12px;border-top:1px solid var(--line-soft);padding-top:26px;flex:1}
-.tier li{font-size:14.5px;color:var(--muted);display:flex;gap:11px;align-items:baseline;line-height:1.5}
-.tier li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0;transform:translateY(-2px)}
-.tier li b{color:var(--text);font-weight:600}
-.tier li.no{color:var(--dim)}
-.tier li.no::before{background:var(--dim);opacity:.5}
-.tier .btn{width:100%;justify-content:center}
-.btn-d{background:rgba(140,158,176,0.06);color:var(--dim);border-color:var(--line-soft);cursor:default}
-.btn-d:hover{background:rgba(140,158,176,0.06);color:var(--dim);transform:none}
-
-/* ============ DOWNLOAD ============ */
-.dl{padding:112px 0;border-top:1px solid var(--line-soft);text-align:center;overflow:hidden}
-.dl::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 70% at 50% 45%,rgba(31,184,171,0.12),transparent 70%);pointer-events:none}
-.dl-inner{position:relative}
-.dl h2{margin-bottom:16px}
-.dl>.wrap>.dl-inner>p{color:var(--muted);max-width:44ch;margin:0 auto}
-.dl-ver{font-family:var(--mono);font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-top:34px}
-.dl .btn-lg{margin-top:16px}
-.dl-req{font-family:var(--mono);font-size:11.5px;letter-spacing:0.09em;color:var(--dim);margin-top:20px;line-height:1.8}
-.dl-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;margin-top:60px;text-align:left}
-.dl-steps div{background:var(--navy-2);padding:26px 26px}
-.dl-steps b{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;color:var(--teal);display:block;margin-bottom:10px}
-.dl-steps p{font-size:14.5px;color:var(--muted)}
-
-/* ============ FAQ ============ */
-.faq{padding:104px 0;border-top:1px solid var(--line-soft)}
-.faq-head{margin-bottom:46px}
-.faq-head h2{margin-bottom:12px}
-.faq-head p{color:var(--muted)}
-details{border-bottom:1px solid var(--line-soft)}
-summary{list-style:none;cursor:pointer;padding:24px 40px 24px 0;font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:0.01em;color:var(--text);position:relative;transition:.18s}
-summary::-webkit-details-marker{display:none}
-summary:hover{color:var(--teal-br)}
-summary::after{content:'';position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:1.5px solid var(--teal);border-bottom:1.5px solid var(--teal);transform:translateY(-70%) rotate(45deg);transition:.2s}
-details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
-details p{color:var(--muted);font-size:15.5px;padding:0 60px 26px 0;max-width:72ch}
-.faq-more{margin-top:38px;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:1000px){
-.show-row{grid-template-columns:1fr;gap:34px}
-.show-row.flip>.show-txt{order:0}
-.feat-grid{grid-template-columns:repeat(2,1fr)}
-.tiers{grid-template-columns:1fr;max-width:460px;margin:0 auto}
-.flow{grid-template-columns:1fr;gap:12px}
-.arrow{height:24px;width:1px;justify-self:center;background:linear-gradient(180deg,rgba(140,158,176,0.1),rgba(31,184,171,0.5))}
-.arrow::after{right:auto;left:-3.5px;top:auto;bottom:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:6px solid rgba(31,184,171,0.75);border-bottom:none}
-}
-@media (max-width:760px){
-.wrap{padding:0 20px}
-
-.step-grid,.dl-steps{grid-template-columns:1fr}
-.step{border-top:1px solid var(--line);padding-top:22px}
-.hero{padding-top:58px}
-.hero-shot{padding:0 20px;margin-top:46px}
-.why,.steps,.feat,.price,.faq,.show{padding-top:72px;padding-bottom:72px}
-.show+.show{padding-top:0}
-.dl{padding:80px 0}
-}
-@media (max-width:520px){
-.feat-grid{grid-template-columns:1fr}
-.hero-tag{margin-bottom:24px}
-summary{font-size:18px}
-details p{padding-right:20px}
-.show-txt p,.lead{max-width:none}
-}
-
-/* ============ SITE INTEGRATION ============ */
-body{font-size:16px;line-height:1.65;overflow-x:hidden}
-main{position:relative;z-index:1}
-main .btn-p,main .btn-p:hover{color:#021A18}
-main .btn-s{color:var(--teal-br)}
-.hero-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(31,184,171,0.35))}
-.slot-box{background:radial-gradient(ellipse at 50% 40%,rgba(31,184,171,0.10),transparent 70%),linear-gradient(180deg,var(--surface),var(--navy-2))}
-.slot-box img{width:100%;height:100%;object-fit:cover;object-position:top left}
-.hero-shot .slot-box img{object-position:top center}
-.faq-more a{color:var(--teal-br)}
-/* ============ ROUND 7 ============ */
-.story-guy{position:absolute;right:34px;bottom:14px;width:92px;height:115px;color:#F2A15C;opacity:.9;transform:rotate(4deg);filter:drop-shadow(0 0 10px rgba(242,161,92,.25))}
-.story-guy .guy-arm{transform-origin:53px 82px;animation:guyThumb 2.4s ease-in-out infinite}
-@keyframes guyThumb{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(-10deg)}90%{transform:rotate(4deg)}}
-.story figcaption{padding-right:120px}
-@media (max-width:760px){.story-guy{width:66px;height:84px;right:14px;bottom:10px}}
-/* ============ ROUND 6 ============ */
-.ver-note{top:auto!important;bottom:6px;right:-10px!important;transform:translateX(100%) rotate(-9deg)!important;font-family:'Caveat',cursive!important;font-style:normal!important;font-weight:700!important;font-size:clamp(34px,4.4vw,52px)!important;letter-spacing:0!important;color:#F2A15C!important;display:block!important;line-height:1;text-shadow:0 0 18px rgba(242,161,92,.3)}
-.ver-note svg{width:78px!important;height:14px!important;transform:translate(-4px,-4px)!important;display:block!important;opacity:.85}
-.story-q{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.6vw,28px);color:#F2A15C;margin-bottom:14px}
-.tl-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.tl-tool{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:7px;background:var(--navy-2);border:1px solid var(--line-soft);text-decoration:none;font-size:12px;transition:.2s}
-.tl-tool i{width:7px;height:7px;border-radius:2px;background:var(--tc)}
-.tl-tool b{color:var(--text);font-weight:600}
-.tl-tool span{color:var(--dim);font-family:var(--mono);font-size:10.5px}
-.tl-tool:hover{border-color:var(--tc);transform:translateY(-1px)}
-.t-gaea{--tc:var(--gaea)}.t-hou{--tc:var(--houdini)}.t-ue{--tc:var(--unreal)}.t-unity{--tc:var(--unity)}
-.tl-note{font-family:var(--mono);font-size:11px!important;letter-spacing:.08em;color:var(--dim)!important;margin-top:10px}
-.vs-table{border-radius:14px;box-shadow:0 30px 70px -40px rgba(0,0,0,.9);font-size:15px}
-.vs-table thead th{padding:18px 22px}
-.vs-table thead th.bad span,.vs-table thead th.good span{display:inline-block;padding:6px 12px;border-radius:30px}
-.vs-table thead th.bad span{background:rgba(232,140,140,.1);border:1px solid rgba(232,140,140,.3)}
-.vs-table thead th.good span{background:rgba(31,184,171,.14);border:1px solid rgba(93,239,213,.4)}
-.vs-table tbody tr{transition:background .2s}
-.vs-table tbody tr:hover th,.vs-table tbody tr:hover td.bad{background:rgba(255,255,255,.025)}
-.vs-table tbody tr:hover td.good{background:rgba(31,184,171,.1)}
-.vs-table td.bad::before,.vs-table td.good::before{content:none!important}
-.vs-table tbody th{width:30%;font-size:16px}
-.vs-table td.good{border-left:1px solid rgba(93,239,213,.25)}
-.vs-feat{display:flex;align-items:center;gap:12px}
-.vs-ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;background:rgba(31,184,171,.1);border:1px solid rgba(93,239,213,.22);color:var(--teal-br)}
-.vs-ico svg{width:19px;height:19px}
-.vs-tip{position:relative;flex-shrink:0;width:19px;height:19px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--dim);font:600 11px/1 var(--mono);cursor:help;padding:0}
-.vs-tip:hover,.vs-tip:focus{color:var(--teal-br);border-color:var(--teal)}
-.vs-tip-text{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);width:260px;padding:11px 13px;border-radius:9px;background:#06131f;border:1px solid rgba(93,239,213,.35);box-shadow:0 14px 34px rgba(0,0,0,.6);font:400 13.5px/1.5 var(--sans);color:var(--text);text-align:left;white-space:normal;opacity:0;pointer-events:none;transition:opacity .18s;z-index:5}
-.vs-tip:hover .vs-tip-text,.vs-tip:focus .vs-tip-text{opacity:1}
-.vs-cell{display:flex;align-items:center;gap:10px}
-.vs-cell i{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700}
-td.bad .vs-cell i{background:rgba(232,140,140,.14);color:#e88c8c}
-td.good .vs-cell i{background:rgba(31,184,171,.2);color:var(--teal-br)}
-.vs-live{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:30px;border:1px solid rgba(93,239,213,.35);background:transparent;color:var(--teal-br);font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s}
-.vs-live svg{width:10px;height:10px}
-.vs-live:hover{background:var(--teal);color:#021A18;border-color:var(--teal)}
-.dl-steps2{display:flex;align-items:stretch;gap:10px;margin-top:56px;text-align:left}
-.dls{flex:1;position:relative;padding:26px 24px 24px;border-radius:14px;background:linear-gradient(165deg,rgba(31,184,171,.08),var(--navy-2) 55%);border:1px solid var(--line-soft);transition:.25s}
-.dls:hover{border-color:rgba(93,239,213,.35);transform:translateY(-3px)}
-.dls-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.dls-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(31,184,171,.14);border:1px solid rgba(93,239,213,.3);color:var(--teal-br)}
-.dls-ico svg{width:22px;height:22px}
-.dls-n{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:rgba(93,239,213,.14)}
-.dls h4{font-family:var(--display);font-weight:600;font-size:21px;margin-bottom:6px}
-.dls p{color:var(--muted);font-size:14.5px;line-height:1.55}
-.dls-tip{margin-top:12px;padding:8px 10px;border-radius:8px;background:rgba(242,161,92,.08);border:1px dashed rgba(242,161,92,.35);color:#f2b08f;font-size:12.5px;line-height:1.45}
-.dls-arrow{display:flex;align-items:center;color:rgba(93,239,213,.45)}
-.dls-arrow svg{width:30px;height:12px}
-@media (min-width:761px){.vs-scroll{overflow:visible}.vs-table{overflow:visible}}
-@media (max-width:860px){.dl-steps2{flex-direction:column}.dls-arrow{justify-content:center;transform:rotate(90deg);height:22px}}
-@media (max-width:760px){.ver-note{position:absolute!important;right:4px!important;bottom:-26px!important;transform:rotate(-8deg)!important;font-size:34px!important}.vs-tip-text{left:0;transform:none;width:220px}}
-/* ============ ROUND 5 ============ */
-.title-wrap{position:relative;display:inline-block}
-.ver-note{position:absolute;right:-8px;top:-50px;transform:translateX(80%) rotate(-7deg);display:inline-flex;align-items:flex-end;gap:2px;font-family:var(--display);font-style:italic;font-weight:500;font-size:19px;letter-spacing:.02em;color:#F2A15C;white-space:nowrap;text-shadow:0 0 14px rgba(242,161,92,.35)}
-.ver-note svg{width:34px;height:26px;margin-left:2px;transform:translateY(16px)}
-.hero-steps{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 12px;margin:26px auto 0}
-.hero-steps span{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-br);border:1px solid rgba(93,239,213,.28);background:rgba(31,184,171,.07);padding:8px 14px;border-radius:30px}
-.hero-steps i{font-style:normal;color:var(--dim)}
-.hero-sub{max-width:46ch;text-wrap:balance;font-size:17px;margin-top:18px}
-.hero-sub b{color:var(--text);font-weight:600}
-.free-badge{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:10px 18px;border-radius:40px;background:linear-gradient(90deg,rgba(31,184,171,.14),rgba(31,184,171,.04));border:1px solid rgba(93,239,213,.35);color:var(--muted);font-size:15px}
-.free-badge svg{width:18px;height:18px;color:var(--teal-br);flex-shrink:0}
-.free-badge b{color:var(--teal-br);font-weight:600}
-.ess-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(31,184,171,.1);border:1px solid rgba(93,239,213,.25);color:var(--teal-br);margin-bottom:18px}
-.ess-ico svg{width:26px;height:26px}
-.ess-big{font-family:var(--display);font-weight:600;font-size:24px;line-height:1.15;color:var(--text);margin-bottom:8px}
-.ess-big s{color:#e88c8c;text-decoration-thickness:2px;opacity:.85}
-.ess-big span{color:var(--dim)}
-.ess-hl{background:linear-gradient(160deg,rgba(31,184,171,.12),var(--navy-2) 60%)}
-.ess-hl .ess-big{color:var(--teal-br)}
-.story{position:relative;max-width:820px;margin:72px auto 0;padding:40px 44px 34px;border-radius:16px;background:linear-gradient(160deg,rgba(242,161,92,.07),var(--navy-2) 45%);border:1px solid rgba(242,161,92,.22)}
-.story-mark{position:absolute;top:-6px;left:26px;font-family:Georgia,serif;font-size:110px;line-height:1;color:rgba(242,161,92,.35)}
-.story .eyebrow{color:#F2A15C}
-.story .eyebrow::before{background:#F2A15C}
-.story blockquote{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.1vw,23px);line-height:1.5;color:var(--text)}
-.story blockquote b{color:#F2A15C;font-weight:600}
-.story figcaption{display:flex;align-items:center;gap:12px;margin-top:24px}
-.story figcaption img{width:40px;height:40px;object-fit:contain}
-.story figcaption span{display:flex;flex-direction:column;line-height:1.3}
-.story figcaption b{color:var(--text);font-weight:600}
-.story figcaption em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.vs{padding:104px 0;border-top:1px solid var(--line-soft)}
-.vs-scroll{overflow-x:auto}
-.vs-table{width:100%;min-width:620px;border-collapse:separate;border-spacing:0;border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;font-size:15px}
-.vs-table th,.vs-table td{padding:16px 22px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
-.vs-table tbody tr:last-child th,.vs-table tbody tr:last-child td{border-bottom:0}
-.vs-table thead th{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;background:var(--navy-2)}
-.vs-table thead th.bad{color:#e88c8c}
-.vs-table thead th.good{color:var(--teal-br);background:rgba(31,184,171,.08)}
-.vs-table tbody th{font-family:var(--display);font-weight:600;font-size:17px;color:var(--text);width:18%;background:var(--navy-2)}
-.vs-table td{color:var(--muted);line-height:1.5}
-.vs-table td.bad::before{content:'✕';color:#e88c8c;margin-right:10px;font-weight:700}
-.vs-table td.good{background:rgba(31,184,171,.05);color:var(--text)}
-.vs-table td.good::before{content:'✓';color:var(--teal-br);margin-right:10px;font-weight:700}
-.vs-total th,.vs-total td{font-family:var(--display);font-size:20px!important;font-weight:600}
-.vs-total td.bad{color:#e88c8c}
-.vs-total td.good{color:var(--teal-br)!important;background:rgba(31,184,171,.12)!important}
-@media (max-width:760px){.ver-note{position:static;transform:rotate(-4deg);margin-top:8px}.ver-note svg{display:none}.title-wrap{display:flex;flex-direction:column;align-items:center}.story{padding:34px 24px 28px}.vs{padding:72px 0}}
-/* ============ ANNOTATION DEMO ============ */
-.hero-shot{position:relative}
-.try-note{position:absolute;top:-78px;right:max(32px,calc(50% - 520px));display:flex;align-items:flex-start;gap:4px;color:var(--teal-br);pointer-events:none;transform:rotate(-2deg);animation:tryFloat 3.2s ease-in-out infinite}
-.try-note span{font-family:var(--display);font-weight:500;font-style:italic;font-size:19px;letter-spacing:.01em;white-space:nowrap;text-shadow:0 0 18px rgba(93,239,213,.35)}
-.try-note svg{width:54px;height:64px;margin-top:8px;flex-shrink:0}
-@keyframes tryFloat{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-4px)}}
-@media (max-width:760px){.try-note{display:none}}
-/* ============ TIMELINE ============ */
-.timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.timeline::before{content:'';position:absolute;top:21px;left:22px;right:22px;height:1px;background:linear-gradient(90deg,rgba(31,184,171,.1),rgba(31,184,171,.55) 20%,rgba(232,131,91,.55) 80%,rgba(232,131,91,.1))}
-.tl-step{position:relative}
-.tl-dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--navy);border:1px solid rgba(31,184,171,.5);box-shadow:0 0 0 6px var(--navy),0 0 22px rgba(31,184,171,.25);margin-bottom:24px}
-.tl-dot span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--teal-br)}
-.tl-step:last-child .tl-dot{border-color:rgba(232,131,91,.6);box-shadow:0 0 0 6px var(--navy),0 0 22px rgba(232,131,91,.3)}
-.tl-step:last-child .tl-dot span{color:#f2b08f}
-.tl-step h3{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:.01em;margin-bottom:8px}
-.tl-step p{color:var(--muted);font-size:15px;line-height:1.6}
-.tl-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.tl-chips span{font-family:var(--mono);font-size:11px;padding:4px 8px;border-radius:5px;background:rgba(31,184,171,.12);border:1px solid rgba(31,184,171,.35);color:var(--teal-br)}
-.tl-chips span.off{background:transparent;border-color:var(--line-soft);color:var(--dim)}
-.tl-name{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:12px;padding:6px 10px;border-radius:6px;background:var(--navy-2);border:1px solid var(--line-soft);color:var(--muted)}
-.tl-name b{color:var(--teal-br);font-weight:500}
-@media (max-width:900px){
-.timeline{grid-template-columns:1fr;gap:34px;padding-left:64px}
-.timeline::before{top:0;bottom:0;left:21px;right:auto;width:1px;height:auto;background:linear-gradient(180deg,rgba(31,184,171,.55),rgba(232,131,91,.55))}
-.tl-dot{position:absolute;left:-64px;top:-4px;margin:0}
-}
-/* ============ TARIFS : couleur par offre (celles du logiciel) ============ */
-.t-free{--tc:#a4becc;--tc-rgb:164,190,204}
-.t-indie{--tc:#5ed3d8;--tc-rgb:94,211,216}
-.t-studio{--tc:#e8835b;--tc-rgb:232,131,91}
-.tier{position:relative;overflow:hidden;border-top:2px solid rgba(var(--tc-rgb),.55)!important}
-.tier::before{content:'';position:absolute;inset:0 0 auto 0;height:140px;background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(var(--tc-rgb),.10),transparent 75%);pointer-events:none}
-.tier .tier-name{color:var(--tc)}
-.tier li::before{background:var(--tc)}
-.tier li.no::before{background:var(--dim)}
-.tier.feature{border-color:rgba(var(--tc-rgb),.45)}
-.tier.feature .tier-badge{background:var(--tc)}
-.tier-cost>span{color:var(--text)}
-.t-studio .tier-cost>span{background:linear-gradient(180deg,#fff 20%,#f2b08f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-main .btn-tier{width:100%;justify-content:center;background:rgba(var(--tc-rgb),.10);color:var(--tc);border-color:rgba(var(--tc-rgb),.40)}
-main .btn-tier:hover{background:rgba(var(--tc-rgb),.18);color:var(--tc)}
-main .btn-soon,main .btn-soon:hover{cursor:default;opacity:.75;background:rgba(var(--tc-rgb),.06)}
-.compare{margin-top:34px;border:1px solid var(--line-soft);border-radius:var(--r);background:var(--navy-2)}
-.compare summary{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-br);padding:18px 44px 18px 22px;border:0}
-.compare[open] summary{border-bottom:1px solid var(--line-soft)}
-.compare-scroll{overflow-x:auto}
-.compare table{width:100%;border-collapse:collapse;min-width:560px;font-size:14.5px}
-.compare th,.compare td{padding:13px 18px;text-align:left;border-bottom:1px solid var(--line-soft)}
-.compare tbody tr:last-child th,.compare tbody tr:last-child td{border-bottom:0}
-.compare tbody th{font-weight:400;color:var(--muted)}
-.compare td{color:var(--text)}
-.compare thead th{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
-.compare .c-free{--tc:#a4becc}.compare .c-indie{--tc:#5ed3d8}.compare .c-studio{--tc:#e8835b}
-.compare thead th[class]{color:var(--tc)}
-.compare td.c-indie{background:rgba(94,211,216,.04)}
-.compare-note{font-size:12.5px;color:var(--dim);padding:14px 22px 18px}
-/* ============ ESSENCE + OUTILS ============ */
-.why-top{max-width:62ch}
-.why-top p{font-size:17px;line-height:1.75}
-.essence{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;max-width:940px;margin:0 auto 64px}
-.ess{background:var(--navy-2);padding:24px 24px 26px}
-.ess b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;font-weight:500}
-.ess p{color:var(--muted);font-size:15px;line-height:1.6}
-a.node{color:var(--text);text-decoration:none;position:relative;display:block}
-.node-pair a.node{display:flex}
-a.node::after{content:'↗';position:absolute;top:10px;right:12px;font-size:12px;color:var(--dim);transition:.2s}
-a.node:hover{border-color:var(--teal);transform:translateY(-2px)}
-a.node:hover::after{color:var(--teal-br)}
-.node-pair .node p{margin-top:2px;text-transform:none;letter-spacing:.04em}
-@media (max-width:760px){.essence{grid-template-columns:1fr}}
-/* ============ FEATURE GRID (cliquable) ============ */
-button.fcell{font:inherit;color:inherit;text-align:left;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;width:100%}
-.fcell .fsee{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:8px;transition:.2s}
-.fcell .fsee::after{content:'';width:14px;height:1px;background:currentColor;transition:width .2s}
-.fcell:hover .fsee{color:var(--teal-br)}
-.fcell:hover .fsee::after{width:26px}
-.demo-modal{position:fixed;inset:0;z-index:1000;background:rgba(1,6,14,.86);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
-.demo-modal[hidden]{display:none}
-.demo-modal-in{width:min(1180px,100%,calc((100vh - 170px) * 1.6));animation:modalIn .25s ease}
-@keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.demo-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:16px}
-.demo-modal-head h3{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.1;margin-bottom:6px}
-.demo-modal-head p{color:var(--muted);font-size:15px;max-width:60ch}
-.demo-modal-x{flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(31,184,171,.06);color:var(--text);font-size:24px;line-height:1;cursor:pointer;transition:.2s}
-.demo-modal-x:hover{border-color:var(--teal-br);color:var(--teal-br)}
-#demo-modal-box{max-height:calc(100vh - 190px)}
-
-/* ============ DEMO INTERACTIVE ============ */
-.demo-box{height:auto!important;aspect-ratio:16/10;overflow:hidden;position:relative}
-.hero-shot .demo-box{aspect-ratio:16/10}
-.demo-box iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#0b1220}
-.demo-play{position:absolute;inset:0;margin:auto;width:max-content;height:max-content;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#021A18;background:var(--teal);border:0;border-radius:8px;padding:13px 22px;cursor:pointer;box-shadow:0 14px 34px -14px rgba(31,184,171,.7);transition:.2s;z-index:2}
-.demo-play:hover{background:var(--teal-br);transform:translateY(-1px)}
-.demo-box.live .demo-play{display:none}
-.shot-bar .demo-badge{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-br);display:inline-flex;align-items:center;gap:6px}
-.shot-bar .demo-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal-br);box-shadow:0 0 8px rgba(93,239,213,.8)}
-.btn svg{width:17px;height:17px;flex-shrink:0}
-.btn-hero{font-size:13.5px;letter-spacing:0.12em;padding:17px 30px;border-radius:9px}
-main .btn-p.btn-hero{box-shadow:0 14px 34px -14px rgba(31,184,171,0.7),inset 0 1px 0 rgba(255,255,255,0.28)}
-main .btn-p.btn-hero:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(93,239,213,0.75),inset 0 1px 0 rgba(255,255,255,0.35)}
-main .btn-s.btn-hero{background:rgba(31,184,171,0.05);border-color:rgba(93,239,213,0.32);color:var(--text)}
-main .btn-s.btn-hero:hover{background:rgba(31,184,171,0.10);border-color:var(--teal-br);color:var(--teal-br)}
-.btn-hero .arr{transition:transform .2s}
-.btn-hero:hover .arr{transform:translateX(4px)}
-.hero-note{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-top:18px}
-
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
   <link rel="stylesheet" href="mobile-nav.css">
 </head>
 <body>
 
-<canvas id="ptx"></canvas>
+<canvas id="particle-canvas"></canvas>
+<div class="k-dust" aria-hidden="true"></div>
 
-<header>
-  <a href="index.html" class="logo">KALYS<span>T</span>EON</a>
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="Kalysteon, home"><img class="logo-img" src="img/logo.png" alt=""><span>KALYS<span class="logo-t">T</span>EON</span></a>
   <nav class="header-nav">
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="products.html" data-en="Products" data-fr="Produits">Products</a>
@@ -546,302 +368,233 @@ main .btn-s.btn-hero:hover{background:rgba(31,184,171,0.10);border-color:var(--t
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger nav-stratum active" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-why"><span class="nav-dd-icon">◆</span><span data-en="What is it" data-fr="C'est quoi">What is it</span></a>
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-pipeline"><span class="nav-dd-icon">⇄</span><span data-en="How it works" data-fr="Fonctionnement">How it works</span></a>
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#overview"><span class="nav-dd-icon">◆</span><span data-en="Overview" data-fr="Aperçu">Overview</span></a>
+        <a class="nav-dd-item" href="stratum.html#features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
+        <a class="nav-dd-item" href="stratum.html#story"><span class="nav-dd-icon">“</span><span data-en="Story" data-fr="L&#x27;histoire">Story</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
-        <a class="nav-dd-item nav-dd-item-str" href="stratum.html#str-faq"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
+        <a class="nav-dd-item" href="stratum.html#pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
+        <a class="nav-dd-item" href="stratum.html#notes"><span class="nav-dd-icon">≡</span><span data-en="Patch notes" data-fr="Notes de version">Patch notes</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="commission.html#tab-terrain"><span class="nav-dd-icon">⛰</span><span data-en="Custom Terrain" data-fr="Terrain Custom">Custom Terrain</span></a>
-        <a class="nav-dd-item" href="commission.html#tab-hero"><span class="nav-dd-icon">◆</span><span data-en="Hero Assets" data-fr="Hero Assets">Hero Assets</span></a>
+        <a class="nav-dd-item" href="commission.html#worlds"><span class="nav-dd-icon">⛰</span><span data-en="What I build" data-fr="Ce que je construis">What I build</span></a>
+        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How it works" data-fr="Comment ça se passe">How it works</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How It Works" data-fr="Comment ça marche">How It Works</span></a>
-        <a class="nav-dd-item" href="commission.html#about"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
+        <a class="nav-dd-item" href="commission.html#brief"><span class="nav-dd-icon">✎</span><span data-en="Start a brief" data-fr="Lancer un brief">Start a brief</span></a>
+        <a class="nav-dd-item" href="support.html#commissions"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Narrative" data-fr="Récit">Narrative</span></a>
+        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Story" data-fr="Récit">Story</span></a>
         <a class="nav-dd-item" href="about.html#namelore"><span class="nav-dd-icon">Ω</span><span data-en="Etymology" data-fr="Étymologie">Etymology</span></a>
+        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tools" data-fr="Outils">Tools</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tech Stack" data-fr="Stack Technique">Tech Stack</span></a>
-        <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="contact.html#contact"><span class="nav-dd-icon">◉</span><span data-en="Newsletter" data-fr="Newsletter">Newsletter</span></a>
-        <a class="nav-dd-item" href="contact.html#socials"><span class="nav-dd-icon">@</span><span data-en="Socials" data-fr="Réseaux">Socials</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
+        <a class="nav-dd-item" href="about.html#socials"><span class="nav-dd-icon">@</span><span data-en="Socials" data-fr="Réseaux">Socials</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="support.html" data-en="Support" data-fr="Support">Support</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="faq.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
-        <div class="nav-dd-divider"></div>
+        <a class="nav-dd-item" href="support.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
         <a class="nav-dd-item" href="tutorials.html"><span class="nav-dd-icon">▶</span><span data-en="Tutorials" data-fr="Tutoriels">Tutorials</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="mailto:contact@kalysteon.com"><span class="nav-dd-icon">✉</span><span data-en="Email Direct" data-fr="Email Direct">Email Direct</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
       </div>
     </div>
   </nav>
-  <div class="header-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="lang-btn-en" onclick="setLang('en')">EN</button>
-      <span class="lang-sep">|</span>
-      <button class="lang-btn" id="lang-btn-fr" onclick="setLang('fr')">FR</button>
-    </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="lang-btn-en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="lang-btn-fr" onclick="setLang('fr')">FR</button>
   </div>
 </header>
 
-<main>
-<!-- ============ HERO ============ -->
-<section class="hero" id="str-top">
-  <div class="wrap hero-inner">
-    <div class="hero-logo"><img src="img/stratum/logo.png" alt="Stratum" onerror="this.style.display='none'"></div>
-    <div class="title-wrap"><h1>STRATUM</h1><span class="ver-note">v<span class="str-ver-short">1.0</span><svg viewBox="0 0 90 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 11c18-7 40-9 84-4"/></svg></span></div>
-    <div class="hero-by"><span data-en="by" data-fr="par">by</span> <span>Kalysteon</span></div>
-    <p class="hero-line" data-en="Your terrain workflow, on autopilot." data-fr="Votre workflow terrain, en pilote automatique.">Your terrain workflow, on autopilot.</p>
-    <div class="hero-steps">
-      <span data-en="Pick a graph" data-fr="Choisissez un graphe">Pick a graph</span><i>→</i>
-      <span data-en="Tick your variants" data-fr="Cochez vos variantes">Tick your variants</span><i>→</i>
-      <span data-en="Run" data-fr="Lancez">Run</span>
-    </div>
-    <p class="hero-sub" data-en="Your terrains land in &lt;b&gt;Unreal Engine&lt;/b&gt; or &lt;b&gt;Unity&lt;/b&gt; with meshes, textures and materials already set up." data-fr="Vos terrains arrivent dans &lt;b&gt;Unreal Engine&lt;/b&gt; ou &lt;b&gt;Unity&lt;/b&gt; avec meshes, textures et matériaux déjà prêts.">Your terrains land in <b>Unreal Engine</b> or <b>Unity</b> with meshes, textures and materials already set up.</p>
-    <div class="hero-btns">
-      <a class="btn btn-p btn-hero" href="#str-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span data-en="Download free" data-fr="Télécharger gratuitement">Download free</span></a>
-      <a class="btn btn-s btn-hero" href="#str-pricing"><span data-en="See pricing" data-fr="Voir les tarifs">See pricing</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-    </div>
-    <div class="free-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-en="&lt;b&gt;Free forever.&lt;/b&gt; No account, no watermark, no time limit." data-fr="&lt;b&gt;Gratuit pour toujours.&lt;/b&gt; Sans compte, sans filigrane, sans limite de temps."><b>Free forever.</b> No account, no watermark, no time limit.</span></div>
-  </div>
-  <div class="hero-shot">
-    <div class="try-note" aria-hidden="true">
-      <span data-en="Go ahead, click anything. It's the real thing." data-fr="Vas-y, clique partout. C'est le vrai logiciel.">Go ahead, click anything. It's the real thing.</span>
-      <svg viewBox="0 0 70 70" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c28-6 48 6 52 50"/><path d="m46 52 10 12 9-14"/></svg>
-    </div>
-    <div class="shot">
-      <div class="shot-bar"><i></i><i></i><i></i><em class="demo-badge" data-en="Live demo" data-fr="Démo live">Live demo</em><span>Stratum</span></div>
-      <div class="slot-box demo-box" data-demo="stratum/demo/index.html"><button class="demo-play" type="button"><span data-en="Try it live" data-fr="Essayer en direct">Try it live</span></button></div>
-    </div>
-  </div>
-  <div class="hero-fade"></div>
-</section>
-
-<!-- ============ WHY ============ -->
-<section class="why" id="str-why">
-  <div class="wrap">
-    <div class="why-top">
-      <div class="eyebrow mid" data-en="What is it" data-fr="C'est quoi">What is it</div>
-      <h2 data-en="One tool between your terrain and your game." data-fr="Un seul outil entre votre terrain et votre jeu.">One tool between your terrain and your game.</h2>
-      <p data-en="Procedural tools make a terrain in minutes. Everything after still eats your days: renaming, sorting folders, exporting, re-importing, building materials, asset by asset. Stratum automates that whole second half, from your Gaea graph to assets ready in your engine." data-fr="Les outils procéduraux créent un terrain en quelques minutes. Tout ce qui vient après mange encore vos journées : renommer, trier les dossiers, exporter, réimporter, créer les matériaux, asset par asset. Stratum automatise toute cette deuxième moitié, de votre graphe Gaea jusqu'aux assets prêts dans votre moteur.">Procedural tools make a terrain in minutes. Everything after still eats your days: renaming, sorting folders, exporting, re-importing, building materials, asset by asset. Stratum automates that whole second half, from your Gaea graph to assets ready in your engine.</p>
-    </div>
-
-    <div class="essence">
-      <div class="ess">
-        <div class="ess-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.6 3-5.6 6-5.6s5.4 2 6 5.6"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.5c2.4.2 4 1.9 4.5 4.6"/></svg></div>
-        <b data-en="Made for" data-fr="Fait pour">Made for</b>
-        <div class="ess-big" data-en="Terrain artists &amp; studios" data-fr="Artistes &amp; studios terrain">Terrain artists &amp; studios</div>
-        <p data-en="Who produce in batches: packs, variants, whole biomes." data-fr="Qui produisent en série : packs, variantes, biomes entiers.">Who produce in batches: packs, variants, whole biomes.</p>
-      </div>
-      <div class="ess">
-        <div class="ess-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.6"/><path d="M20 4v4.6h-4.6"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.4"/><path d="M4 20v-4.6h4.6"/><path d="m3 3 18 18" stroke-width="1.8"/></svg></div>
-        <b data-en="It removes" data-fr="Il supprime">It removes</b>
-        <div class="ess-big" data-en="The busywork" data-fr="Le travail répétitif">The busywork</div>
-        <p data-en="Renaming, sorting, re-importing, building materials, by hand." data-fr="Renommer, trier, réimporter, créer les matériaux, à la main.">Renaming, sorting, re-importing, building materials, by hand.</p>
-      </div>
-      <div class="ess ess-hl">
-        <div class="ess-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2.5h6"/></svg></div>
-        <b data-en="You get" data-fr="Vous gagnez">You get</b>
-        <div class="ess-big"><s>4-6 h</s> <span>→</span> ~5 min</div>
-        <p data-en="Per terrain set. Your assets land named, sorted and ready." data-fr="Par série de terrains. Vos assets arrivent nommés, triés et prêts.">Per terrain set. Your assets land named, sorted and ready.</p>
-      </div>
-    </div>
-
-
-    <figure class="story">
-      <div class="story-mark">“</div>
-      <h3 class="story-q" data-en="Why did I build this tool?" data-fr="Pourquoi ai-je créé cet outil ?">Why did I build this tool?</h3>
-      <blockquote data-en="Simple: Stratum started as a personal tool I built while making terrain packs. The thing is, I spent far more time &lt;b&gt;juggling between software&lt;/b&gt; than actually working in it: exporting each variant, renaming files, organizing folders, re-importing everything into the game engine, building materials... I repeated the same clicks for hours on every pack, it was a huge time sink. So I automated the process, step by step, until a single click did it all. Today every Kalysteon pack goes through this tool, and now it's yours to use. Hopefully it helps you too!" data-fr="Simple, à l'origine, Stratum était un outil personnel que j'ai conçu lorsque je créais des packs de terrain. Le truc, c'est que je passais bien plus de temps &lt;b&gt;à jongler entre les logiciels&lt;/b&gt; qu'à travailler réellement dedans : exporter chaque variante, renommer les fichiers, organiser les dossiers, réimporter le tout dans le moteur de jeu, créer les matériaux... Je répétais les mêmes clics pendant des heures pour chaque pack, c'est super chronophage. J'ai donc automatisé le processus, étape par étape, jusqu'à ce qu'un seul clic suffise à tout accomplir. Aujourd'hui, tous les packs Kalysteon passent par cet outil, et il est désormais à votre disposition. En espérant que ça puisse vous servir également !">Simple: Stratum started as a personal tool I built while making terrain packs. The thing is, I spent far more time <b>juggling between software</b> than actually working in it: exporting each variant, renaming files, organizing folders, re-importing everything into the game engine, building materials... I repeated the same clicks for hours on every pack, it was a huge time sink. So I automated the process, step by step, until a single click did it all. Today every Kalysteon pack goes through this tool, and now it's yours to use. Hopefully it helps you too!</blockquote>
-      <svg class="story-guy" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="52" cy="40" r="25"/><path d="M40 36h7"/><circle cx="61" cy="35" r="2.6" fill="currentColor" stroke="none"/><path d="M40 49c7 8 18 7 23-2"/><path d="M51 65c-3 20-3 40 1 60"/><path d="M50 84c-12 5-20 14-25 27"/><path class="guy-arm" d="M53 82c15-2 26-10 31-23"/><path class="guy-arm" d="M84 59c-2-8 0-15 4-20"/><circle class="guy-arm" cx="87" cy="61" r="7"/><path d="M52 125c-8 6-12 14-14 22M52 125c8 6 12 14 13 22"/></svg>
-      <figcaption><img src="img/stratum/logo.png" alt="" onerror="this.style.display='none'"><span><b>Andrei Bobe</b><em data-en="Founder of Kalysteon" data-fr="Fondateur de Kalysteon">Founder of Kalysteon</em></span></figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ PIPELINE ============ -->
-<section class="steps" id="str-pipeline">
-  <div class="wrap">
-    <div class="steps-head">
-      <div class="eyebrow mid" data-en="How it works" data-fr="Fonctionnement">How it works</div>
-      <h2 data-en="Four steps, then coffee." data-fr="Quatre étapes, puis le café.">Four steps, then coffee.</h2>
-    </div>
-    <div class="timeline">
-      <div class="tl-step">
-        <div class="tl-dot"><span>01</span></div>
-        <h3 data-en="Pick your graph" data-fr="Choisissez votre graphe">Pick your graph</h3>
-        <p data-en="Point Stratum at a Gaea file. Your tools are detected on their own." data-fr="Indiquez un fichier Gaea. Vos outils sont détectés tout seuls.">Point Stratum at a Gaea file. Your tools are detected on their own.</p>
-        <div class="tl-tools"><a class="tl-tool t-gaea" href="https://quadspinner.com" target="_blank" rel="noopener"><i></i><b>Gaea 2</b><span data-en="Pro / Enterprise" data-fr="Pro / Enterprise">Pro / Enterprise</span></a></div>
-      </div>
-      <div class="tl-step">
-        <div class="tl-dot"><span>02</span></div>
-        <h3 data-en="Tick your variants" data-fr="Cochez vos variantes">Tick your variants</h3>
-        <p data-en="Choose which terrains run and which stages each one goes through." data-fr="Choisissez quels terrains tournent et par quelles étapes chacun passe.">Choose which terrains run and which stages each one goes through.</p>
-        <div class="tl-chips"><span>VarA</span><span>VarB</span><span>VarC</span><span class="off">VarD</span></div>
-      </div>
-      <div class="tl-step">
-        <div class="tl-dot"><span>03</span></div>
-        <h3 data-en="Name it your way" data-fr="Nommez à votre façon">Name it your way</h3>
-        <p data-en="You control every file and asset name, from Gaea to your engine. Or keep the original names." data-fr="Vous contrôlez le nom de chaque fichier et asset, de Gaea jusqu'au moteur. Ou gardez les noms d'origine.">You control every file and asset name, from Gaea to your engine. Or keep the original names.</p>
-        <code class="tl-name">SM_<b>{project}</b>_<b>{variant}</b>_<b>{style}</b></code>
-      </div>
-      <div class="tl-step">
-        <div class="tl-dot"><span>04</span></div>
-        <h3 data-en="Run" data-fr="Lancez">Run</h3>
-        <p data-en="Assets land in Unreal or Unity, sorted and set up." data-fr="Les assets arrivent dans Unreal ou Unity, rangés et configurés.">Assets land in Unreal or Unity, sorted and set up.</p>
-        <div class="tl-tools"><a class="tl-tool t-hou" href="https://www.sidefx.com" target="_blank" rel="noopener"><i></i><b>Houdini 21</b><span data-en="optional" data-fr="optionnel">optional</span></a><a class="tl-tool t-ue" href="https://www.unrealengine.com" target="_blank" rel="noopener"><i></i><b>Unreal 5</b><span data-en="Nanite" data-fr="Nanite">Nanite</span></a><a class="tl-tool t-unity" href="https://unity.com" target="_blank" rel="noopener"><i></i><b>Unity 6</b><span data-en="URP / HDRP" data-fr="URP / HDRP">URP / HDRP</span></a></div>
-        <p class="tl-note" data-en="Only Gaea and Unity? Turn the rest off." data-fr="Seulement Gaea et Unity ? Coupez le reste.">Only Gaea and Unity? Turn the rest off.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURES ============ -->
-<!-- ============ FONCTIONS : AVANT / APRES ============ -->
-<section class="vs" id="str-features">
-  <div class="wrap">
-    <div class="steps-head">
-      <div class="eyebrow mid" data-en="Features" data-fr="Fonctions">Features</div>
-      <h2 data-en="Same terrain set. Two workflows." data-fr="Même série de terrains. Deux workflows.">Same terrain set. Two workflows.</h2>
-    </div>
-    <div class="vs-scroll">
-    <table class="vs-table">
-      <thead><tr><th></th><th class="bad"><span data-en="Without Stratum" data-fr="Sans Stratum">Without Stratum</span></th><th class="good"><span data-en="With Stratum" data-fr="Avec Stratum">With Stratum</span></th></tr></thead>
-      <tbody>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1"/></svg></span><span class="vs-feat-name" data-en="Variant grid" data-fr="Grille de variantes">Variant grid</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Up to 26 terrains per project. See what is done or out of date, redo only that." data-fr="Jusqu'à 26 terrains par projet. Voyez ce qui est fait ou périmé, refaites seulement ça.">Up to 26 terrains per project. See what is done or out of date, redo only that.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Change the seed, build, export, one by one" data-fr="Changer la seed, builder, exporter, une par une">Change the seed, build, export, one by one</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Tick them, one run builds them all" data-fr="Cochez-les, un run les builde toutes">Tick them, one run builds them all</span><button class="vs-live" type="button" data-demo-page="gaea"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span class="vs-feat-name" data-en="Naming" data-fr="Nommage">Naming</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="You control every file and asset name, from Gaea to your engine. Or keep the original names." data-fr="Vous contrôlez le nom de chaque fichier et asset, de Gaea jusqu'au moteur. Ou gardez les noms d'origine.">You control every file and asset name, from Gaea to your engine. Or keep the original names.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Rename every file by hand" data-fr="Renommer chaque fichier à la main">Rename every file by hand</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Your naming rules, applied everywhere" data-fr="Vos règles de nommage, appliquées partout">Your naming rules, applied everywhere</span><button class="vs-live" type="button" data-demo-page="naming"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 11.5h18"/></svg></span><span class="vs-feat-name" data-en="Asset library" data-fr="Bibliothèque d'assets">Asset library</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Every mesh from every project, with 3D thumbnails. Filter, sort, pack." data-fr="Chaque mesh de chaque projet, avec vignettes 3D. Filtrez, triez, packez.">Every mesh from every project, with 3D thumbnails. Filter, sort, pack.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Hunt through folders for the right file" data-fr="Fouiller les dossiers pour trouver le bon fichier">Hunt through folders for the right file</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Sorted automatically, all in one library" data-fr="Rangé automatiquement, tout dans une bibliothèque">Sorted automatically, all in one library</span><button class="vs-live" type="button" data-demo-page="library"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><span class="vs-feat-name" data-en="Houdini modifiers" data-fr="Modificateurs Houdini">Houdini modifiers</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Reduce polycount, fix normals, smooth edges, or plug in your own HDA." data-fr="Réduire les polygones, corriger les normales, adoucir les arêtes, ou brancher votre propre HDA.">Reduce polycount, fix normals, smooth edges, or plug in your own HDA.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Open, load the HDA, cook, export each mesh" data-fr="Ouvrir, charger le HDA, cuire, exporter chaque mesh">Open, load the HDA, cook, export each mesh</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Chained in the background, no window opened" data-fr="Enchaîné en arrière-plan, sans ouvrir Houdini">Chained in the background, no window opened</span><button class="vs-live" type="button" data-demo-page="houdini"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9.5 9 2.5 2.5L16 7.5"/></svg></span><span class="vs-feat-name" data-en="Ready in Unreal &amp; Unity" data-fr="Prêt dans Unreal &amp; Unity">Ready in Unreal &amp; Unity</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Meshes, textures and one material per variant, imported and set up for you." data-fr="Meshes, textures et un matériau par variante, importés et réglés pour vous.">Meshes, textures and one material per variant, imported and set up for you.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Import, Nanite, collision, materials per asset" data-fr="Import, Nanite, collision, matériaux par asset">Import, Nanite, collision, materials per asset</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Imported, one material per variant" data-fr="Importé, un matériau par variante">Imported, one material per variant</span><button class="vs-live" type="button" data-demo-page="unreal"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9z"/><path d="M12 12 21 7.5M12 12v9.5M12 12 3 7.5"/></svg></span><span class="vs-feat-name" data-en="3D preview &amp; photo studio" data-fr="Aperçu 3D &amp; studio photo">3D preview &amp; photo studio</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Inspect every mesh before your engine does, then shoot 4K images for your store page." data-fr="Inspectez chaque mesh avant votre moteur, puis photographiez des images 4K pour votre fiche store.">Inspect every mesh before your engine does, then shoot 4K images for your store page.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Import into the engine just to check a mesh" data-fr="Importer dans le moteur juste pour vérifier un mesh">Import into the engine just to check a mesh</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Checked in 3D, 4K store shots in one click" data-fr="Vérifié en 3D, photos 4K pour le store en un clic">Checked in 3D, 4K store shots in one click</span><button class="vs-live" type="button" data-demo-page="preview"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span><span class="vs-feat-name" data-en="Tools auto-detected" data-fr="Outils détectés">Tools auto-detected</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Stratum finds Gaea, Houdini, Unreal and Unity, and opens each project with the right version." data-fr="Stratum trouve Gaea, Houdini, Unreal et Unity, et ouvre chaque projet avec la bonne version.">Stratum finds Gaea, Houdini, Unreal and Unity, and opens each project with the right version.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Set every tool path by hand" data-fr="Renseigner chaque chemin d'outil à la main">Set every tool path by hand</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Found automatically" data-fr="Trouvés automatiquement">Found automatically</span><button class="vs-live" type="button" data-demo-page="settings"><span data-en="See it" data-fr="Voir">See it</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg></button></div></td>
-        </tr>
-        <tr>
-          <th><div class="vs-feat"><span class="vs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span><span class="vs-feat-name" data-en="Pre-flight checks" data-fr="Vérifications avant run">Pre-flight checks</span><button class="vs-tip" type="button" aria-label="?">?<span class="vs-tip-text" data-en="Tools, paths, disk space and graph outputs verified before the run, not after." data-fr="Outils, chemins, espace disque et sorties du graphe vérifiés avant le run, pas après.">Tools, paths, disk space and graph outputs verified before the run, not after.</span></button></div></th>
-          <td class="bad"><div class="vs-cell"><i>✕</i><span data-en="Mistakes found after the import, redo everything" data-fr="Erreurs découvertes après l'import, tout refaire">Mistakes found after the import, redo everything</span></div></td>
-          <td class="good"><div class="vs-cell"><i>✓</i><span data-en="Caught before the run" data-fr="Repérées avant le run">Caught before the run</span></div></td>
-        </tr>
-        <tr class="vs-total"><th><span data-en="Time per set" data-fr="Temps par série">Time per set</span></th><td class="bad"><div class="vs-cell"><span data-en="4 to 6 hours" data-fr="4 à 6 heures">4 to 6 hours</span></div></td><td class="good"><div class="vs-cell"><span data-en="~5 minutes of setup" data-fr="~5 minutes de réglage">~5 minutes of setup</span></div></td></tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-</section>
-
-<div class="demo-modal" id="demo-modal" hidden>
-  <div class="demo-modal-in" role="dialog" aria-modal="true">
-    <div class="demo-modal-head">
-      <div>
-        <h3 id="demo-modal-title"></h3>
-        <p id="demo-modal-text"></p>
-      </div>
-      <button class="demo-modal-x" type="button" aria-label="Close">&times;</button>
-    </div>
-    <div class="shot">
-      <div class="shot-bar"><i></i><i></i><i></i><em class="demo-badge" data-en="Live demo" data-fr="Démo live">Live demo</em></div>
-      <div class="slot-box demo-box" id="demo-modal-box"></div>
+<div class="st-tabs">
+  <div class="wrap st-tabs-in">
+    <div class="st-tabs-l">
+      <span class="st-brand"><img src="img/stratum/logo-256.webp" alt="">STRATUM</span>
+      <nav class="st-tablist" role="tablist" aria-label="Stratum">
+        <a class="st-tab" role="tab" href="#overview" data-tab="overview" aria-selected="false"><span data-en="Overview" data-fr="Aperçu">Overview</span></a>
+        <a class="st-tab" role="tab" href="#features" data-tab="features" aria-selected="false"><span data-en="Features" data-fr="Fonctions">Features</span></a>
+        <a class="st-tab" role="tab" href="#story" data-tab="story" aria-selected="false"><span data-en="Story" data-fr="L&#x27;histoire">Story</span></a>
+        <a class="st-tab" role="tab" href="#pricing" data-tab="pricing" aria-selected="false"><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="st-tab" role="tab" href="#download" data-tab="download" aria-selected="false"><span data-en="Download" data-fr="Télécharger">Download</span></a>
+        <a class="st-tab" role="tab" href="#notes" data-tab="notes" aria-selected="false"><span data-en="Patch notes" data-fr="Notes de version">Patch notes</span></a>
+      </nav>
     </div>
   </div>
 </div>
 
-<!-- ============ PRICING ============ -->
-<section class="price" id="str-pricing">
+<main class="st-main">
+<section class="st-panel" id="overview" data-panel="overview" role="tabpanel">
+  <div class="st-hero">
+    <img src="img/stratum/hero-salar.webp" alt="" fetchpriority="high">
+    <div class="wrap st-hero-in">
+      <div class="st-hero-by"><img src="img/stratum/logo-256.webp" alt=""><span data-en="by" data-fr="par">by</span> KALYSTEON</div>
+      <div class="st-title-wrap"><h1 class="st-title">STRATUM</h1><span class="st-ver">v<span class="str-ver-short">1.0</span></span></div>
+      <p class="st-slogan" data-en="Your terrain workflow, on autopilot." data-fr="Votre workflow terrain, en pilote automatique.">Your terrain workflow, on autopilot.</p>
+      <div class="st-hero-btns">
+        <a class="st-btn st-btn-p" href="#download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span data-en="Download free" data-fr="Télécharger gratuitement">Download free</span></a>
+        <a class="st-btn st-btn-g" href="#pricing"><span data-en="See pricing" data-fr="Voir les tarifs">See pricing</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap st-state-wrap">
+    <span class="st-kick">Stratum</span>
+    <h2 class="st-state" data-en="One tool between your terrain and your game." data-fr="Un seul outil entre votre terrain et votre jeu.">One tool between your terrain and your game.</h2>
+    <p class="st-lead" style="max-width: 620px; font-size: 18px" data-en="From your Gaea graph to assets ready in Unreal Engine or Unity: named, sorted, set up." data-fr="De votre graphe Gaea jusqu&#x27;aux assets prêts dans Unreal Engine ou Unity : nommés, rangés, configurés.">From your Gaea graph to assets ready in Unreal Engine or Unity: named, sorted, set up.</p>
+  </div>
+
   <div class="wrap">
-    <div class="price-head">
-      <div class="eyebrow mid" data-en="Pricing" data-fr="Tarifs">Pricing</div>
-      <h2 data-en="Start free. Upgrade when you ship." data-fr="Commencez gratuitement. Passez au niveau supérieur quand vous vendez.">Start free. Upgrade when you ship.</h2>
-      <p data-en="Pay once, keep it forever. Paid licenses include one year of updates, then renewal is optional." data-fr="Payez une fois, gardez-le pour toujours. Les licences payantes incluent un an de mises à jour, le renouvellement est ensuite facultatif.">Pay once, keep it forever. Paid licenses include one year of updates, then renewal is optional.</p>
+    <div class="st-demo">
+      <div class="st-demo-note" aria-hidden="true"><span class="st-note" data-en="Go ahead, click anything. It&#x27;s the real thing." data-fr="Vas-y, clique partout. C&#x27;est le vrai logiciel.">Go ahead, click anything. It's the real thing.</span><svg viewBox="0 0 74 72" fill="none" stroke="#F2A15C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8 C 30 0, 60 12, 56 62"/><path d="M47 53 L56 64 L64 54"/></svg></div>
+      <div class="shot">
+        <div class="shot-bar"><i></i><i></i><i></i><span>Stratum</span><em class="demo-badge" data-en="Live demo" data-fr="Démo live">Live demo</em></div>
+        <div class="demo-box" data-demo="stratum/demo/index.html"><button class="demo-play" type="button"><span data-en="Try it live" data-fr="Essayer en direct">Try it live</span></button></div>
+      </div>
     </div>
-    <div class="tiers">
+  </div>
 
-      <div class="tier t-free">
-        <div class="tier-name">Free</div>
-        <h3 data-en="Personal" data-fr="Personnel">Personal</h3>
-        <p class="tier-for" data-en="To learn the tool and make personal projects." data-fr="Pour apprendre l'outil et faire vos projets perso.">To learn the tool and make personal projects.</p>
-        <div class="tier-cost"><span data-en="$0" data-fr="0 €">$0</span><small data-en="Free forever" data-fr="Gratuit pour toujours">Free forever</small></div>
-        <ul>
-          <li data-en="1 project, 3 variants" data-fr="1 projet, 3 variantes">1 project, 3 variants</li>
-          <li data-en="Terrains up to 2K" data-fr="Terrains jusqu'à 2K">Terrains up to 2K</li>
-          <li data-en="2 of the 3 Houdini modifiers" data-fr="2 des 3 modificateurs Houdini">2 of the 3 Houdini modifiers</li>
-          <li class="no" data-en="Non-commercial use" data-fr="Usage non commercial">Non-commercial use</li>
-        </ul>
-        <a class="btn btn-tier" href="#str-download" data-en="Download" data-fr="Télécharger">Download</a>
+  <div class="wrap" style="padding-top: 140px">
+    <div class="st-head-row" style="margin-bottom: 8px"><h2 class="st-h2" data-en="Four steps, then coffee." data-fr="Quatre étapes, puis le café.">Four steps, then coffee.</h2><a class="st-link" href="#features"><span data-en="All features" data-fr="Toutes les fonctions">All features</span> →</a></div>
+    <div class="st-pillars"><div class="st-pillar"><span class="st-mono" style="font-size: 11px; letter-spacing: 0.2em; color: #5DEFD5">01</span><b data-en="Gaea" data-fr="Gaea">Gaea</b><p data-en="Pick a &lt;b&gt;Gaea file&lt;/b&gt;. Your tools are &lt;b&gt;detected on their own&lt;/b&gt;." data-fr="Indiquez un &lt;b&gt;fichier Gaea&lt;/b&gt;. Vos outils sont &lt;b&gt;détectés tout seuls&lt;/b&gt;.">Pick a <b>Gaea file</b>. Your tools are <b>detected on their own</b>.</p></div><div class="st-pillar"><span class="st-mono" style="font-size: 11px; letter-spacing: 0.2em; color: #5DEFD5">02</span><b data-en="Variants" data-fr="Variantes">Variants</b><p data-en="Choose &lt;b&gt;which terrains run&lt;/b&gt; and &lt;b&gt;which stages&lt;/b&gt; each one goes through." data-fr="Choisissez &lt;b&gt;quels terrains tournent&lt;/b&gt; et &lt;b&gt;par quelles étapes&lt;/b&gt; chacun passe.">Choose <b>which terrains run</b> and <b>which stages</b> each one goes through.</p></div><div class="st-pillar"><span class="st-mono" style="font-size: 11px; letter-spacing: 0.2em; color: #5DEFD5">03</span><b data-en="Naming" data-fr="Nommage">Naming</b><p data-en="You name &lt;b&gt;every file and asset&lt;/b&gt;, from Gaea to your engine." data-fr="Vous nommez &lt;b&gt;chaque fichier et asset&lt;/b&gt;, de Gaea jusqu&#x27;au moteur.">You name <b>every file and asset</b>, from Gaea to your engine.</p></div><div class="st-pillar"><span class="st-mono" style="font-size: 11px; letter-spacing: 0.2em; color: #5DEFD5">04</span><b data-en="Engines" data-fr="Moteurs">Engines</b><p data-en="Assets land in &lt;b&gt;Unreal or Unity&lt;/b&gt;, &lt;b&gt;sorted and set up&lt;/b&gt;." data-fr="Assets &lt;b&gt;rangés et configurés&lt;/b&gt; dans &lt;b&gt;Unreal ou Unity&lt;/b&gt;.">Assets land in <b>Unreal or Unity</b>, <b>sorted and set up</b>.</p></div></div>
+  </div>
+
+  <div class="wrap" style="padding-top: 170px; padding-bottom: 160px">
+    <div class="st-card st-time">
+      <div style="display: flex; flex-direction: column; gap: 18px">
+        <span class="st-cap" data-en="Time per set" data-fr="Temps par série">Time per set</span>
+        <h2 class="st-h2" data-en="3 variants or 26: minutes, not hours." data-fr="3 variantes ou 26 : des minutes, pas des heures.">3 variants or 26: minutes, not hours.</h2>
       </div>
-
-      <div class="tier t-indie feature">
-        <span class="tier-badge" data-en="Best value" data-fr="Meilleur choix">Best value</span>
-        <div class="tier-name">Indie</div>
-        <h3 data-en="Indie &amp; Pro" data-fr="Indie &amp; Pro">Indie &amp; Pro</h3>
-        <p class="tier-for" data-en="For solo devs and small teams who sell their work." data-fr="Pour les devs solo et petites équipes qui vendent leur travail.">For solo devs and small teams who sell their work.</p>
-        <div class="tier-cost"><span data-en="$56.99" data-fr="48,99 €">$56.99</span><small data-en="One-time payment" data-fr="Paiement unique">One-time payment</small></div>
-        <ul>
-          <li data-en="Unlimited projects, 12 variants" data-fr="Projets illimités, 12 variantes">Unlimited projects, 12 variants</li>
-          <li data-en="Terrains up to 4K" data-fr="Terrains jusqu'à 4K">Terrains up to 4K</li>
-          <li data-en="All 3 modifiers + your own HDA" data-fr="Les 3 modificateurs + votre propre HDA">All 3 modifiers + your own HDA</li>
-          <li data-en="Commercial use, up to $100k/yr" data-fr="Usage commercial, jusqu'à 100 000 $/an de CA">Commercial use, up to $100k/yr</li>
-        </ul>
-        <a class="btn btn-tier" href="https://kalysteon.lemonsqueezy.com/checkout/buy/f3300734-507e-4ffa-8d87-1ffa752a7358" data-en="Buy Indie" data-fr="Acheter Indie">Buy Indie</a>
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <div class="st-legend"><span style="color: #F07A8A"><i style="background: #F07A8A"></i><span data-en="By hand" data-fr="À la main">By hand</span></span><span style="color: #5DEFD5"><i style="background: #5DEFD5"></i><span data-en="With Stratum" data-fr="Avec Stratum">With Stratum</span></span></div>
+        <div class="st-bar-row"><b data-en="3 variants" data-fr="3 variantes">3 variants</b><div class="st-bars"><span class="st-bar-hand" style="width: 12%"></span><span class="st-bar-str"><i style="width: 10px"></i>~5 min</span></div></div><div class="st-bar-row"><b data-en="12 variants" data-fr="12 variantes">12 variants</b><div class="st-bars"><span class="st-bar-hand" style="width: 46%"></span><span class="st-bar-str"><i style="width: 14px"></i>~8 min</span></div></div><div class="st-bar-row"><b data-en="26 variants" data-fr="26 variantes">26 variants</b><div class="st-bars"><span class="st-bar-hand" style="width: 100%"></span><span class="st-bar-str"><i style="width: 20px"></i>~12 min</span></div></div>
       </div>
-
-      <div class="tier t-studio">
-        <div class="tier-name">Studio</div>
-        <h3 data-en="Studio" data-fr="Studio">Studio</h3>
-        <p class="tier-for" data-en="For teams producing terrain at production scale." data-fr="Pour les équipes qui produisent du terrain à grande échelle.">For teams producing terrain at production scale.</p>
-        <div class="tier-cost"><span data-en="$221.99" data-fr="189,99 €">$221.99</span><small data-en="One-time payment" data-fr="Paiement unique">One-time payment</small></div>
-        <ul>
-          <li data-en="Unlimited projects, 26 variants" data-fr="Projets illimités, 26 variantes">Unlimited projects, 26 variants</li>
-          <li data-en="Terrains up to 8K" data-fr="Terrains jusqu'à 8K">Terrains up to 8K</li>
-          <li data-en="Unlimited commercial use" data-fr="Usage commercial illimité">Unlimited commercial use</li>
-          <li data-en="Priority support" data-fr="Support prioritaire">Priority support</li>
-        </ul>
-        <a class="btn btn-tier" href="https://kalysteon.lemonsqueezy.com/checkout/buy/28ad4942-d06a-41a7-be9b-4f3dd1249340" data-en="Buy Studio" data-fr="Acheter Studio">Buy Studio</a>
-      </div>
-
     </div>
+  </div>
 
-    <details class="compare">
-      <summary data-en="Compare all features" data-fr="Comparer toutes les fonctions">Compare all features</summary>
-      <div class="compare-scroll">
-      <table>
+  <div class="wrap st-final">
+    <img src="img/stratum/logo-256.webp" alt="">
+    <h2 class="st-state" data-en="Start free." data-fr="Commencez gratuitement.">Start free.</h2>
+    <p class="st-lead" data-en="Free forever. No account, no watermark, no time limit." data-fr="Gratuit pour toujours. Sans compte, sans filigrane, sans limite de temps.">Free forever. No account, no watermark, no time limit.</p>
+    <div class="st-hero-btns" style="justify-content: center">
+      <a class="st-btn st-btn-p" href="#download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span data-en="Download free" data-fr="Télécharger gratuitement">Download free</span></a>
+      <a class="st-btn st-btn-g" href="#pricing"><span data-en="See pricing" data-fr="Voir les tarifs">See pricing</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="st-panel" id="features" data-panel="features" role="tabpanel" hidden>
+  <div class="wrap" style="padding-top: 80px">
+    <div class="st-head-row" style="margin-bottom: 34px">
+      <div style="display: flex; flex-direction: column; gap: 16px"><span class="st-kick" data-en="Features" data-fr="Fonctions">Features</span><h2 class="st-h2 st-h2-xl" data-en="Same terrain set. Two workflows." data-fr="Mêmes terrains. Deux workflows.">Same terrain set. Two workflows.</h2></div>
+      <span class="st-note" style="font-size: 24px; transform: rotate(-2deg); white-space: nowrap" data-en="each line opens in the demo" data-fr="chaque ligne s&#x27;ouvre dans la démo">each line opens in the demo</span>
+    </div>
+    <div class="st-cmp">
+      <div class="st-cmp-row st-cmp-head"><div></div><div style="color: rgba(240,122,138,0.85)"><span data-en="Without Stratum" data-fr="Sans Stratum">Without Stratum</span></div><div class="with" style="color: #5DEFD5"><span data-en="With Stratum" data-fr="Avec Stratum">With Stratum</span></div><div></div></div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1"/></svg></span><span><b class="st-cmp-name" data-en="Variant grid" data-fr="Grille de variantes">Variant grid</b><span class="st-cmp-desc" data-en="Up to 26 terrains per project. See what is done or out of date, redo only that." data-fr="Jusqu&#x27;à 26 terrains par projet. Voyez ce qui est fait ou périmé, refaites seulement ça.">Up to 26 terrains per project. See what is done or out of date, redo only that.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Change the seed, build, export, one by one" data-fr="Changer la seed, builder, exporter, une par une">Change the seed, build, export, one by one</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="One run builds them all, and only what changed is redone" data-fr="Un run les builde toutes, et seul ce qui a changé est refait">One run builds them all, and only what changed is redone</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="gaea"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span><b class="st-cmp-name" data-en="Naming" data-fr="Nommage">Naming</b><span class="st-cmp-desc" data-en="You control every file and asset name, from Gaea to your engine. Or keep the original names." data-fr="Vous nommez chaque fichier et asset, de Gaea au moteur. Ou gardez les noms d&#x27;origine.">You control every file and asset name, from Gaea to your engine. Or keep the original names.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Rename every file by hand" data-fr="Renommer chaque fichier à la main">Rename every file by hand</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Your rules on every file, every run, undone in one click" data-fr="Vos règles sur chaque fichier, à chaque run, annulables en un clic">Your rules on every file, every run, undone in one click</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="naming"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 11.5h18"/></svg></span><span><b class="st-cmp-name" data-en="Asset library" data-fr="Bibliothèque d&#x27;assets">Asset library</b><span class="st-cmp-desc" data-en="Every mesh from every project, with 3D thumbnails. Filter, sort, pack." data-fr="Chaque mesh de chaque projet, avec vignettes 3D. Filtrez, triez, packez.">Every mesh from every project, with 3D thumbnails. Filter, sort, pack.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Hunt through folders for the right file" data-fr="Fouiller les dossiers à la main">Hunt through folders for the right file</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Every terrain you made, found in seconds and ready to pack" data-fr="Tous vos terrains, retrouvés en quelques secondes et prêts à packer">Every terrain you made, found in seconds and ready to pack</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="library"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><span><b class="st-cmp-name" data-en="Houdini modifiers" data-fr="Modificateurs Houdini">Houdini modifiers</b><span class="st-cmp-desc" data-en="Reduce polycount, fix normals, smooth edges, or plug in your own HDA." data-fr="Réduire les polygones, corriger les normales, adoucir les arêtes, ou brancher votre propre HDA.">Reduce polycount, fix normals, smooth edges, or plug in your own HDA.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Open, load the HDA, cook, export each mesh" data-fr="Ouvrir, charger le HDA, cuire, exporter chaque mesh">Open, load the HDA, cook, export each mesh</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Your modifiers run on every mesh in the background, Houdini stays closed" data-fr="Vos modificateurs passent sur chaque mesh en fond, Houdini reste fermé">Your modifiers run on every mesh in the background, Houdini stays closed</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="houdini"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9.5 9 2.5 2.5L16 7.5"/></svg></span><span><b class="st-cmp-name" data-en="Ready in Unreal &amp;amp; Unity" data-fr="Prêt dans Unreal &amp;amp; Unity">Ready in Unreal &amp; Unity</b><span class="st-cmp-desc" data-en="Meshes, textures and one material per variant, imported and set up for you." data-fr="Meshes, textures et un matériau par variante, importés et réglés pour vous.">Meshes, textures and one material per variant, imported and set up for you.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Import, Nanite, collision, materials per asset" data-fr="Import, Nanite, collision, matériaux par asset">Import, Nanite, collision, materials per asset</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Imported with your settings, on your master material or one built for you" data-fr="Importés avec vos réglages, sur votre matériau maître ou un créé pour vous">Imported with your settings, on your master material or one built for you</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="unreal"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9z"/><path d="M12 12 21 7.5M12 12v9.5M12 12 3 7.5"/></svg></span><span><b class="st-cmp-name" data-en="3D preview &amp;amp; photo studio" data-fr="Aperçu 3D &amp;amp; studio photo">3D preview &amp; photo studio</b><span class="st-cmp-desc" data-en="Inspect every mesh before your engine does, then shoot 4K images for your store page." data-fr="Inspectez chaque mesh avant votre moteur, puis photographiez des images 4K pour votre fiche store.">Inspect every mesh before your engine does, then shoot 4K images for your store page.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Import into the engine just to check a mesh" data-fr="Importer dans le moteur juste pour vérifier un mesh">Import into the engine just to check a mesh</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Every mesh checked in 3D and shot in 4K, without opening an engine" data-fr="Chaque mesh vérifié en 3D et shooté en 4K, sans ouvrir de moteur">Every mesh checked in 3D and shot in 4K, without opening an engine</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="preview"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span><span><b class="st-cmp-name" data-en="Tools auto-detected" data-fr="Outils détectés">Tools auto-detected</b><span class="st-cmp-desc" data-en="Stratum finds Gaea, Houdini, Unreal and Unity, and opens each project with the right version." data-fr="Stratum trouve Gaea, Houdini, Unreal et Unity, et ouvre chaque projet avec la bonne version.">Stratum finds Gaea, Houdini, Unreal and Unity, and opens each project with the right version.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Set every tool path by hand" data-fr="Indiquer chaque chemin à la main">Set every tool path by hand</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Found on their own, each project opened with the right version" data-fr="Trouvés tout seuls, chaque projet ouvert avec la bonne version">Found on their own, each project opened with the right version</span></div>
+        <div class="see"><button class="st-see" type="button" data-demo-page="settings"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span data-en="See it" data-fr="Voir">See it</span></button></div>
+      </div>
+      <div class="st-cmp-row">
+        <div class="st-cmp-cell-feat"><div class="st-cmp-feat"><span class="st-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/></svg></span><span><b class="st-cmp-name" data-en="Pre-flight checks" data-fr="Vérifications avant run">Pre-flight checks</b><span class="st-cmp-desc" data-en="Tools, paths, disk space and graph outputs verified before the run, not after." data-fr="Outils, chemins, espace disque et sorties du graphe vérifiés avant le run, pas après.">Tools, paths, disk space and graph outputs verified before the run, not after.</span></span></div></div>
+        <div class="without"><i aria-hidden="true">✕</i><span data-en="Mistakes found after the import, redo everything" data-fr="Erreurs découvertes après l&#x27;import, tout refaire">Mistakes found after the import, redo everything</span></div>
+        <div class="with"><i aria-hidden="true">✓</i><span data-en="Problems caught before the run, not after an hour of import" data-fr="Problèmes repérés avant le run, pas après une heure d&#x27;import">Problems caught before the run, not after an hour of import</span></div>
+        <div class="see"></div>
+      </div>
+      <div class="st-cmp-row st-cmp-total"><div class="st-cap" style="color: #9BB0D0"><span data-en="Time per set" data-fr="Temps par série">Time per set</span></div><div class="without"><span class="t-bad" data-en="Hours" data-fr="Des heures">Hours</span></div><div class="with"><span data-en="5 to 12 minutes" data-fr="5 à 12 minutes">5 to 12 minutes</span></div><div class="see"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="st-panel" id="story" data-panel="story" role="tabpanel" hidden>
+  <div class="wrap" style="padding-top: 80px">
+    <div class="st-card st-story">
+      <div class="st-story-who"><img src="img/avatar.webp" alt="Andrei Bobe" loading="lazy"><span class="st-note" style="font-size: 38px">Andrei Bobe</span><span class="st-mono" style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #7085A0" data-en="Founder of Kalysteon" data-fr="Fondateur de Kalysteon">Founder of Kalysteon</span></div>
+      <div class="st-story-txt"><span class="st-kick" style="color: #F2A15C" data-en="The story" data-fr="L&#x27;histoire">The story</span><h2 class="st-h2 st-h2-l" data-en="Why did I build this tool?" data-fr="Pourquoi ai-je créé cet outil ?">Why did I build this tool?</h2><blockquote data-en="Simple: Stratum started as a personal tool I built while making terrain packs. The thing is, I spent far more time &lt;b&gt;juggling between software&lt;/b&gt; than actually working in it: exporting each variant, renaming files, organizing folders, re-importing everything into the game engine, building materials... I repeated the same clicks for hours on every pack, it was a huge time sink. So I automated the process, step by step, until a single click did it all. Today every Kalysteon pack goes through this tool, and now it&#x27;s yours to use. Hopefully it helps you too!" data-fr="Simple, à l&#x27;origine, Stratum était un outil personnel que j&#x27;ai conçu lorsque je créais des packs de terrain. Le truc, c&#x27;est que je passais bien plus de temps &lt;b&gt;à jongler entre les logiciels&lt;/b&gt; qu&#x27;à travailler réellement dedans : exporter chaque variante, renommer les fichiers, organiser les dossiers, réimporter le tout dans le moteur de jeu, créer les matériaux... Je répétais les mêmes clics pendant des heures pour chaque pack, c&#x27;est super chronophage. J&#x27;ai donc automatisé le processus, étape par étape, jusqu&#x27;à ce qu&#x27;un seul clic suffise à tout accomplir. Aujourd&#x27;hui, tous les packs Kalysteon passent par cet outil, et il est désormais à votre disposition. En espérant que ça puisse vous servir également !">Simple: Stratum started as a personal tool I built while making terrain packs. The thing is, I spent far more time <b>juggling between software</b> than actually working in it: exporting each variant, renaming files, organizing folders, re-importing everything into the game engine, building materials... I repeated the same clicks for hours on every pack, it was a huge time sink. So I automated the process, step by step, until a single click did it all. Today every Kalysteon pack goes through this tool, and now it's yours to use. Hopefully it helps you too!</blockquote></div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top: 100px"><div class="st-values"><div class="st-value"><span class="st-mono" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #7085A0" data-en="Made for" data-fr="Fait pour">Made for</span><b data-en="Terrain artists &amp;amp; studios" data-fr="Artistes &amp;amp; studios terrain">Terrain artists &amp; studios</b><p data-en="Who produce in batches: packs, variants, whole biomes." data-fr="Qui produisent en série : packs, variantes, biomes entiers.">Who produce in batches: packs, variants, whole biomes.</p></div><div class="st-value"><span class="st-mono" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #7085A0" data-en="It removes" data-fr="Il supprime">It removes</span><b data-en="The busywork" data-fr="Le travail répétitif">The busywork</b><p data-en="Renaming, sorting, re-importing, building materials, by hand." data-fr="Renommer, trier, réimporter, créer les matériaux, à la main.">Renaming, sorting, re-importing, building materials, by hand.</p></div><div class="st-value"><span class="st-mono" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #7085A0" data-en="You get" data-fr="Vous gagnez">You get</span><b style="color: #5DEFD5" data-en="Hours → 5 to 12 min" data-fr="Des heures → 5 à 12 min">Hours → 5 to 12 min</b><p data-en="From 3 to 26 variants. Your assets land named, sorted, ready." data-fr="De 3 à 26 variantes. Vos assets arrivent nommés, triés, prêts.">From 3 to 26 variants. Your assets land named, sorted, ready.</p></div></div></div>
+  <div class="wrap" style="padding-top: 100px">
+    <div class="st-head-row"><div style="display: flex; flex-direction: column; gap: 16px"><span class="st-kick" data-en="Made with Stratum" data-fr="Fait avec Stratum">Made with Stratum</span><h2 class="st-h2" data-en="Every Kalysteon pack goes through it." data-fr="Tous les packs Kalysteon passent par lui.">Every Kalysteon pack goes through it.</h2></div><a class="st-link" href="products.html"><span data-en="See the packs" data-fr="Voir les packs">See the packs</span> →</a></div>
+    <div class="st-made"><a href="products.html#coll-card-arctic"><img src="img/stratum/made-arctic-world.webp" alt="Arctic World" loading="lazy"><span><small style="color: #ECE7DC" data-en="Complete Worlds" data-fr="Mondes complets">Complete Worlds</small><b>Arctic World</b></span></a><a href="products.html#coll-card-frostholm"><img src="img/stratum/made-frostholm-glaciers.webp" alt="Frosthölm Glaciers" loading="lazy"><span><small style="color: #B8DCF2" data-en="Frosthölm" data-fr="Frosthölm">Frosthölm</small><b>Frosthölm Glaciers</b></span></a><a href="products.html#coll-card-8k"><img src="img/stratum/made-zhangjiajie.webp" alt="Zhangjiajie" loading="lazy"><span><small style="color: #F2D777" data-en="Landscape Packs" data-fr="Landscape Packs">Landscape Packs</small><b>Zhangjiajie</b></span></a><a href="products.html#coll-card-8k"><img src="img/stratum/made-african.webp" alt="African" loading="lazy"><span><small style="color: #F2D777" data-en="Landscape Packs" data-fr="Landscape Packs">Landscape Packs</small><b>African</b></span></a></div>
+  </div>
+</section>
+
+<section class="st-panel" id="pricing" data-panel="pricing" role="tabpanel" hidden>
+  <div class="wrap" style="padding-top: 72px; text-align: center">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px"><span class="st-kick" data-en="Pricing" data-fr="Tarifs">Pricing</span><h2 class="st-h2 st-h2-xl" data-en="Start free. Upgrade when you ship." data-fr="Démarrez gratuit. Évoluez quand vous vendez.">Start free. Upgrade when you ship.</h2><p class="st-lead" style="max-width: 620px" data-en="Pay once, keep it forever. Paid licenses include one year of updates, then renewal is optional." data-fr="Payez une fois, gardez-le pour toujours. Les licences payantes incluent un an de mises à jour, le renouvellement est ensuite facultatif.">Pay once, keep it forever. Paid licenses include one year of updates, then renewal is optional.</p></div>
+    <div class="st-tiers">
+      <div class="st-tier t-free">
+        <div class="st-tier-top"><span class="st-tier-key">Free</span></div>
+        <h3 data-en="Personal" data-fr="Personnel">Personal</h3><p class="st-tier-for" data-en="To learn the tool and make personal projects." data-fr="Pour apprendre l&#x27;outil et faire vos projets perso.">To learn the tool and make personal projects.</p>
+        <div class="st-tier-cost"><b data-en="$0" data-fr="0 €">$0</b><small data-en="Free forever" data-fr="Gratuit pour toujours">Free forever</small></div>
+        <ul><li data-en="1 project, 3 variants" data-fr="1 projet, 3 variantes">1 project, 3 variants</li><li data-en="Terrains up to 2K" data-fr="Terrains jusqu&#x27;à 2K">Terrains up to 2K</li><li data-en="2 of the 3 Houdini modifiers" data-fr="2 des 3 modificateurs Houdini">2 of the 3 Houdini modifiers</li><li data-en="Non-commercial use" data-fr="Usage non commercial">Non-commercial use</li></ul>
+        <a class="st-btn st-btn-tier" href="#download"><span data-en="Download" data-fr="Télécharger">Download</span></a>
+      </div>
+      <div class="st-tier t-indie best">
+        <div class="st-tier-top"><span class="st-tier-key">Indie</span><span class="st-tier-badge" data-en="Best value" data-fr="Meilleur choix">Best value</span></div>
+        <h3 data-en="Indie &amp;amp; Pro" data-fr="Indie &amp;amp; Pro">Indie &amp; Pro</h3><p class="st-tier-for" data-en="For solo devs and small teams who sell their work." data-fr="Pour les devs solo et petites équipes qui vendent leur travail.">For solo devs and small teams who sell their work.</p>
+        <div class="st-tier-cost"><b data-en="$56.99" data-fr="48,99 €">$56.99</b><small data-en="One-time payment" data-fr="Paiement unique">One-time payment</small></div>
+        <ul><li data-en="Unlimited projects, 12 variants" data-fr="Projets illimités, 12 variantes">Unlimited projects, 12 variants</li><li data-en="Terrains up to 4K" data-fr="Terrains jusqu&#x27;à 4K">Terrains up to 4K</li><li data-en="All 3 modifiers + your own HDA" data-fr="Les 3 modificateurs + votre propre HDA">All 3 modifiers + your own HDA</li><li data-en="Commercial use, up to $100k/yr" data-fr="Usage commercial, jusqu&#x27;à 100 k$/an de CA">Commercial use, up to $100k/yr</li></ul>
+        <a class="st-btn st-btn-tier" href="https://kalysteon.lemonsqueezy.com/checkout/buy/f3300734-507e-4ffa-8d87-1ffa752a7358"><span data-en="Buy Indie" data-fr="Acheter Indie">Buy Indie</span></a>
+      </div>
+      <div class="st-tier t-studio">
+        <div class="st-tier-top"><span class="st-tier-key">Studio</span></div>
+        <h3 data-en="Studio" data-fr="Studio">Studio</h3><p class="st-tier-for" data-en="For teams producing terrain at production scale." data-fr="Pour les équipes qui produisent du terrain à grande échelle.">For teams producing terrain at production scale.</p>
+        <div class="st-tier-cost"><b data-en="$221.99" data-fr="189,99 €">$221.99</b><small data-en="One-time payment" data-fr="Paiement unique">One-time payment</small></div>
+        <ul><li data-en="Unlimited projects, 26 variants" data-fr="Projets illimités, 26 variantes">Unlimited projects, 26 variants</li><li data-en="Terrains up to 8K" data-fr="Terrains jusqu&#x27;à 8K">Terrains up to 8K</li><li data-en="Unlimited commercial use" data-fr="Usage commercial illimité">Unlimited commercial use</li><li data-en="Priority support" data-fr="Support prioritaire">Priority support</li></ul>
+        <a class="st-btn st-btn-tier" href="https://kalysteon.lemonsqueezy.com/checkout/buy/28ad4942-d06a-41a7-be9b-4f3dd1249340"><span data-en="Buy Studio" data-fr="Acheter Studio">Buy Studio</span></a>
+      </div>
+    </div>
+    <details class="st-compare">
+      <summary><span data-en="Compare all features" data-fr="Comparer toutes les fonctions">Compare all features</span></summary>
+      <div class="st-compare-body"><div class="st-compare-scroll"><table>
         <thead><tr><th></th><th class="c-free">Free</th><th class="c-indie">Indie &amp; Pro</th><th class="c-studio">Studio</th></tr></thead>
         <tbody>
           <tr><th><span data-en="Price" data-fr="Prix">Price</span></th><td class="c-free"><span data-en="$0" data-fr="0 €">$0</span></td><td class="c-indie"><span data-en="$56.99" data-fr="48,99 €">$56.99</span></td><td class="c-studio"><span data-en="$221.99" data-fr="189,99 €">$221.99</span></td></tr>
@@ -856,151 +609,232 @@ main .btn-s.btn-hero:hover{background:rgba(31,184,171,0.10);border-color:var(--t
           <tr><th><span data-en="Updates" data-fr="Mises à jour">Updates</span></th><td class="c-free"><span data-en="Included" data-fr="Incluses">Included</span></td><td class="c-indie"><span data-en="1 year included" data-fr="1 an incluse">1 year included</span></td><td class="c-studio"><span data-en="1 year included" data-fr="1 an incluse">1 year included</span></td></tr>
           <tr><th><span data-en="Support" data-fr="Support">Support</span></th><td class="c-free"><span data-en="Community" data-fr="Communauté">Community</span></td><td class="c-indie"><span data-en="Email" data-fr="Email">Email</span></td><td class="c-studio"><span data-en="Priority" data-fr="Prioritaire">Priority</span></td></tr>
         </tbody>
-      </table>
-      </div>
-      <p class="compare-note" data-en="Prices in US dollars are indicative: payment is made in euros (€48.99 and €189.99)." data-fr="Prix en euros, TVA gérée au paiement.">Prices in US dollars are indicative: payment is made in euros (€48.99 and €189.99).</p>
+      </table></div>
+      <p class="st-compare-note" data-en="Prices in US dollars are indicative: payment is made in euros (€48.99 and €189.99)." data-fr="Prix en euros, TVA gérée au paiement.">Prices in US dollars are indicative: payment is made in euros (€48.99 and €189.99).</p></div>
     </details>
+    <p style="margin: 14px 0 0; font-size: 13px; color: #7085A0" data-en="After the first year, updates are optional: $22.99/yr (Indie), $81.99/yr (Studio)." data-fr="Après la première année, les mises à jour sont facultatives : 19,99 €/an (Indie), 69,99 €/an (Studio).">After the first year, updates are optional: $22.99/yr (Indie), $81.99/yr (Studio).</p>
   </div>
 </section>
 
-<!-- ============ DOWNLOAD ============ -->
-<section class="dl" id="str-download">
-  <div class="wrap">
-    <div class="dl-inner">
-      <div class="eyebrow mid" data-en="Download" data-fr="Télécharger">Download</div>
-      <h2 data-en="Get Stratum for Windows." data-fr="Obtenez Stratum pour Windows.">Get Stratum for Windows.</h2>
-      <p data-en="One installer for every tier, no account required to start." data-fr="Un installeur pour toutes les offres, aucun compte requis pour commencer.">One installer for every tier, no account required to start.</p>
-      <div class="dl-ver">v<span class="str-ver">1.0.0</span> · ~22 MB</div>
-      <a class="btn btn-p btn-lg" href="stratum/download" data-en="Download Stratum" data-fr="Télécharger Stratum">Download Stratum</a>
-      <p class="dl-req" data-en="Windows 10/11 · 64-bit · Gaea 2 Professional or Enterprise required" data-fr="Windows 10/11 · 64 bits · Gaea 2 Professional ou Enterprise requis">Windows 10/11 · 64-bit · Gaea 2 Professional or Enterprise required</p>
-      <div class="dl-steps2"><div class="dls"><div class="dls-top"><span class="dls-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="dls-n">01</span></div><h4 data-en="Install" data-fr="Installez">Install</h4><p data-en="Run the installer. No admin rights needed." data-fr="Lancez l'installeur. Pas besoin de droits admin.">Run the installer. No admin rights needed.</p><div class="dls-tip" data-en="Windows warns you? More info, then Run anyway." data-fr="Windows vous avertit ? Informations complémentaires, puis Exécuter quand même.">Windows warns you? More info, then Run anyway.</div></div><div class="dls-arrow" aria-hidden="true"><svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 6h34M30 1l6 5-6 5"/></svg></div><div class="dls"><div class="dls-top"><span class="dls-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span><span class="dls-n">02</span></div><h4 data-en="Detect" data-fr="Détectez">Detect</h4><p data-en="Stratum finds Gaea, Houdini, Unreal and Unity on its own." data-fr="Stratum trouve Gaea, Houdini, Unreal et Unity tout seul.">Stratum finds Gaea, Houdini, Unreal and Unity on its own.</p></div><div class="dls-arrow" aria-hidden="true"><svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 6h34M30 1l6 5-6 5"/></svg></div><div class="dls"><div class="dls-top"><span class="dls-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg></span><span class="dls-n">03</span></div><h4 data-en="Run" data-fr="Lancez">Run</h4><p data-en="Open a Gaea graph and run your first batch." data-fr="Ouvrez un graphe Gaea et lancez votre première série.">Open a Gaea graph and run your first batch.</p></div></div>
+<section class="st-panel" id="download" data-panel="download" role="tabpanel" hidden>
+  <div class="wrap" style="padding-top: 72px">
+    <div class="st-card st-dl">
+      <div class="st-dl-l"><img src="img/stratum/logo-256.webp" alt=""><div><span class="st-kick" data-en="Download" data-fr="Télécharger">Download</span><h2 class="st-h2" data-en="Get Stratum for Windows." data-fr="Obtenez Stratum pour Windows.">Get Stratum for Windows.</h2><p class="st-lead" data-en="One installer for every tier, no account required to start." data-fr="Un installeur pour toutes les offres, aucun compte requis pour commencer.">One installer for every tier, no account required to start.</p></div></div>
+      <div class="st-dl-r"><span class="st-mono" style="font-size: 11px; letter-spacing: 0.14em; color: #9BB0D0">v<span class="str-ver">1.0.1</span> · ~22 MB</span><a class="st-btn st-btn-p" href="stratum/download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span data-en="Download Stratum" data-fr="Télécharger Stratum">Download Stratum</span></a></div>
     </div>
+    <p class="st-req" data-en="Windows 10/11 · 64-bit · Gaea 2 Professional or Enterprise required" data-fr="Windows 10/11 · 64 bits · Gaea 2 Professional ou Enterprise requis">Windows 10/11 · 64-bit · Gaea 2 Professional or Enterprise required</p>
+  </div>
+  <div class="wrap" style="padding-top: 70px">
+    <div class="st-steps"><div class="st-step"><span class="st-num">01</span><h3 data-en="Install" data-fr="Installez">Install</h3><p data-en="Run the installer. No admin rights needed." data-fr="Lancez l&#x27;installeur. Pas besoin de droits admin.">Run the installer. No admin rights needed.</p></div><span class="st-step-arrow" aria-hidden="true">→</span><div class="st-step"><span class="st-num">02</span><h3 data-en="Detect" data-fr="Détectez">Detect</h3><p data-en="Stratum finds Gaea, Houdini, Unreal and Unity on its own." data-fr="Stratum trouve Gaea, Houdini, Unreal et Unity tout seul.">Stratum finds Gaea, Houdini, Unreal and Unity on its own.</p></div><span class="st-step-arrow" aria-hidden="true">→</span><div class="st-step"><span class="st-num">03</span><h3 data-en="Run" data-fr="Lancez">Run</h3><p data-en="Open a Gaea graph and run your first batch." data-fr="Ouvrez un graphe Gaea, lancez votre série.">Open a Gaea graph and run your first batch.</p></div></div>
+    <p class="st-tip" data-en="Windows warns you? More info, then Run anyway." data-fr="Windows vous avertit ? Informations complémentaires, puis Exécuter quand même.">Windows warns you? More info, then Run anyway.</p>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section class="faq" id="str-faq">
-  <div class="wrap">
-    <div class="faq-head">
-      <div class="eyebrow" data-en="FAQ" data-fr="FAQ">FAQ</div>
-      <h2 data-en="Questions, answered." data-fr="Questions, réponses.">Questions, answered.</h2>
-    </div>
-
-    <details>
-      <summary data-en="What do I need installed to use Stratum?" data-fr="Que dois-je avoir d'installé pour utiliser Stratum ?">What do I need installed to use Stratum?</summary>
-      <p data-en="Gaea 2 Professional or Enterprise, plus Unreal Engine or Unity for the import stage. Houdini is optional. Stratum drives those tools, it does not replace them." data-fr="Gaea 2 Professional ou Enterprise, plus Unreal Engine ou Unity pour l'import. Houdini est optionnel. Stratum pilote ces outils, il ne les remplace pas.">Gaea 2 Professional or Enterprise, plus Unreal Engine or Unity for the import stage. Houdini is optional. Stratum drives those tools, it does not replace them.</p>
-    </details>
-
-    <details>
-      <summary data-en="Does it work with Gaea Community?" data-fr="Est-ce que ça marche avec Gaea Community ?">Does it work with Gaea Community?</summary>
-      <p data-en="No. Stratum builds your graphs through Gaea's command line, which is reserved for Gaea 2 Professional and Enterprise. You can still use the Houdini and engine stages on meshes you already have." data-fr="Non. Stratum builde vos graphes via la ligne de commande de Gaea, réservée à Gaea 2 Professional et Enterprise. Vous pouvez quand même utiliser les étapes Houdini et moteur sur des meshes que vous avez déjà.">No. Stratum builds your graphs through Gaea's command line, which is reserved for Gaea 2 Professional and Enterprise. You can still use the Houdini and engine stages on meshes you already have.</p>
-    </details>
-
-    <details>
-      <summary data-en="Can I use it without Houdini?" data-fr="Puis-je l'utiliser sans Houdini ?">Can I use it without Houdini?</summary>
-      <p data-en="Yes. Every stage can be switched off. Gaea straight to Unreal, Gaea straight to Unity, or Gaea on its own are all valid runs." data-fr="Oui. Chaque étape peut être désactivée. Gaea directement vers Unreal, Gaea directement vers Unity, ou Gaea seul sont tous des runs valides.">Yes. Every stage can be switched off. Gaea straight to Unreal, Gaea straight to Unity, or Gaea on its own are all valid runs.</p>
-    </details>
-
-    <details>
-      <summary data-en="How do updates work?" data-fr="Comment se passent les mises à jour ?">How do updates work?</summary>
-      <p data-en="Stratum tells you when a new version is out. Download the installer and run it over the current one: your projects, settings and license stay in place." data-fr="Stratum vous prévient quand une nouvelle version sort. Téléchargez l'installeur et lancez-le par-dessus : vos projets, réglages et licence restent en place.">Stratum tells you when a new version is out. Download the installer and run it over the current one: your projects, settings and license stay in place.</p>
-    </details>
-
-    <details>
-      <summary data-en="What happens after the first year?" data-fr="Que se passe-t-il après la première année ?">What happens after the first year?</summary>
-      <p data-en="Your license never expires: Stratum keeps working, with every version released during your year of updates. To keep getting new versions, renew for $22.99/year (Indie) or $81.99/year (Studio), cancel anytime. Renew with the same email as your purchase, straight from Stratum (Settings, License)." data-fr="Votre licence n'expire jamais : Stratum continue de fonctionner, avec toutes les versions sorties pendant votre année de mises à jour. Pour recevoir les nouvelles versions, renouvelez pour 19,99 €/an (Indie) ou 69,99 €/an (Studio), résiliable à tout moment. Renouvelez avec le même email que votre achat, directement depuis Stratum (Réglages, Licence).">Your license never expires: Stratum keeps working, with every version released during your year of updates. To keep getting new versions, renew for $22.99/year (Indie) or $81.99/year (Studio), cancel anytime. Renew with the same email as your purchase, straight from Stratum (Settings, License).</p>
-    </details>
-
-    <details>
-      <summary data-en="Can I sell games made with Stratum terrains?" data-fr="Puis-je vendre des jeux faits avec des terrains Stratum ?">Can I sell games made with Stratum terrains?</summary>
-      <p data-en="With an Indie or Studio license, yes. The free tier is personal and non-commercial. Terrains you generate belong to you in every tier." data-fr="Avec une licence Indie ou Studio, oui. L'offre gratuite est personnelle et non commerciale. Les terrains que vous générez vous appartiennent dans toutes les offres.">With an Indie or Studio license, yes. The free tier is personal and non-commercial. Terrains you generate belong to you in every tier.</p>
-    </details>
-
-    <p class="faq-more"><a href="faq.html" data-en="Visit the support center" data-fr="Voir le centre d'aide">Visit the support center</a></p>
+<section class="st-panel" id="notes" data-panel="notes" role="tabpanel" hidden>
+  <div class="wrap" style="padding-top: 72px">
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px"><span class="st-kick" data-en="Patch notes" data-fr="Notes de version">Patch notes</span><h2 class="st-h2 st-h2-xl" data-en="Every update, in the open." data-fr="Chaque mise à jour, en clair.">Every update, in the open.</h2></div>
+    <div class="st-pn"><nav class="st-pn-index" id="st-pn-index" aria-label="Versions"></nav><div id="st-pn-list"></div></div>
+    <script type="application/json" id="st-changelog">[
+  {
+    "version": "1.0.1",
+    "date": "2026-09-17",
+    "items": [
+      { "type": "fix", "en": "Version number shown correctly at install and in About.", "fr": "Numéro de version affiché correctement à l'installation et dans « À propos »." }
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-09-15",
+    "summary": { "en": "First public release.", "fr": "Première version publique." },
+    "groups": [
+      {
+        "name": { "en": "Gaea", "fr": "Gaea" },
+        "items": [
+          { "type": "new", "en": "Variant grid, up to 26 terrains per project. Only what changed is rebuilt.", "fr": "Grille de variantes, jusqu'à 26 terrains par projet. Seul ce qui a changé est refait." },
+          { "type": "new", "en": "Seeds in Auto, Random or Custom mode.", "fr": "Seeds en mode Auto, Aléatoire ou Personnalisé." },
+          { "type": "new", "en": "Pick the nodes to export, with an export added automatically to nodes that have none.", "fr": "Choix des nœuds à exporter, avec export ajouté automatiquement aux nœuds qui n'en ont pas." },
+          { "type": "new", "en": "Warning when the resolution is too low for a mesh (VPS).", "fr": "Alerte quand la résolution est trop basse pour un mesh (VPS)." },
+          { "type": "new", "en": "Detection of .terrain files from an older Gaea version, with the steps to follow.", "fr": "Détection des fichiers .terrain d'une ancienne version de Gaea, avec la marche à suivre." },
+          { "type": "new", "en": "Gaea build cache, with an adjustable maximum size.", "fr": "Cache des builds Gaea, avec une taille maximale réglable." }
+        ]
+      },
+      {
+        "name": { "en": "Naming and sorting", "fr": "Nommage et rangement" },
+        "items": [
+          { "type": "new", "en": "Naming rules applied to every file and asset, from Gaea to your engine, and undoable.", "fr": "Règles de nommage appliquées à chaque fichier et asset, de Gaea jusqu'au moteur, avec annulation possible." },
+          { "type": "new", "en": "Destination composer (style, type, variant, project) to sort assets your way.", "fr": "Composeur de destination (style, type, variante, projet) pour ranger les assets à votre façon." }
+        ]
+      },
+      {
+        "name": { "en": "Houdini", "fr": "Houdini" },
+        "items": [
+          { "type": "new", "en": "Reorderable modifier chain, each link can be switched on or off and filtered by style.", "fr": "Chaîne de modificateurs réordonnable, chaque maillon activable et filtrable par style." },
+          { "type": "new", "en": "Plug in your own HDA, with a check of its input and output.", "fr": "Branchement de votre propre HDA, avec vérification de son entrée et de sa sortie." }
+        ]
+      },
+      {
+        "name": { "en": "Engines", "fr": "Moteurs" },
+        "items": [
+          { "type": "new", "en": "Import into Unreal Engine 5 (Nanite, collision, LOD, master material, one instance per variant, normal maps).", "fr": "Import dans Unreal Engine 5 (Nanite, collision, LOD, master material, instance par variante, normal maps)." },
+          { "type": "new", "en": "Import into Unity, in URP, HDRP or Built-in (ShaderGraph or existing material, Material Variants, prefabs, collider).", "fr": "Import dans Unity, en URP, HDRP ou Built-in (ShaderGraph ou matériau existant, Material Variants, prefabs, collider)." },
+          { "type": "new", "en": "Clean-up of what Stratum placed in the engine, sent to the recycle bin.", "fr": "Nettoyage de ce que Stratum a posé dans le moteur, envoyé à la corbeille." }
+        ]
+      },
+      {
+        "name": { "en": "Preview and library", "fr": "Aperçu et bibliothèque" },
+        "items": [
+          { "type": "new", "en": "3D preview (texture, wireframe, grid, normals, lighting presets).", "fr": "Aperçu 3D (texture, fil de fer, grille, normales, presets d'éclairage)." },
+          { "type": "new", "en": "Live ambient occlusion, adjustable in the Light panel.", "fr": "Occlusion ambiante en direct, réglable dans le panneau Lumière." },
+          { "type": "new", "en": "Photo studio, captures up to 4K.", "fr": "Studio photo, captures jusqu'en 4K." },
+          { "type": "new", "en": "Library of every mesh from every project.", "fr": "Bibliothèque de tous les meshes de tous les projets." }
+        ]
+      },
+      {
+        "name": { "en": "General", "fr": "Général" },
+        "items": [
+          { "type": "new", "en": "Several projects, run history and end-of-run summary.", "fr": "Plusieurs projets, historique des runs et résumé de fin de run." },
+          { "type": "new", "en": "Tools detected automatically, checks before every run.", "fr": "Outils détectés automatiquement, vérifications avant chaque run." },
+          { "type": "new", "en": "Variants deleted through the Windows recycle bin.", "fr": "Suppression de variantes via la corbeille de Windows." },
+          { "type": "new", "en": "Update alert, “Report a problem” button.", "fr": "Alerte de mise à jour, bouton « Signaler un problème »." },
+          { "type": "new", "en": "Interface in 5 languages, works fully offline.", "fr": "Interface en 5 langues, fonctionne entièrement hors ligne." }
+        ]
+      }
+    ]
+  }
+]</script>
   </div>
 </section>
 
+<div class="wrap" style="padding-top: 110px">
+  <div class="st-help"><div><b data-en="A question before you start?" data-fr="Une question avant de vous lancer ?">A question before you start?</b><p data-en="Requirements, Gaea Community, updates, licences: the answers are in the support center." data-fr="Prérequis, Gaea Community, mises à jour, licences : les réponses sont dans le centre d&#x27;aide.">Requirements, Gaea Community, updates, licences: the answers are in the support center.</p></div><a href="support.html#stratum"><span data-en="Support center" data-fr="Centre d&#x27;aide">Support center</span> →</a></div>
+</div>
 </main>
 
-<footer>
-  <span class="footer-copy">© 2026 Kalysteon · Andrei Bobe</span>
-  <div class="footer-links">
-    <a class="footer-link" href="https://www.fab.com/sellers/Kalysteon" target="_blank">Fab</a>
-    <a class="footer-link" href="https://assetstore.unity.com/publishers/104184" target="_blank">Unity</a>
-    <a class="footer-link" href="https://www.artstation.com/kalysteon/store" target="_blank">ArtStation</a>
+<div class="demo-modal" id="demo-modal" hidden>
+  <div class="demo-modal-in" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+    <div class="demo-modal-head"><div><h3 id="demo-modal-title"></h3><p id="demo-modal-text"></p></div><button class="demo-modal-x" type="button" aria-label="Close">&times;</button></div>
+    <div class="shot"><div class="shot-bar"><i></i><i></i><i></i><em class="demo-badge" data-en="Live demo" data-fr="Démo live">Live demo</em></div><div class="demo-box" id="demo-modal-box"></div></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a class="ft-logo" href="index.html" aria-label="Kalysteon, home">KALYS<span>T</span>EON</a>
+        <p class="ft-desc" data-en="Environment art for games. Terrain packs, tools and commissions." data-fr="Des environnements pour le jeu vidéo. Packs de terrains, outils et commissions.">Environment art for games. Terrain packs, tools and commissions.</p>
+        <div class="ft-icons">
+          <a class="ft-icon" href="https://www.artstation.com/kalysteon" target="_blank" rel="noopener" aria-label="ArtStation"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 17.723l2.027 3.505a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"></path></svg></a>
+          <a class="ft-icon" href="https://www.youtube.com/@Kalysteon" target="_blank" rel="noopener" aria-label="YouTube"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="m10 9.2 5 2.8-5 2.8z"></path></svg></a>
+          <a class="ft-icon" href="https://www.instagram.com/kalysteon/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="0.6"></circle></svg></a>
+          <a class="ft-icon" href="https://www.tiktok.com/@kalysteon" target="_blank" rel="noopener" aria-label="TikTok"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.4 2.6 2.4 4.6 5 4.8"></path></svg></a>
+          <a class="ft-icon" href="https://x.com/Kalysteon" target="_blank" rel="noopener" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4.2L20 20h-4.2z"></path><path d="M20 4l-6.6 7.2"></path><path d="M4 20l6.6-7.2"></path></svg></a>
+          <a class="ft-icon" href="https://www.linkedin.com/in/andreibobe/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 10.5V17"></path><path d="M8 7.2v.1"></path><path d="M12 17v-6.5"></path><path d="M12 13.5a2.5 2.5 0 0 1 5 0V17"></path></svg></a>
+          <a class="ft-icon" href="https://www.facebook.com/profile.php?id=61563883627493" target="_blank" rel="noopener" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a class="ft-icon" href="https://www.reddit.com/user/Kalysteon/" target="_blank" rel="noopener" aria-label="Reddit"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="14.6" rx="8" ry="5.6"></ellipse><circle cx="4.6" cy="10.4" r="1.7"></circle><circle cx="19.4" cy="10.4" r="1.7"></circle><path d="M12 9l1.3-5.2 4 1"></path><circle cx="18.7" cy="5" r="1.3"></circle><circle cx="9" cy="13.6" r="0.6" fill="currentColor"></circle><circle cx="15" cy="13.6" r="0.6" fill="currentColor"></circle><path d="M9.3 16.8c1.6 1.1 3.8 1.1 5.4 0"></path></svg></a>
+        </div>
+        <div class="ft-stores">
+          <a class="ft-store" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener">Fab <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://assetstore.unity.com/publishers/104184" target="_blank" rel="noopener">Unity Asset Store <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://www.artstation.com/kalysteon/store" target="_blank" rel="noopener">ArtStation <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="ft-cols">
+        <nav class="ft-col" aria-label="Explore" data-aria-en="Explore" data-aria-fr="Explorer">
+          <h4 data-en="Explore" data-fr="Explorer">Explore</h4>
+          <a class="ft-link" href="products.html" data-en="Products" data-fr="Produits">Products</a>
+          <a class="ft-link" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
+          <a class="ft-link" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
+          <a class="ft-link" href="tutorials.html" data-en="Tutorials" data-fr="Tutoriels">Tutorials</a>
+          <a class="ft-link" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
+        </nav>
+        <nav class="ft-col" aria-label="Info" data-aria-en="Info" data-aria-fr="Infos">
+          <h4 data-en="Info" data-fr="Infos">Info</h4>
+          <a class="ft-link" href="about.html#contact" data-en="Contact" data-fr="Contact">Contact</a>
+          <a class="ft-link" href="support.html" data-en="FAQ" data-fr="FAQ">FAQ</a>
+          <a class="ft-link" href="cgv.html" data-en="Terms of sale" data-fr="CGV">Terms of sale</a>
+          <a class="ft-link" href="mentions-legales.html" data-en="Legal notice" data-fr="Mentions légales">Legal notice</a>
+          <a class="ft-link" href="confidentialite.html" data-en="Privacy" data-fr="Confidentialité">Privacy</a>
+        </nav>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Kalysteon · Andrei Bobe</span>
+      <a class="ft-link" href="mailto:contact@kalysteon.com">contact@kalysteon.com</a>
+    </div>
   </div>
 </footer>
 
 <script>
+// Langue (innerHTML: some Stratum texts keep a <b>)
 function setLang(lang) {
   localStorage.setItem('kalysteon-lang', lang);
   document.documentElement.lang = lang;
-  document.querySelectorAll('[data-en]').forEach(function(el) {
+  document.querySelectorAll('[data-en]').forEach(function (el) {
     var txt = el.getAttribute('data-' + lang);
-    if (txt) el.innerHTML = txt;
+    if (txt !== null) el.innerHTML = txt;
   });
-  document.querySelectorAll('.lang-toggle .lang-btn').forEach(function(b) {
-    b.classList.toggle('active', b.id === 'lang-btn-' + lang);
+  document.querySelectorAll('[data-aria-en]').forEach(function (el) {
+    var txt = el.getAttribute('data-aria-' + lang);
+    if (txt !== null) el.setAttribute('aria-label', txt);
   });
+  document.querySelectorAll('.lang-btn').forEach(function (btn) { btn.classList.toggle('active', btn.id === 'lang-btn-' + lang); });
 }
 setLang(localStorage.getItem('kalysteon-lang') || 'en');
 
+// Header height: the tab bar sticks right under the site header
 (function () {
-  var hdr = document.querySelector('header');
-  function setH() { if (hdr) document.documentElement.style.setProperty('--hdr-h', hdr.offsetHeight + 'px'); }
-  setH(); window.addEventListener('resize', setH);
-
-
-  // Version = celle du dernier installeur publie (release.bat).
-  fetch('stratum/version.json', { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) {
-      if (!d || !d.version) return;
-      document.querySelectorAll('.str-ver').forEach(function (el) { el.textContent = d.version; });
-      document.querySelectorAll('.str-ver-short').forEach(function (el) { el.textContent = d.version.split('.').slice(0, 2).join('.'); });    })
-    .catch(function () {});
+  var header = document.querySelector('header.site-header');
+  if (!header) return;
+  var set = function () { document.documentElement.style.setProperty('--hdr-h', header.offsetHeight + 'px'); };
+  set();
+  window.addEventListener('resize', set);
+  window.addEventListener('load', set);
 })();
 
-(function() {
-  var canvas = document.getElementById('ptx');
+// Particles: Kalysteon gold mixed with Stratum teal
+(function () {
+  var canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var particles = [], w, h;
   function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize);
   resize();
-  // Mix gold + teal particles for the Stratum page
-  for (var i = 0; i < 80; i++) {
-    particles.push({
-      x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.3 + 0.4,
-      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
-      a: Math.random() * 0.45 + 0.15, da: (Math.random() > 0.5 ? 1 : -1) * 0.0025,
-      teal: Math.random() < 0.5
-    });
-  }
+  for (var i = 0; i < 80; i++) particles.push({
+    x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.3 + 0.4,
+    vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
+    a: Math.random() * 0.45 + 0.15, da: (Math.random() > 0.5 ? 1 : -1) * 0.0025, teal: Math.random() < 0.5
+  });
   function animate() {
     ctx.clearRect(0, 0, w, h);
-    for (var p of particles) {
+    particles.forEach(function (p) {
       p.x += p.vx; p.y += p.vy; p.a += p.da;
       if (p.a < 0.08) p.da = Math.abs(p.da);
       if (p.a > 0.5) p.da = -Math.abs(p.da);
       if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.teal
-        ? 'rgba(93, 239, 213, ' + p.a.toFixed(3) + ')'
-        : 'rgba(212, 175, 55, ' + p.a.toFixed(3) + ')';
+      ctx.fillStyle = p.teal ? 'rgba(93, 239, 213, ' + p.a.toFixed(3) + ')' : 'rgba(212, 175, 55, ' + p.a.toFixed(3) + ')';
       ctx.fill();
-    }
+    });
     requestAnimationFrame(animate);
   }
   animate();
 })();
-</script>
-<script>
-// Charge une iframe de demo et verifie que c'est bien la demo qui s'affiche.
-// Une reponse d'erreur (serveur occupe, cache perime) est rechargee une fois
-// avec une adresse neuve, au lieu de laisser une page 404 dans la fenetre.
+
+// Version = the latest published installer (release.bat writes stratum/version.json)
+fetch('stratum/version.json', { cache: 'no-store' })
+  .then(function (r) { return r.ok ? r.json() : null; })
+  .then(function (d) {
+    if (!d || !d.version) return;
+    document.querySelectorAll('.str-ver').forEach(function (el) { el.textContent = d.version; });
+    document.querySelectorAll('.str-ver-tab').forEach(function (el) { el.textContent = 'v' + d.version; });
+    document.querySelectorAll('.str-ver-short').forEach(function (el) { el.textContent = d.version.split('.').slice(0, 2).join('.'); });
+  })
+  .catch(function () {});
+
+// Demo iframe: checks it really loaded the demo, reloads once with a fresh address otherwise
 window.stratumDemoFrame = function (url) {
   var f = document.createElement('iframe');
   f.title = 'Stratum demo';
@@ -1017,20 +851,17 @@ window.stratumDemoFrame = function (url) {
   f.src = url;
   return f;
 };
-</script>
-<script>
-// Demo interactive : la vraie interface de Stratum, avec un faux moteur.
-// Chargee a l'approche du cadre (ou au clic), puis mise a l'echelle.
-(function () {
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('.demo-box'));
+
+// The big demo: loaded when it comes near the screen (desktop) or on click, then scaled
+var stratumDemo = (function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.demo-box[data-demo]'));
   function fit(box) {
     var f = box.querySelector('iframe');
     if (f) f.style.transform = 'scale(' + (box.clientWidth / 1440) + ')';
   }
   function load(box) {
     if (box.classList.contains('live')) return;
-    var f = window.stratumDemoFrame(box.getAttribute('data-demo'));
-    box.appendChild(f);
+    box.appendChild(window.stratumDemoFrame(box.getAttribute('data-demo')));
     box.classList.add('live');
     fit(box);
   }
@@ -1038,35 +869,75 @@ window.stratumDemoFrame = function (url) {
     var btn = b.querySelector('.demo-play');
     if (btn) btn.addEventListener('click', function () { load(b); });
   });
+  var io = null;
   if ('IntersectionObserver' in window && window.innerWidth > 760) {
-    var io = new IntersectionObserver(function (entries) {
+    io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } });
     }, { rootMargin: '300px 0px' });
     boxes.forEach(function (b) { io.observe(b); });
   }
   window.addEventListener('resize', function () { boxes.forEach(fit); });
+  return { refit: function () { boxes.forEach(fit); } };
 })();
-</script>
-<script>
-// Grille de fonctions : chaque case ouvre la demo placee sur cette fonction.
+
+// Tabs: one panel at a time, driven by the address (#overview, #features...)
+var stratumTabs = (function () {
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.st-panel'));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.st-tab'));
+  var keys = panels.map(function (p) { return p.getAttribute('data-panel'); });
+  // Old links from the previous one-page layout
+  var ALIAS = { 'str-top': 'overview', 'str-why': 'overview', 'str-pipeline': 'overview', 'str-features': 'features', 'str-pricing': 'pricing', 'str-download': 'download', 'str-faq': 'overview' };
+  function keyOf(hash) {
+    var k = (hash || '').replace(/^#/, '');
+    k = ALIAS[k] || k;
+    return keys.indexOf(k) >= 0 ? k : 'overview';
+  }
+  function show(key, scroll) {
+    panels.forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== key; });
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-tab') === key)); });
+    var active = tabs.filter(function (t) { return t.getAttribute('data-tab') === key; })[0];
+    if (active && active.scrollIntoView) active.parentNode.scrollLeft = active.offsetLeft - 40;
+    if (scroll) window.scrollTo({ top: 0, behavior: 'instant' });
+    stratumDemo.refit();
+  }
+  function go(key) {
+    if (location.hash !== '#' + key) history.pushState(null, '', '#' + key);
+    show(key, true);
+  }
+  // Every in-page link to a tab (tab bar, buttons, footer links) switches instead of jumping
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    var m = href.match(/^(?:stratum\.html)?#(.+)$/);
+    if (!m) return;
+    var k = ALIAS[m[1]] || m[1];
+    if (keys.indexOf(k) < 0) return;
+    e.preventDefault();
+    go(k);
+  });
+  window.addEventListener('popstate', function () { show(keyOf(location.hash), true); });
+  show(keyOf(location.hash), false);
+  if (location.hash && ALIAS[location.hash.slice(1)]) history.replaceState(null, '', '#' + keyOf(location.hash));
+  return { go: go };
+})();
+
+// "See it": opens the demo on that feature, in a window over the page
 (function () {
   var modal = document.getElementById('demo-modal');
   var box = document.getElementById('demo-modal-box');
   if (!modal || !box) return;
-  // Hors de <main> : sinon la fenetre reste sous le header du site.
-  document.body.appendChild(modal);
   function fit() {
     var f = box.querySelector('iframe');
     if (f) f.style.transform = 'scale(' + (box.clientWidth / 1440) + ')';
   }
-  function open(cell) {
-    var row = cell.closest('tr') || cell;
-    document.getElementById('demo-modal-title').innerHTML = (row.querySelector('.vs-feat-name') || row.querySelector('h4')).innerHTML;
-    document.getElementById('demo-modal-text').innerHTML = (row.querySelector('.vs-tip-text') || row.querySelector('p')).innerHTML;
+  function open(btn) {
+    var row = btn.closest('.st-cmp-row');
+    document.getElementById('demo-modal-title').innerHTML = row.querySelector('.st-cmp-name').innerHTML;
+    document.getElementById('demo-modal-text').innerHTML = row.querySelector('.st-cmp-desc').innerHTML;
     box.innerHTML = '';
-    // Nouvelle iframe a chaque ouverture : la demo repart propre sur la bonne page.
-    var f = window.stratumDemoFrame('stratum/demo/index.html#' + cell.getAttribute('data-demo-page'));
-    box.appendChild(f);
+    // A fresh iframe each time: the demo starts clean on the right page
+    box.appendChild(window.stratumDemoFrame('stratum/demo/index.html#' + btn.getAttribute('data-demo-page')));
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(fit);
@@ -1076,25 +947,109 @@ window.stratumDemoFrame = function (url) {
     box.innerHTML = '';
     document.body.style.overflow = '';
   }
-  document.querySelectorAll('button[data-demo-page]').forEach(function (c) {
-    c.addEventListener('click', function () { open(c); });
-  });
+  document.querySelectorAll('button[data-demo-page]').forEach(function (b) { b.addEventListener('click', function () { open(b); }); });
   modal.querySelector('.demo-modal-x').addEventListener('click', close);
   modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) close(); });
   window.addEventListener('resize', fit);
+  window.stratumCloseDemo = close;
 })();
-</script>
-<script>
-// La demo suit la langue du site, et sa fin de run renvoie au telechargement.
+
+// End of a demo run: "your terrains are ready" sends visitors to the download tab
+window.addEventListener('message', function (e) {
+  if (!e.data || e.data.type !== 'stratum-demo-download') return;
+  var modal = document.getElementById('demo-modal');
+  if (modal && !modal.hidden && window.stratumCloseDemo) window.stratumCloseDemo();
+  stratumTabs.go('download');
+});
+
+// "Compare all features": the table slides open and closed instead of jumping
 (function () {
-  window.addEventListener('message', function (e) {
-    if (!e.data || e.data.type !== 'stratum-demo-download') return;
-    var modal = document.getElementById('demo-modal');
-    if (modal && !modal.hidden) { var x = modal.querySelector('.demo-modal-x'); if (x) x.click(); }
-    var dl = document.getElementById('str-download');
-    if (dl) dl.scrollIntoView({ behavior: 'smooth' });
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('details.st-compare').forEach(function (d) {
+    var sum = d.querySelector('summary'), body = d.querySelector('.st-compare-body'), anim = null;
+    if (!sum || !body || still || !body.animate) return;
+    sum.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (anim) { anim.cancel(); anim = null; }
+      if (!d.open) {
+        d.open = true;
+        anim = body.animate([{ height: '0px', opacity: 0 }, { height: body.scrollHeight + 'px', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        anim.onfinish = function () { anim = null; };
+      } else {
+        anim = body.animate([{ height: body.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 300, easing: 'cubic-bezier(.4,0,.2,1)' });
+        anim.onfinish = function () { d.open = false; anim = null; };
+      }
+    });
   });
+})();
+
+// Patch notes: built from stratum/changelog.json, so a new release only needs that file updated
+(function () {
+  var list = document.getElementById('st-pn-list'), index = document.getElementById('st-pn-index');
+  if (!list) return;
+  var TAG = { new: ['New', 'Nouveau'], fix: ['Fixed', 'Corrigé'], imp: ['Improved', 'Amélioré'] };
+  var MONTHS = {
+    en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+  };
+  var SHORT = {
+    en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    fr: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+  };
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function bi(tag, en, fr, attrs) {
+    return '<' + tag + (attrs ? ' ' + attrs : '') + ' data-en="' + esc(en) + '" data-fr="' + esc(fr) + '">' + esc(document.documentElement.lang === 'fr' ? fr : en) + '</' + tag + '>';
+  }
+  function day(iso, lang, short) {
+    var p = iso.split('-'), d = +p[2], m = +p[1] - 1;
+    if (short) return lang === 'fr' ? d + ' ' + SHORT.fr[m] : SHORT.en[m] + ' ' + d;
+    return d + ' ' + MONTHS[lang][m] + ' ' + p[0];
+  }
+  function idOf(v) { return 'v' + String(v).replace(/\./g, '-'); }
+  function itemList(items) {
+    return '<div class="st-pn-list">' + (items || []).map(function (it) {
+      var k = TAG[it.type] ? it.type : 'new';
+      return '<div class="st-pn-item">' + bi('span', TAG[k][0], TAG[k][1], 'class="st-pn-tag ' + k + '"') + bi('p', it.en, it.fr) + '</div>';
+    }).join('') + '</div>';
+  }
+  function render(rels) {
+      if (!rels || !rels.length) return;
+      list.innerHTML = rels.map(function (r, i) {
+        return '<article class="st-pn-rel" id="' + idOf(r.version) + '">' +
+          '<div class="st-pn-head"><h3>v' + esc(r.version) + '</h3>' +
+          (i === 0 ? bi('span', 'Latest', 'Dernière', 'class="st-pn-latest"') : '') +
+          bi('span', day(r.date, 'en'), day(r.date, 'fr'), 'class="st-pn-date"') + '</div>' +
+          (r.summary ? bi('p', r.summary.en, r.summary.fr, 'class="st-pn-sum"') : '') +
+          // A release lists its changes directly (items) or by area of the app (groups)
+          (r.items ? itemList(r.items) : '') +
+          (r.groups || []).map(function (g) {
+            return '<div class="st-pn-group">' + bi('h4', g.name.en, g.name.fr) + itemList(g.items) + '</div>';
+          }).join('') +
+          (i === 0 ? '<a class="st-link st-pn-dl" href="#download">↓ ' + bi('span', 'Download this version', 'Télécharger cette version') + '</a>' : '') +
+        '</article>';
+      }).join('');
+      index.innerHTML = rels.map(function (r, i) {
+        return '<button type="button" class="' + (i === 0 ? 'on' : '') + '" data-target="' + idOf(r.version) + '"><span>v' + esc(r.version) + '</span>' +
+          bi('small', day(r.date, 'en', true), day(r.date, 'fr', true)) + '</button>';
+      }).join('');
+      // Version index: scrolls within the tab and leaves the address alone (the address picks the tab)
+      index.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          index.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+          var el = document.getElementById(b.getAttribute('data-target'));
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+  }
+  // Copy embedded at build time: shows even when the page is opened straight from the disk
+  var embedded = document.getElementById('st-changelog');
+  try { if (embedded) render(JSON.parse(embedded.textContent)); } catch (e) {}
+  // Online, the file wins: a release only has to update stratum/changelog.json
+  fetch('stratum/changelog.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rels) { if (rels && rels.length) render(rels); })
+    .catch(function () {});
 })();
 </script>
   <script src="mobile-nav.js"></script>

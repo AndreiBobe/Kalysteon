@@ -1,0 +1,6 @@
+# Jamais en ligne : anciennes versions des pages et config locale de Claude.
+_backup
+_design
+.claude
+# Fichiers temporaires de preview des maquettes (a supprimer, jamais en ligne)
+_dc*

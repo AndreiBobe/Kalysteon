@@ -3231,6 +3231,12 @@ function configContentGaea() {
       </div>
     `, "gaea.nodes")}
 
+    ${_cfgSectionHTML(_t("cfg.gaea.seeds_section", "Seed lock"), `
+      <div id="gaea-seeds-area">
+        <div class="faint" style="font-size:11px;font-style:italic">${_t("cfg.gaea.nodes_empty", "— select a .terrain file to load nodes —")}</div>
+      </div>
+    `, "gaea.seeds")}
+
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:10px;border-top:1px solid var(--line-soft)" title="${_t("cfg.gaea.force_rebuild_hint", "Bypass cache")}">
       <span class="faint" style="font-size:12px">${_t("cfg.gaea.force_rebuild", "Force rebuild (ignore cache)")}</span>
       <div class="switch${forceRebuild ? ' on' : ''}" id="gaea-force-rebuild"></div>
@@ -3647,6 +3653,77 @@ function _gaeaNodesSectionsHTML(data) {
        + section("other", "OTHER", "var(--fg-dim)");
 }
 
+// Verrou de seed : un node verrouille garde le seed du .terrain, donc le
+// meme resultat d'une variante a l'autre. Les autres suivent la variante.
+function _gaeaSeedsHTML(nodes) {
+  const _t = (k, fb) => _tt(k, fb);
+  if (!nodes.length) {
+    return `<div class="faint" style="font-size:11px;font-style:italic">${_t("cfg.gaea.seeds_none", "no random node in this graph")}</div>`;
+  }
+  const locked = cfgGet("pipeline.gaea.seeds_locked") || {};
+  const nLocked = nodes.filter(n => locked[n.id]).length;
+  const groups = { shape: nodes.filter(n => n.kind !== "color"), color: nodes.filter(n => n.kind === "color") };
+  const row = n => {
+    const on = !!locked[n.id];
+    return `<button class="seed-lock${on ? " on" : ""}" data-seed-node="${n.id}" title="${on
+        ? _t("cfg.gaea.seed_locked", "Locked: identical in every variant. Click to let it vary.")
+        : _t("cfg.gaea.seed_free", "Varies with each variant. Click to lock it.")}">
+      <span class="seed-lock-ico">${on ? "\u{1F512}" : "\u{1F513}"}</span>
+      <span class="seed-lock-name">${n.name}</span>
+      <span class="seed-lock-type">${n.type}</span>
+    </button>`;
+  };
+  const block = (key, label, color) => {
+    if (!groups[key].length) return "";
+    return `<div style="margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="width:8px;height:14px;background:${color};border-radius:2px"></span>
+        <span class="section-label" style="color:${color}">${label} \u00b7 ${groups[key].length}</span>
+        <button class="btn ghost" data-seed-all="${key}" style="height:22px;padding:0 8px;font-size:10px;margin-left:auto">${_t("cfg.gaea.seed_lock_all", "Lock all")}</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:4px 10px">${groups[key].map(row).join("")}</div>
+    </div>`;
+  };
+  return `<div class="faint" style="font-size:10.5px;font-style:italic;margin-bottom:8px">${_t("cfg.gaea.seeds_hint", "Locked nodes keep the seed saved in your .terrain: same colors, same shapes, in every variant.")}</div>`
+    + block("shape", _t("cfg.gaea.seeds_shape", "SHAPE"), "var(--accent)")
+    + block("color", _t("cfg.gaea.seeds_color", "COLOR"), "var(--cta)")
+    + (nLocked ? `<div class="faint" style="font-size:10.5px;margin-top:2px">${nLocked} ${_t("cfg.gaea.seeds_locked_count", "locked")}</div>` : "");
+}
+
+async function _loadGaeaSeedNodes() {
+  const area = $("#gaea-seeds-area");
+  if (!area) return;
+  const file = cfgGet("pipeline.gaea.file") || "";
+  if (!file) { area.innerHTML = `<div class="faint" style="font-size:11px;font-style:italic">${_tt("cfg.gaea.nodes_empty", "\u2014 select a .terrain file to load nodes \u2014")}</div>`; return; }
+  let nodes = [];
+  try { nodes = (await eel.get_terrain_seed_nodes(file)()).nodes || []; }
+  catch (e) { area.innerHTML = `<div class="faint" style="font-size:11px">error : ${e}</div>`; return; }
+  const render = () => {
+    area.innerHTML = _gaeaSeedsHTML(nodes);
+    area.querySelectorAll("[data-seed-node]").forEach(b => {
+      b.addEventListener("click", async () => {
+        const all = cfgGet("pipeline.gaea.seeds_locked") || {};
+        const id = b.dataset.seedNode;
+        if (all[id]) delete all[id]; else all[id] = true;
+        await cfgSet("pipeline.gaea.seeds_locked", all);
+        render();
+      });
+    });
+    area.querySelectorAll("[data-seed-all]").forEach(b => {
+      b.addEventListener("click", async () => {
+        const kind = b.dataset.seedAll;
+        const group = nodes.filter(n => (kind === "color") === (n.kind === "color"));
+        const all = cfgGet("pipeline.gaea.seeds_locked") || {};
+        const everyLocked = group.every(n => all[n.id]);
+        group.forEach(n => { if (everyLocked) delete all[n.id]; else all[n.id] = true; });
+        await cfgSet("pipeline.gaea.seeds_locked", all);
+        render();
+      });
+    });
+  };
+  render();
+}
+
 function _updateGaeaVpsWarning(data) {
   const w = $("#gaea-vps-warning");
   if (!w || !data) return;
@@ -3680,6 +3757,7 @@ async function _loadGaeaNodes() {
     // fallait toucher un autre reglage pour la reveiller.
     refreshStats();
     _updateGaeaVpsWarning(data);
+    _loadGaeaSeedNodes();
     area.querySelectorAll(".gaea-node").forEach(cb => {
       cb.addEventListener("change", async () => {
         const all = cfgGet("pipeline.gaea.nodes_enabled") || {};

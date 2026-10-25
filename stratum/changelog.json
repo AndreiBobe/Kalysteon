@@ -1,0 +1,68 @@
+[
+  {
+    "version": "1.0.1",
+    "date": "2026-09-17",
+    "items": [
+      { "type": "fix", "en": "Version number shown correctly at install and in About.", "fr": "Numéro de version affiché correctement à l'installation et dans « À propos »." }
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-09-15",
+    "summary": { "en": "First public release.", "fr": "Première version publique." },
+    "groups": [
+      {
+        "name": { "en": "Gaea", "fr": "Gaea" },
+        "items": [
+          { "type": "new", "en": "Variant grid, up to 26 terrains per project. Only what changed is rebuilt.", "fr": "Grille de variantes, jusqu'à 26 terrains par projet. Seul ce qui a changé est refait." },
+          { "type": "new", "en": "Seeds in Auto, Random or Custom mode.", "fr": "Seeds en mode Auto, Aléatoire ou Personnalisé." },
+          { "type": "new", "en": "Pick the nodes to export, with an export added automatically to nodes that have none.", "fr": "Choix des nœuds à exporter, avec export ajouté automatiquement aux nœuds qui n'en ont pas." },
+          { "type": "new", "en": "Warning when the resolution is too low for a mesh (VPS).", "fr": "Alerte quand la résolution est trop basse pour un mesh (VPS)." },
+          { "type": "new", "en": "Detection of .terrain files from an older Gaea version, with the steps to follow.", "fr": "Détection des fichiers .terrain d'une ancienne version de Gaea, avec la marche à suivre." },
+          { "type": "new", "en": "Gaea build cache, with an adjustable maximum size.", "fr": "Cache des builds Gaea, avec une taille maximale réglable." }
+        ]
+      },
+      {
+        "name": { "en": "Naming and sorting", "fr": "Nommage et rangement" },
+        "items": [
+          { "type": "new", "en": "Naming rules applied to every file and asset, from Gaea to your engine, and undoable.", "fr": "Règles de nommage appliquées à chaque fichier et asset, de Gaea jusqu'au moteur, avec annulation possible." },
+          { "type": "new", "en": "Destination composer (style, type, variant, project) to sort assets your way.", "fr": "Composeur de destination (style, type, variante, projet) pour ranger les assets à votre façon." }
+        ]
+      },
+      {
+        "name": { "en": "Houdini", "fr": "Houdini" },
+        "items": [
+          { "type": "new", "en": "Reorderable modifier chain, each link can be switched on or off and filtered by style.", "fr": "Chaîne de modificateurs réordonnable, chaque maillon activable et filtrable par style." },
+          { "type": "new", "en": "Plug in your own HDA, with a check of its input and output.", "fr": "Branchement de votre propre HDA, avec vérification de son entrée et de sa sortie." }
+        ]
+      },
+      {
+        "name": { "en": "Engines", "fr": "Moteurs" },
+        "items": [
+          { "type": "new", "en": "Import into Unreal Engine 5 (Nanite, collision, LOD, master material, one instance per variant, normal maps).", "fr": "Import dans Unreal Engine 5 (Nanite, collision, LOD, master material, instance par variante, normal maps)." },
+          { "type": "new", "en": "Import into Unity, in URP, HDRP or Built-in (ShaderGraph or existing material, Material Variants, prefabs, collider).", "fr": "Import dans Unity, en URP, HDRP ou Built-in (ShaderGraph ou matériau existant, Material Variants, prefabs, collider)." },
+          { "type": "new", "en": "Clean-up of what Stratum placed in the engine, sent to the recycle bin.", "fr": "Nettoyage de ce que Stratum a posé dans le moteur, envoyé à la corbeille." }
+        ]
+      },
+      {
+        "name": { "en": "Preview and library", "fr": "Aperçu et bibliothèque" },
+        "items": [
+          { "type": "new", "en": "3D preview (texture, wireframe, grid, normals, lighting presets).", "fr": "Aperçu 3D (texture, fil de fer, grille, normales, presets d'éclairage)." },
+          { "type": "new", "en": "Live ambient occlusion, adjustable in the Light panel.", "fr": "Occlusion ambiante en direct, réglable dans le panneau Lumière." },
+          { "type": "new", "en": "Photo studio, captures up to 4K.", "fr": "Studio photo, captures jusqu'en 4K." },
+          { "type": "new", "en": "Library of every mesh from every project.", "fr": "Bibliothèque de tous les meshes de tous les projets." }
+        ]
+      },
+      {
+        "name": { "en": "General", "fr": "Général" },
+        "items": [
+          { "type": "new", "en": "Several projects, run history and end-of-run summary.", "fr": "Plusieurs projets, historique des runs et résumé de fin de run." },
+          { "type": "new", "en": "Tools detected automatically, checks before every run.", "fr": "Outils détectés automatiquement, vérifications avant chaque run." },
+          { "type": "new", "en": "Variants deleted through the Windows recycle bin.", "fr": "Suppression de variantes via la corbeille de Windows." },
+          { "type": "new", "en": "Update alert, “Report a problem” button.", "fr": "Alerte de mise à jour, bouton « Signaler un problème »." },
+          { "type": "new", "en": "Interface in 5 languages, works fully offline.", "fr": "Interface en 5 langues, fonctionne entièrement hors ligne." }
+        ]
+      }
+    ]
+  }
+]

@@ -1,404 +1,82 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Kalysteon</title>
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.webp">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.webp">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=IBM+Plex+Mono:wght@400;500&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Customer reviews · Kalysteon</title>
+<meta name="description" content="A selection of real reviews of Kalysteon terrain packs on Fab and the Unity Asset Store, with links to every review.">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="legal.css">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══ REVIEWS PAGE (R2) ═══
+   A selection of real reviews, links to every review on each marketplace, owner replies. */
+:root { --rv-gold: #F2D777; --rv-ink: #EEE8D6; --rv-muted: #9BB0D0; --rv-dim: #7085A0; }
+body { background-color: #020A16; background-image: radial-gradient(ellipse 60% 40% at 80% 6%, rgba(201,168,76,0.08), transparent 70%), radial-gradient(ellipse 50% 30% at 6% 40%, rgba(10,30,80,0.5), transparent 70%); }
+.rv-main { position: relative; z-index: 1; color: var(--rv-ink); font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.65; }
+.rv-kick { display: inline-flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--rv-gold); }
+.rv-kick::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rv-gold); box-shadow: 0 0 10px rgba(242,215,119,0.8); }
+.rv-card-bg { border-radius: 14px; border: 1px solid rgba(255,255,255,0.07); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); }
+.rv-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: end; padding-top: 110px; padding-bottom: 50px; }
+.rv-hero-l { display: flex; flex-direction: column; gap: 18px; }
+.rv-h1 { margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 72px; line-height: 0.98; color: var(--rv-ink); }
+.rv-sub { margin: 0; max-width: 500px; font-size: 17px; color: rgba(238,232,214,0.75); }
+.rv-all { display: block; padding: 26px 30px; }
+.rv-all-lbl { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rv-muted); }
+.rv-plat { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); color: var(--rv-ink); text-decoration: none; transition: border-color 0.2s; }
+.rv-plat:hover { border-color: rgba(242,215,119,0.45); }
+.rv-plat b { font-family: 'Rajdhani', sans-serif; font-size: 20px; }
+.rv-plat span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rv-gold); }
+.rv-stars { position: relative; display: inline-block; font-size: 15px; letter-spacing: 2px; line-height: 1; color: rgba(255,255,255,0.15); }
+.rv-stars i { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; font-style: normal; color: var(--rv-gold); }
+.rv-feat { display: block; padding: 44px 48px; border-radius: 18px; border: 1px solid rgba(242,215,119,0.25); background: radial-gradient(ellipse at 10% 0%, rgba(242,215,119,0.1), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); }
+.rv-feat .rv-stars { font-size: 18px; }
+.rv-feat q { display: block; margin-top: 18px; quotes: none; font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.35; color: #F7E9B8; }
+.rv-who { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--rv-muted); }
+.rv-who span { color: var(--rv-dim); }
+.rv-feat .rv-who { margin-top: 20px; }
+.rv-tr { display: block; margin-top: 4px; font-size: 11.5px; color: #5B6F8C; }
+.rv-tr:empty { display: none; }
+.rv-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 60px 0 26px; }
+.rv-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--rv-ink); }
+.rv-chip small { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--rv-dim); }
+.rv-chip.on { border-color: var(--rv-gold); background: rgba(201,168,76,0.1); color: var(--rv-gold); }
+.rv-grid { column-count: 3; column-gap: 16px; }
+.rv-item { display: block; break-inside: avoid; margin: 0 0 16px; padding: 22px 24px; }
+.rv-item.hide { display: none; }
+.rv-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.rv-tag { display: inline-block; padding: 3px 9px; border-radius: 999px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tc); border: 1px solid color-mix(in srgb, var(--tc) 35%, transparent); background: color-mix(in srgb, var(--tc) 7%, transparent); }
+.rv-item p { margin: 14px 0 16px; font-size: 15px; line-height: 1.65; color: rgba(238,232,214,0.88); }
+.rv-reply { display: block; margin: 0 0 16px; padding: 14px 16px; border-left: 2px solid var(--rv-gold); border-radius: 0 10px 10px 0; background: rgba(201,168,76,0.07); }
+.rv-reply b { display: block; margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rv-gold); }
+.rv-reply span { display: block; font-size: 14px; line-height: 1.6; color: rgba(238,232,214,0.82); }
+.rv-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 70px; margin-bottom: 120px; padding: 28px 32px; border-color: rgba(201,168,76,0.25); }
+.rv-cta b { display: block; font-family: 'Rajdhani', sans-serif; font-size: 24px; }
+.rv-cta > div:first-child span { font-size: 14px; color: var(--rv-muted); }
+.rv-cta-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.rv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 9px; white-space: nowrap; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; }
+.rv-btn-g { color: #1A1405; background: linear-gradient(110deg, #B8933A 0%, #E6C35C 45%, #F2D777 60%, #D9B44E 100%); }
+.rv-btn-o { color: var(--rv-ink); background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.4); }
 
-:root {
-  --bg-deep: #01060F;
-  --gold: #D4AF37;
-  --gold-bright: #F5D76E;
-  --gold-glow: rgba(212,175,55,0.6);
-  --gold-border: rgba(212,175,55,0.4);
-  --text-light: #F5F0E6;
-  --text-muted: #D0D9F0;
-  --text-dim: #9BB0D0;
-  --card-bg: rgba(5,14,40,0.55);
-  --transition-smooth: cubic-bezier(0.2,0.9,0.4,1.1);
-  --radius-card: 20px;
-  --mono: 'IBM Plex Mono', monospace;
+@media (max-width: 1100px) {
+  .rv-hero { grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  .rv-grid { column-count: 2; }
 }
-
-body {
-  background-color: #020A16;
-  background-image:
-    radial-gradient(ellipse at 20% 10%, rgba(20,45,90,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 85%, rgba(10,30,70,0.35) 0%, transparent 55%);
-  color: var(--text-light);
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+@media (max-width: 768px) {
+  .rv-hero { padding-top: 96px; padding-bottom: 36px; }
+  .rv-h1 { font-size: 48px; }
+  .rv-sub { font-size: 16px; }
+  .rv-all { padding: 20px; }
+  .rv-feat { padding: 26px 22px; }
+  .rv-feat q { font-size: 21px; }
+  .rv-chips { margin-top: 44px; }
+  .rv-grid { column-count: 1; }
+  .rv-cta { flex-direction: column; align-items: flex-start; padding: 22px; }
 }
-
-#particle-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+@media (max-width: 400px) {
+  .rv-cta b { font-size: 21px; }
 }
-
-/* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.4rem 2.5rem;
-  border-bottom: 1px solid rgba(212,175,55,0.45);
-  background: linear-gradient(135deg, rgba(2,8,20,0.97) 0%, rgba(6,18,50,0.97) 40%, rgba(10,28,65,0.97) 65%, rgba(2,8,20,0.97) 100%);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 1px 30px rgba(212,175,55,0.07), 0 4px 20px rgba(0,0,0,0.5);
-  animation: fadeInDown 0.8s var(--transition-smooth) forwards;
-}
-.logo { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.8rem; letter-spacing: 0.08em; color: var(--text-light); text-decoration: none; }
-.logo span { color: var(--gold); }
-
-/* NAV PILLS */
-.header-nav { display: flex; align-items: center; gap: 0.3rem; position: absolute; left: 50%; transform: translateX(-50%); }
-.nav-pill { position: relative; display: flex; align-items: center; }
-.nav-link { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 7px 14px; border-radius: 30px; border: 0.5px solid transparent; background: rgba(255,255,255,0.04); transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; white-space: nowrap; }
-.nav-link:hover, .nav-pill:hover > .nav-link { color: var(--gold-bright); border-color: rgba(201,168,76,0.40); box-shadow: 0 0 14px rgba(201,168,76,0.18), inset 0 0 10px rgba(201,168,76,0.07); transform: scale(1.05); }
-.nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.08); }
-/* ── Per-nav color accents ── */
-.header-nav .nav-pill:nth-child(1) > .nav-link.active { color: var(--gold-bright); border-color: rgba(201,168,76,0.50); box-shadow: 0 0 14px rgba(201,168,76,0.25), inset 0 0 10px rgba(201,168,76,0.10); background: rgba(201,168,76,0.09); }
-.header-nav .nav-pill:nth-child(2) > .nav-link.active { color: #5DEFD5; border-color: rgba(93,239,213,0.40); box-shadow: 0 0 14px rgba(93,239,213,0.20), inset 0 0 10px rgba(93,239,213,0.08); background: rgba(93,239,213,0.06); }
-.header-nav .nav-pill:nth-child(3) > .nav-link.active { color: #C084FC; border-color: rgba(168,85,247,0.40); box-shadow: 0 0 14px rgba(168,85,247,0.20), inset 0 0 10px rgba(168,85,247,0.08); background: rgba(168,85,247,0.06); }
-.header-nav .nav-pill:nth-child(4) > .nav-link.active { color: #A3E635; border-color: rgba(163,230,53,0.40); box-shadow: 0 0 14px rgba(163,230,53,0.20), inset 0 0 10px rgba(163,230,53,0.08); background: rgba(163,230,53,0.06); }
-.header-nav .nav-pill:nth-child(5) > .nav-link.active { color: #FF7A45; border-color: rgba(255,122,69,0.40); box-shadow: 0 0 14px rgba(255,122,69,0.20), inset 0 0 10px rgba(255,122,69,0.08); background: rgba(255,122,69,0.06); }
-.nav-dropdown-trigger::after { content: ' ▾'; font-size: 0.5rem; opacity: 0.65; }
-.nav-dd-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(6,14,32,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(201,168,76,0.28); border-radius: 16px; padding: 0.5rem; min-width: 210px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.28s ease, transform 0.28s ease; box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 24px rgba(201,168,76,0.06); }
-.nav-dd-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
-.nav-pill:hover .nav-dd-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
-.nav-dd-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.85rem; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s, background 0.2s; white-space: nowrap; }
-.nav-dd-item:hover { color: var(--gold-bright); background: rgba(201,168,76,0.09); }
-.nav-dd-icon { font-size: 0.9rem; width: 20px; text-align: center; flex-shrink: 0; }
-.nav-dd-divider { height: 1px; background: rgba(201,168,76,0.15); margin: 0.3rem 0.5rem; }
-.nav-dd-reviews { color: rgba(212,175,55,0.85); }
-.nav-dd-reviews:hover { color: var(--gold-bright); background: rgba(201,168,76,0.12); }
-.nav-dd-wide { min-width: 490px; display: flex; flex-direction: row; gap: 0; padding: 0.6rem 0.4rem; right: 0; left: auto; transform: translateY(-6px); }
-.nav-pill:hover .nav-dd-wide { opacity: 1; pointer-events: all; transform: translateY(0); }
-.nav-dd-col { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 0 0.3rem; }
-.nav-dd-col-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.52rem; letter-spacing: 0.14em; color: var(--gold); padding: 0.35rem 0.7rem 0.4rem; text-transform: uppercase; opacity: 0.65; font-weight: 600; }
-.nav-dd-col-sep { width: 1px; background: rgba(201,168,76,0.15); margin: 0.25rem 0; flex-shrink: 0; }
-
-.lang-toggle { display: flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(212,175,55,0.5); border-radius: 40px; padding: 0.2rem 0.8rem; background: rgba(0,0,0,0.3); }
-.lang-btn { background: none; border: none; color: var(--text-dim); font-family: 'Inter', monospace; font-size: 0.7rem; font-weight: 500; cursor: pointer; padding: 0.2rem 0.4rem; transition: color 0.15s; text-transform: uppercase; }
-.lang-btn.active { color: var(--gold); }
-.lang-sep { color: var(--text-dim); font-size: 0.7rem; }
-
-/* ANIMATIONS */
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideUpFade { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes goldShimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes starPulse {
-  0%, 100% { text-shadow: 0 0 8px rgba(212,175,55,0.5); }
-  50% { text-shadow: 0 0 20px rgba(245,215,110,0.9), 0 0 40px rgba(212,175,55,0.4); }
-}
-
-/* MAIN */
-main { position: relative; z-index: 10; flex: 1; }
-
-/* HERO HEADER */
-.reviews-hero {
-  padding: 5rem 2.5rem 4rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(212,175,55,0.18);
-}
-.reviews-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(30,60,130,0.25) 0%, transparent 65%);
-  pointer-events: none;
-}
-.reviews-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  animation: slideUpFade 0.7s 0.1s var(--transition-smooth) backwards;
-}
-.reviews-eyebrow::before,
-.reviews-eyebrow::after {
-  content: '✦';
-  font-size: 0.5rem;
-  opacity: 0.7;
-}
-.reviews-title {
-  font-family: 'Rajdhani', sans-serif; font-weight: 700;
-  font-size: clamp(3.5rem, 9vw, 7.5rem);
-  letter-spacing: 0.04em;
-  line-height: 0.92;
-  background: linear-gradient(135deg, var(--text-light) 20%, var(--gold) 50%, var(--gold-bright) 60%, var(--text-light) 80%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: slideUpFade 0.7s 0.2s var(--transition-smooth) backwards, goldShimmer 6s 1s linear infinite;
-  margin-bottom: 1.5rem;
-}
-.reviews-title-fr {
-  display: none;
-}
-.reviews-subtitle {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  max-width: 500px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-  animation: slideUpFade 0.7s 0.32s var(--transition-smooth) backwards;
-}
-
-/* STATS BAR */
-.reviews-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-  padding: 1.4rem 2.5rem;
-  animation: slideUpFade 0.7s 0.42s var(--transition-smooth) backwards;
-}
-.stat-item {
-  text-align: center;
-}
-.stat-value {
-  font-family: 'Rajdhani', sans-serif; font-weight: 700;
-  font-size: 2.4rem;
-  letter-spacing: 0.04em;
-  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-.stat-label {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-.stat-sep {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.35), transparent);
-}
-.stat-stars {
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
-  color: var(--gold);
-  animation: starPulse 3s ease-in-out infinite;
-  margin-bottom: 0.25rem;
-}
-
-/* MASONRY GRID */
-.reviews-section {
-  padding: 3.5rem 2.5rem 5rem;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-.reviews-grid {
-  columns: 3;
-  column-gap: 1.4rem;
-}
-@media (max-width: 1000px) { .reviews-grid { columns: 2; } }
-@media (max-width: 620px)  { .reviews-grid { columns: 1; } }
-
-/* REVIEW CARD */
-.rv-card {
-  break-inside: avoid;
-  margin-bottom: 1.4rem;
-  background: var(--card-bg);
-  border: 1px solid rgba(212,175,55,0.18);
-  border-radius: var(--radius-card);
-  padding: 1.5rem 1.6rem;
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  /* entrance animation staggered via JS */
-  opacity: 0;
-  transform: translateY(30px);
-}
-.rv-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth),
-              border-color 0.35s ease, box-shadow 0.35s ease;
-}
-.rv-card:hover {
-  border-color: rgba(212,175,55,0.42);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.08);
-  transform: translateY(-4px);
-}
-
-/* Mouse-tracking radial glow */
-.rv-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    220px circle at var(--mouse-x) var(--mouse-y),
-    rgba(212,175,55,0.10) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-.rv-card:hover::before { opacity: 1; }
-
-/* Card content above glow */
-.rv-card > * { position: relative; z-index: 1; }
-
-/* CARD HEADER */
-.rv-card-hdr {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  gap: 0.75rem;
-}
-.rv-stars {
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  color: var(--gold);
-  transition: text-shadow 0.3s ease;
-  flex-shrink: 0;
-}
-.rv-card:hover .rv-stars {
-  text-shadow: 0 0 12px rgba(245,215,110,0.8), 0 0 24px rgba(212,175,55,0.4);
-}
-.rv-badge {
-  font-family: var(--mono);
-  font-size: 0.57rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 0.22rem 0.7rem;
-  border-radius: 20px;
-  border: 1px solid;
-  font-weight: 500;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.rv-badge--frost {
-  color: rgba(130,200,255,0.9);
-  border-color: rgba(130,200,255,0.30);
-  background: rgba(130,200,255,0.07);
-}
-.rv-badge--8k {
-  color: rgba(180,230,140,0.9);
-  border-color: rgba(180,230,140,0.30);
-  background: rgba(180,230,140,0.07);
-}
-.rv-badge--arctic {
-  color: rgba(160,195,255,0.9);
-  border-color: rgba(160,195,255,0.30);
-  background: rgba(160,195,255,0.07);
-}
-
-/* CARD TEXT */
-.rv-text {
-  font-size: 0.86rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin-bottom: 1.2rem;
-  font-weight: 400;
-}
-.rv-text--long {
-  /* Cap long reviews with a fade */
-  max-height: 220px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-}
-
-/* CARD FOOTER */
-.rv-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 0.9rem;
-  border-top: 1px solid rgba(212,175,55,0.10);
-}
-.rv-author {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: var(--gold);
-  font-weight: 500;
-}
-.rv-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.rv-date {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-}
-.rv-rating-chip {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: rgba(212,175,55,0.7);
-  border: 1px solid rgba(212,175,55,0.18);
-  border-radius: 10px;
-  padding: 0.15rem 0.5rem;
-}
-
-/* FOOTER */
-footer {
-  position: relative;
-  z-index: 10;
-  border-top: 1px solid rgba(212,175,55,0.2);
-  padding: 2.5rem 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-.footer-brand { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; color: var(--text-dim); }
-.footer-brand span { color: var(--gold); }
-.footer-copy { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--text-dim); }
-.footer-links { display: flex; gap: 1.2rem; }
-.footer-link { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
-.footer-link:hover { color: var(--gold); }
-
-/* RESPONSIVE */
-@media (max-width: 780px) { header { padding: 1rem 1.5rem; } .reviews-hero { padding: 3.5rem 1.5rem 3rem; } .reviews-section { padding: 2.5rem 1.5rem 4rem; } }
-@media (max-width: 550px) { .header-nav { display: none; } .reviews-stats { gap: 1.2rem; } .stat-sep { display: none; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
   <link rel="stylesheet" href="mobile-nav.css">
@@ -406,9 +84,10 @@ footer {
 <body>
 
 <canvas id="particle-canvas"></canvas>
+<div class="k-dust" aria-hidden="true"></div>
 
-<header>
-  <a href="index.html" class="logo">KALYS<span>T</span>EON</a>
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="Kalysteon, home"><img class="logo-img" src="img/logo.png" alt=""><span>KALYS<span class="logo-t">T</span>EON</span></a>
   <nav class="header-nav">
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger active" href="products.html" data-en="Products" data-fr="Produits">Products</a>
@@ -424,299 +103,183 @@ footer {
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="stratum.html#str-why"><span class="nav-dd-icon">◆</span><span data-en="What is it" data-fr="C'est quoi">What is it</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-pipeline"><span class="nav-dd-icon">⇄</span><span data-en="How it works" data-fr="Fonctionnement">How it works</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#overview"><span class="nav-dd-icon">◆</span><span data-en="Overview" data-fr="Aperçu">Overview</span></a>
+        <a class="nav-dd-item" href="stratum.html#features"><span class="nav-dd-icon">◈</span><span data-en="Features" data-fr="Fonctions">Features</span></a>
+        <a class="nav-dd-item" href="stratum.html#story"><span class="nav-dd-icon">“</span><span data-en="Story" data-fr="L&#x27;histoire">Story</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="stratum.html#str-download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
-        <a class="nav-dd-item" href="stratum.html#str-faq"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
+        <a class="nav-dd-item" href="stratum.html#pricing"><span class="nav-dd-icon">$</span><span data-en="Pricing" data-fr="Tarifs">Pricing</span></a>
+        <a class="nav-dd-item" href="stratum.html#download"><span class="nav-dd-icon">↓</span><span data-en="Download" data-fr="Télécharger">Download</span></a>
+        <a class="nav-dd-item" href="stratum.html#notes"><span class="nav-dd-icon">≡</span><span data-en="Patch notes" data-fr="Notes de version">Patch notes</span></a>
       </div>
     </div>
-        <div class="nav-pill">
+    <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="commission.html#tab-terrain"><span class="nav-dd-icon">⛰</span><span data-en="Custom Terrain" data-fr="Terrain Custom">Custom Terrain</span></a>
-        <a class="nav-dd-item" href="commission.html#tab-hero"><span class="nav-dd-icon">◆</span><span data-en="Hero Assets" data-fr="Hero Assets">Hero Assets</span></a>
+        <a class="nav-dd-item" href="commission.html#worlds"><span class="nav-dd-icon">⛰</span><span data-en="What I build" data-fr="Ce que je construis">What I build</span></a>
+        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How it works" data-fr="Comment ça se passe">How it works</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="commission.html#process"><span class="nav-dd-icon">↺</span><span data-en="How It Works" data-fr="Comment ca marche">How It Works</span></a>
-        <a class="nav-dd-item" href="commission.html#about"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
+        <a class="nav-dd-item" href="commission.html#brief"><span class="nav-dd-icon">✎</span><span data-en="Start a brief" data-fr="Lancer un brief">Start a brief</span></a>
+        <a class="nav-dd-item" href="support.html#commissions"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Narrative" data-fr="Récit">Narrative</span></a>
+        <a class="nav-dd-item" href="about.html#bio"><span class="nav-dd-icon">▸</span><span data-en="Story" data-fr="Récit">Story</span></a>
         <a class="nav-dd-item" href="about.html#namelore"><span class="nav-dd-icon">Ω</span><span data-en="Etymology" data-fr="Étymologie">Etymology</span></a>
+        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tools" data-fr="Outils">Tools</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="about.html#stack"><span class="nav-dd-icon">■</span><span data-en="Tech Stack" data-fr="Stack Technique">Tech Stack</span></a>
-        <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="contact.html#contact"><span class="nav-dd-icon">◉</span><span data-en="Newsletter" data-fr="Newsletter">Newsletter</span></a>
-        <a class="nav-dd-item" href="contact.html#socials"><span class="nav-dd-icon">@</span><span data-en="Socials" data-fr="Réseaux">Socials</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
+        <a class="nav-dd-item" href="about.html#socials"><span class="nav-dd-icon">@</span><span data-en="Socials" data-fr="Réseaux">Socials</span></a>
       </div>
     </div>
     <div class="nav-pill">
       <a class="nav-link nav-dropdown-trigger" href="support.html" data-en="Support" data-fr="Support">Support</a>
       <div class="nav-dd-menu">
-        <a class="nav-dd-item" href="faq.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
-        <div class="nav-dd-divider"></div>
+        <a class="nav-dd-item" href="support.html"><span class="nav-dd-icon">?</span><span data-en="FAQ" data-fr="FAQ">FAQ</span></a>
         <a class="nav-dd-item" href="tutorials.html"><span class="nav-dd-icon">▶</span><span data-en="Tutorials" data-fr="Tutoriels">Tutorials</span></a>
         <div class="nav-dd-divider"></div>
-        <a class="nav-dd-item" href="mailto:contact@kalysteon.com"><span class="nav-dd-icon">✉</span><span data-en="Email Direct" data-fr="Email Direct">Email Direct</span></a>
+        <a class="nav-dd-item" href="about.html#contact"><span class="nav-dd-icon">✉</span><span data-en="Contact" data-fr="Contact">Contact</span></a>
       </div>
     </div>
   </nav>
   <div class="lang-toggle">
-    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn active" id="lang-btn-en" onclick="setLang('en')">EN</button>
     <span class="lang-sep">|</span>
-    <button class="lang-btn" data-lang="fr">FR</button>
+    <button class="lang-btn" id="lang-btn-fr" onclick="setLang('fr')">FR</button>
   </div>
 </header>
 
-<main>
-
-  <!-- HERO -->
-  <div class="reviews-hero">
-    <div class="reviews-eyebrow" data-en="Verified Buyers · Fab Marketplace" data-fr="Acheteurs Vérifiés · Fab Marketplace">Verified Buyers · Fab Marketplace</div>
-    <h1 class="reviews-title" data-en="WHAT MY CLIENTS SAY" data-fr="CE QUE MES CLIENTS DISENT">WHAT MY CLIENTS SAY</h1>
-    <p class="reviews-subtitle" data-en="Honest feedback from creators who use Kalysteon assets in real-world projects — Unreal Engine, game dev, arch-viz." data-fr="Retours honnêtes de créateurs utilisant les assets Kalysteon dans leurs projets — Unreal Engine, jeux vidéo, archiviz.">
-      Honest feedback from creators who use Kalysteon assets in real-world projects — Unreal Engine, game dev, arch-viz.
-    </p>
-
-    <!-- STATS -->
-    <div class="reviews-stats">
-      <div class="stat-item">
-        <div class="stat-stars">★★★★★</div>
-        <div class="stat-label" data-en="Average Score" data-fr="Note Moyenne">Average Score</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-value">4.7</div>
-        <div class="stat-label" data-en="out of 5" data-fr="sur 5">out of 5</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-value">12</div>
-        <div class="stat-label" data-en="Reviews" data-fr="Avis">Reviews</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-value">58%</div>
-        <div class="stat-label" data-en="5-star" data-fr="5 étoiles">5-star</div>
-      </div>
-    </div>
+<main class="rv-main">
+<section class="wrap rv-hero">
+  <div class="rv-hero-l"><span class="rv-kick" data-en="Customer reviews" data-fr="Avis clients">Customer reviews</span><h1 class="rv-h1" data-en="Their own words." data-fr="Avec leurs mots.">Their own words.</h1><p class="rv-sub" data-en="A selection of reviews from developers who bought my packs, as they wrote them." data-fr="Une sélection d’avis de développeurs qui ont acheté mes packs, tels quels.">A selection of reviews from developers who bought my packs, as they wrote them.</p></div>
+  <div class="rv-card-bg rv-all">
+    <span class="rv-all-lbl" data-en="Every review, unfiltered" data-fr="Tous les avis, sans filtre">Every review, unfiltered</span>
+    <a class="rv-plat" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener"><b>Fab</b><span data-en="Read them ↗" data-fr="Les lire ↗">Read them ↗</span></a>
+    <a class="rv-plat" href="https://assetstore.unity.com/publishers/104184" target="_blank" rel="noopener"><b>Unity Asset Store</b><span data-en="Read them ↗" data-fr="Les lire ↗">Read them ↗</span></a>
   </div>
+</section>
 
-  <!-- MASONRY CARDS -->
-  <section class="reviews-section">
-    <div class="reviews-grid" id="reviews-grid">
-      <!-- Injected by JS -->
-    </div>
-  </section>
-
+<section class="wrap">
+  <figure class="rv-feat" style="margin: 0"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><q data-en="You can tell this author puts a lot of meticulous energy into assembling these kits. They match or surpass similar kits in quality and go more than one step beyond, providing a vast selection of landscapes to work with. Not just random satellite heightmaps but each map has key features and dynamic layouts for different gaming needs. These feel thoughtfully selected: interconnected roads, geographic features, zones leveled for building infrastructure. Creme of the crop heightmaps made with passion, accessible to anyone. Thanks mate." data-fr="On voit que l&amp;#x27;auteur met une énergie méticuleuse à assembler ces kits. Ils égalent ou dépassent les kits similaires en qualité et vont plus loin, avec un vaste choix de paysages. Pas de simples heightmaps satellite prises au hasard : chaque carte a ses éléments clés et des agencements variés selon les besoins du jeu. On sent qu&amp;#x27;elles sont choisies avec soin : routes reliées, reliefs marquants, zones aplanies pour construire. La crème des heightmaps, faites avec passion et accessibles à tous. Merci l&amp;#x27;ami.">You can tell this author puts a lot of meticulous energy into assembling these kits. They match or surpass similar kits in quality and go more than one step beyond, providing a vast selection of landscapes to work with. Not just random satellite heightmaps but each map has key features and dynamic layouts for different gaming needs. These feel thoughtfully selected: interconnected roads, geographic features, zones leveled for building infrastructure. Creme of the crop heightmaps made with passion, accessible to anyone. Thanks mate.</q><figcaption class="rv-who">psychohacktive <span>· Fab · Landscape Packs</span></figcaption><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></figure>
+  <div class="rv-chips" role="group"><button type="button" class="rv-chip on" data-c="all"><span data-en="All" data-fr="Tout">All</span><small>12</small></button><button type="button" class="rv-chip" data-c="8k"><span data-en="Landscape Packs" data-fr="Landscape Packs">Landscape Packs</span><small>8</small></button><button type="button" class="rv-chip" data-c="frost"><span data-en="Frosthölm" data-fr="Frosthölm">Frosthölm</span><small>2</small></button><button type="button" class="rv-chip" data-c="arctic"><span data-en="Arctic World" data-fr="Arctic World">Arctic World</span><small>2</small></button></div>
+  <div class="rv-grid" id="rv-grid"><div class="rv-card-bg rv-item" data-c="frost"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #9FD8F5">Frosthölm</span></span><p data-en="Amazing and realistic. Looking forward to the rest of the series." data-fr="Incroyable et réaliste. J&amp;#x27;attends la suite de la série avec impatience.">Amazing and realistic. Looking forward to the rest of the series.</p><span class="rv-who">EmpireLion4u <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="Great quality. Thank you for making this beautiful stuff. But it will be great if there is some blueprint assets that are combined as set not only just a static mesh." data-fr="Excellente qualité. Merci pour ce beau travail. Mais ce serait super d&amp;#x27;avoir des assets Blueprint regroupés en sets, pas seulement des static meshes.">Great quality. Thank you for making this beautiful stuff. But it will be great if there is some blueprint assets that are combined as set not only just a static mesh.</p><span class="rv-who">jonius12 <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="Only for HDRP. Pls can you add URP support!!!!!" data-fr="Seulement pour HDRP. Vous pouvez ajouter le support URP, svp !!!!!">Only for HDRP. Pls can you add URP support!!!!!</p><span class="rv-reply"><b data-en="Reply from Kalysteon" data-fr="Réponse de Kalysteon">Reply from Kalysteon</b><span data-en="Hi! Thanks a lot for the 4 stars. I&amp;#x27;ve definitely heard you on the URP support! It&amp;#x27;s something I&amp;#x27;m planning to look into seriously for the next updates. Thanks for the feedback, stay tuned!" data-fr="Salut ! Merci beaucoup pour les 4 étoiles. J&amp;#x27;ai bien entendu ta demande de support URP ! C&amp;#x27;est quelque chose que je compte regarder sérieusement pour les prochaines mises à jour. Merci pour le retour, reste à l&amp;#x27;écoute !">Hi! Thanks a lot for the 4 stars. I&#x27;ve definitely heard you on the URP support! It&#x27;s something I&#x27;m planning to look into seriously for the next updates. Thanks for the feedback, stay tuned!</span></span><span class="rv-who">Lord_Legion <span>· Unity Asset Store</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="I corrected my review, in UE5 it works perfectly, the developer helped quickly. The heightmaps are great! A full 4.27 release would be cool." data-fr="J&amp;#x27;ai corrigé mon avis : sous UE5 ça marche parfaitement, le développeur m&amp;#x27;a aidé rapidement. Les heightmaps sont super ! Une version complète pour 4.27 serait top.">I corrected my review, in UE5 it works perfectly, the developer helped quickly. The heightmaps are great! A full 4.27 release would be cool.</p><span class="rv-who">hm-hesse <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="I learned a lot with your heightmaps! Thank you for your support, you answer all my questions." data-fr="J&amp;#x27;ai beaucoup appris avec vos heightmaps ! Merci pour votre aide, vous répondez à toutes mes questions.">I learned a lot with your heightmaps! Thank you for your support, you answer all my questions.</p><span class="rv-who">GildardHache <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="arctic"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #ECE7DC">Arctic World</span></span><p data-en="These terrains are truly made for high tier performance and depth of details are amazing for any project. Thank you." data-fr="Ces terrains sont vraiment faits pour des performances haut de gamme, et la profondeur de détail est bluffante pour tout projet. Merci.">These terrains are truly made for high tier performance and depth of details are amazing for any project. Thank you.</p><span class="rv-who">Amor2point0 <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="A really great pack with everything you need to make a good environment. The 8K textures are really realistic." data-fr="Un très bon pack avec tout ce qu&amp;#x27;il faut pour faire un bel environnement. Les textures 8K sont vraiment réalistes.">A really great pack with everything you need to make a good environment. The 8K textures are really realistic.</p><span class="rv-who">NikausDraw <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="I had some issues at the start with the map. But after looking at it for a while I managed to get it working. Updated!" data-fr="J&amp;#x27;ai eu quelques soucis au début avec la map. Mais en y regardant de plus près, j&amp;#x27;ai réussi à la faire marcher. Mis à jour !">I had some issues at the start with the map. But after looking at it for a while I managed to get it working. Updated!</p><span class="rv-who">Lil Freeze4U <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="Update: Thank you for your quick feedback, the PostProcessVolume advice fixed it partially, I&amp;#x27;ve ended up changing the Exposure Compensation. In regards to the collision it&amp;#x27;s a shame as stones and trees need to be removed from the grass layer. The Z,X,Y was in regards to GAEA (8K Tiled Output)." data-fr="Mise à jour : merci pour votre réponse rapide, le conseil sur le PostProcessVolume a réglé une partie du problème, j&amp;#x27;ai fini par changer l&amp;#x27;Exposure Compensation. Pour les collisions, c&amp;#x27;est dommage de devoir retirer pierres et arbres de la couche d&amp;#x27;herbe. Les Z,X,Y concernaient GAEA (sortie 8K en tuiles).">Update: Thank you for your quick feedback, the PostProcessVolume advice fixed it partially, I&#x27;ve ended up changing the Exposure Compensation. In regards to the collision it&#x27;s a shame as stones and trees need to be removed from the grass layer. The Z,X,Y was in regards to GAEA (8K Tiled Output).</p><span class="rv-who">PureYuki <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="frost"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #9FD8F5">Frosthölm</span></span><p data-en="Very nice." data-fr="Très beau.">Very nice.</p><span class="rv-who">EmpireLion4u <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="arctic"><span class="rv-top"><span class="rv-stars" aria-label="5/5">★★★★★<i style="width: 100%">★★★★★</i></span><span class="rv-tag" style="--tc: #ECE7DC">Arctic World</span></span><p data-en="True Beauty." data-fr="Une vraie beauté.">True Beauty.</p><span class="rv-who">Amor2point0 <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div><div class="rv-card-bg rv-item" data-c="8k"><span class="rv-top"><span class="rv-stars" aria-label="4/5">★★★★★<i style="width: 80%">★★★★★</i></span><span class="rv-tag" style="--tc: #F2D777">Landscape Packs</span></span><p data-en="It&amp;#x27;s okay. I had some issues at the start but now it works." data-fr="C&amp;#x27;est bien. J&amp;#x27;ai eu quelques soucis au départ mais maintenant ça marche.">It&#x27;s okay. I had some issues at the start but now it works.</p><span class="rv-who">Lil Freeze4U <span>· Fab</span></span><span class="rv-tr" data-en="" data-fr="Traduit de l&#x27;anglais"></span></div></div>
+  <div class="rv-card-bg rv-cta">
+    <div><b data-en="Using a Kalysteon pack?" data-fr="Vous avez un pack Kalysteon ?">Using a Kalysteon pack?</b><span data-en="A review on Fab helps other developers, and helps me a lot." data-fr="Un avis sur Fab aide les autres devs, et m’aide beaucoup.">A review on Fab helps other developers, and helps me a lot.</span></div>
+    <div class="rv-cta-btns"><a class="rv-btn rv-btn-o" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener"><span data-en="Leave a review on Fab" data-fr="Laisser un avis sur Fab">Leave a review on Fab</span> ↗</a><a class="rv-btn rv-btn-g" href="products.html"><span data-en="See the packs" data-fr="Voir les packs">See the packs</span> →</a></div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="footer-brand">KALYS<span>T</span>EON</div>
-  <div class="footer-copy" data-en="© 2024 Kalysteon — All rights reserved" data-fr="© 2024 Kalysteon — Tous droits réservés">© 2024 Kalysteon — All rights reserved</div>
-  <div class="footer-links">
-    <a class="footer-link" href="products.html" data-en="Products" data-fr="Produits">Products</a>
-    <a class="footer-link" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
-    <a class="footer-link" href="about.html" data-en="About" data-fr="À propos">About</a>
-    <a class="footer-link" href="contact.html" data-en="Contact" data-fr="Contact">Contact</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a class="ft-logo" href="index.html" aria-label="Kalysteon, home">KALYS<span>T</span>EON</a>
+        <p class="ft-desc" data-en="Environment art for games. Terrain packs, tools and commissions." data-fr="Des environnements pour le jeu vidéo. Packs de terrains, outils et commissions.">Environment art for games. Terrain packs, tools and commissions.</p>
+        <div class="ft-icons">
+          <a class="ft-icon" href="https://www.artstation.com/kalysteon" target="_blank" rel="noopener" aria-label="ArtStation"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 17.723l2.027 3.505a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z"></path></svg></a>
+          <a class="ft-icon" href="https://www.youtube.com/@Kalysteon" target="_blank" rel="noopener" aria-label="YouTube"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="m10 9.2 5 2.8-5 2.8z"></path></svg></a>
+          <a class="ft-icon" href="https://www.instagram.com/kalysteon/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.4" cy="6.6" r="0.6"></circle></svg></a>
+          <a class="ft-icon" href="https://www.tiktok.com/@kalysteon" target="_blank" rel="noopener" aria-label="TikTok"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.4 2.6 2.4 4.6 5 4.8"></path></svg></a>
+          <a class="ft-icon" href="https://x.com/Kalysteon" target="_blank" rel="noopener" aria-label="X"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4.2L20 20h-4.2z"></path><path d="M20 4l-6.6 7.2"></path><path d="M4 20l6.6-7.2"></path></svg></a>
+          <a class="ft-icon" href="https://www.linkedin.com/in/andreibobe/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 10.5V17"></path><path d="M8 7.2v.1"></path><path d="M12 17v-6.5"></path><path d="M12 13.5a2.5 2.5 0 0 1 5 0V17"></path></svg></a>
+          <a class="ft-icon" href="https://www.facebook.com/profile.php?id=61563883627493" target="_blank" rel="noopener" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a class="ft-icon" href="https://www.reddit.com/user/Kalysteon/" target="_blank" rel="noopener" aria-label="Reddit"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="14.6" rx="8" ry="5.6"></ellipse><circle cx="4.6" cy="10.4" r="1.7"></circle><circle cx="19.4" cy="10.4" r="1.7"></circle><path d="M12 9l1.3-5.2 4 1"></path><circle cx="18.7" cy="5" r="1.3"></circle><circle cx="9" cy="13.6" r="0.6" fill="currentColor"></circle><circle cx="15" cy="13.6" r="0.6" fill="currentColor"></circle><path d="M9.3 16.8c1.6 1.1 3.8 1.1 5.4 0"></path></svg></a>
+        </div>
+        <div class="ft-stores">
+          <a class="ft-store" href="https://www.fab.com/sellers/Kalysteon" target="_blank" rel="noopener">Fab <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://assetstore.unity.com/publishers/104184" target="_blank" rel="noopener">Unity Asset Store <span aria-hidden="true">↗</span></a>
+          <a class="ft-store" href="https://www.artstation.com/kalysteon/store" target="_blank" rel="noopener">ArtStation <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="ft-cols">
+        <nav class="ft-col" aria-label="Explore" data-aria-en="Explore" data-aria-fr="Explorer">
+          <h4 data-en="Explore" data-fr="Explorer">Explore</h4>
+          <a class="ft-link" href="products.html" data-en="Products" data-fr="Produits">Products</a>
+          <a class="ft-link" href="stratum.html" data-en="Stratum" data-fr="Stratum">Stratum</a>
+          <a class="ft-link" href="commission.html" data-en="Commission" data-fr="Commission">Commission</a>
+          <a class="ft-link" href="tutorials.html" data-en="Tutorials" data-fr="Tutoriels">Tutorials</a>
+          <a class="ft-link" href="about.html" data-en="Studio" data-fr="Studio">Studio</a>
+        </nav>
+        <nav class="ft-col" aria-label="Info" data-aria-en="Info" data-aria-fr="Infos">
+          <h4 data-en="Info" data-fr="Infos">Info</h4>
+          <a class="ft-link" href="about.html#contact" data-en="Contact" data-fr="Contact">Contact</a>
+          <a class="ft-link" href="support.html" data-en="FAQ" data-fr="FAQ">FAQ</a>
+          <a class="ft-link" href="cgv.html" data-en="Terms of sale" data-fr="CGV">Terms of sale</a>
+          <a class="ft-link" href="mentions-legales.html" data-en="Legal notice" data-fr="Mentions légales">Legal notice</a>
+          <a class="ft-link" href="confidentialite.html" data-en="Privacy" data-fr="Confidentialité">Privacy</a>
+        </nav>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Kalysteon · Andrei Bobe</span>
+      <a class="ft-link" href="mailto:contact@kalysteon.com">contact@kalysteon.com</a>
+    </div>
   </div>
 </footer>
 
 <script>
-/* ============================================================
-   PARTICLE CANVAS (same as other pages)
-============================================================ */
-(function() {
+// Langue (innerHTML)
+function setLang(lang) {
+  localStorage.setItem('kalysteon-lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(function (el) {
+    var txt = el.getAttribute('data-' + lang);
+    if (txt !== null) el.innerHTML = txt;
+  });
+  document.querySelectorAll('.lang-btn').forEach(function (btn) { btn.classList.toggle('active', btn.id === 'lang-btn-' + lang); });
+}
+setLang(localStorage.getItem('kalysteon-lang') || 'en');
+
+// Collection filter
+document.querySelectorAll('.rv-chip').forEach(function (c) {
+  c.addEventListener('click', function () {
+    document.querySelectorAll('.rv-chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+    document.querySelectorAll('.rv-item').forEach(function (it) { it.classList.toggle('hide', c.dataset.c !== 'all' && it.dataset.c !== c.dataset.c); });
+  });
+});
+
+// Header height
+(function () {
+  var header = document.querySelector('header.site-header');
+  if (!header) return;
+  var set = function () { document.documentElement.style.setProperty('--hdr-h', header.offsetHeight + 'px'); };
+  set();
+  window.addEventListener('resize', set);
+})();
+
+// Particles, Kalysteon gold
+(function () {
   var canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
-  var particles = [];
-  var W, H;
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize();
+  var particles = [], w, h;
+  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize);
-  for (var i = 0; i < 55; i++) {
-    particles.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+0.3, vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18, a: Math.random()*0.45+0.05 });
-  }
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(function(p) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(212,175,55,' + p.a + ')';
+  resize();
+  for (var i = 0; i < 70; i++) particles.push({
+    x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.3 + 0.4,
+    vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
+    a: Math.random() * 0.45 + 0.15, da: (Math.random() > 0.5 ? 1 : -1) * 0.0025
+  });
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.a += p.da;
+      if (p.a < 0.08) p.da = Math.abs(p.da);
+      if (p.a > 0.5) p.da = -Math.abs(p.da);
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(212, 175, 55, ' + p.a.toFixed(3) + ')';
       ctx.fill();
     });
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animate);
   }
-  draw();
+  animate();
 })();
-
-/* ============================================================
-   REVIEWS DATA
-============================================================ */
-var REVIEWS = [
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'Amazing and realistic. Looking forward to the rest of the series.',
-    text_fr: "Incroyable et réaliste. J'attends la suite de la série avec impatience.",
-    author: 'EmpireLion4u', date: 'Last year', date_fr: 'L\'an dernier', badge: 'frost', badgeLabel: '❄ Frosthölm'
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'Great quality. Thank you for making this beautiful stuff. But it will be great if there is some blueprint assets that are combined as set not only just a static mesh.',
-    text_fr: 'Excellente qualité. Merci pour ce travail magnifique. Ce serait encore mieux si certains assets Blueprint étaient regroupés en sets, pas seulement des meshes statiques.',
-    author: 'jonius12', date: 'Last year', date_fr: 'L\'an dernier', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 4, stars: '★★★★☆',
-    text: 'I corrected my review, in UE5 it works perfectly — the developer helped quickly. The heightmaps are great! A full 4.27 release would be cool.',
-    text_fr: 'J\'ai corrigé mon avis — sous UE5 ça fonctionne parfaitement, le développeur a répondu très vite. Les heightmaps sont excellentes ! Une version complète pour 4.27 serait top.',
-    author: 'hm-hesse', date: '3 years ago', date_fr: 'Il y a 3 ans', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 4, stars: '★★★★☆',
-    text: 'I learned a lot with your heightmaps! Thank you for your support, you answer all my questions.',
-    text_fr: 'J\'ai beaucoup appris grâce à vos heightmaps ! Merci pour votre support, vous répondez à toutes mes questions.',
-    author: 'GildardHache', date: '4 years ago', date_fr: 'Il y a 4 ans', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'These terrains are truly made for high tier performance and depth of details are amazing for any project. Thank you.',
-    text_fr: 'Ces terrains sont vraiment conçus pour les performances haut de gamme et le niveau de détail est bluffant pour n\'importe quel projet. Merci.',
-    author: 'Amor2point0', date: '4 years ago', date_fr: 'Il y a 4 ans', badge: 'arctic', badgeLabel: '🏔 Arctic World'
-  },
-  {
-    rating: 4, stars: '★★★★☆',
-    text: 'I had some issues at the start with the map. But after looking at it for a while I managed to get it working. — Updated!',
-    text_fr: 'J\'ai eu quelques problèmes au début avec la carte, mais après quelques recherches j\'ai réussi à la faire fonctionner. — Mis à jour !',
-    author: 'Lil Freeze4U', date: '4 years ago', date_fr: 'Il y a 4 ans', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 4, stars: '★★★★☆',
-    text: 'Update: Thank you for your quick feedback — the PostProcessVolume advice fixed it partially, I\'ve ended up changing the Exposure Compensation. In regards to the collision it\'s a shame as stones and trees need to be removed from the grass layer. The Z,X,Y was in regards to GAEA (8K Tiled Output).',
-    text_fr: 'Mise à jour : Merci pour votre retour rapide — le PostProcessVolume conseillé a partiellement résolu le problème, j\'ai finalement modifié l\'Exposure Compensation. Concernant les collisions, c\'est dommage que pierres et arbres doivent être retirés de la couche d\'herbe. Les Z,X,Y concernaient GAEA (Sortie Tuilée 8K).',
-    author: 'PureYuki', date: '3 years ago', date_fr: 'Il y a 3 ans', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'A really great pack with everything you need to make a good environment. The 8K textures are really realistic.',
-    text_fr: 'Un excellent pack avec tout ce qu\'il faut pour créer un bel environnement. Les textures 8K sont vraiment réalistes.',
-    author: 'NikausDraw', date: 'Last year', date_fr: 'L\'an dernier', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'You can tell this author puts a lot of meticulous energy into assembling these kits. They match or surpass similar kits in quality and go more than one step beyond — providing a vast selection of landscapes to work with. Not just random satellite heightmaps but each map has key features and dynamic layouts for different gaming needs. These feel thoughtfully selected: interconnected roads, geographic features, zones leveled for building infrastructure. Creme of the crop heightmaps made with passion, accessible to anyone. Thanks mate.',
-    text_fr: 'On voit que l\'auteur met une énergie et une attention méticuleuses dans l\'assemblage de ces kits. Ils égalent ou surpassent les produits similaires en qualité et vont bien au-delà avec une vaste sélection de paysages. Pas de simples heightmaps génériques — chaque carte a ses caractéristiques distinctes pour différents besoins de jeu. Routes interconnectées, éléments géographiques mémorables, zones adaptées. Le tout à moitié prix de concurrents inférieurs. Un travail fait par passion, accessible à tous. Merci.',
-    author: 'psychohacktive', date: 'Last year', date_fr: 'L\'an dernier', badge: '8k', badgeLabel: '⛰ Landscape Packs', long: true
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'Very nice.',
-    text_fr: 'Très beau.',
-    author: 'EmpireLion4u', date: 'Last year', date_fr: 'L\'an dernier', badge: 'frost', badgeLabel: '❄ Frosthölm'
-  },
-  {
-    rating: 5, stars: '★★★★★',
-    text: 'True Beauty.',
-    text_fr: 'Une vraie beauté.',
-    author: 'Amor2point0', date: '4 years ago', date_fr: 'Il y a 4 ans', badge: 'arctic', badgeLabel: '🏔 Arctic World'
-  },
-  {
-    rating: 4, stars: '★★★★☆',
-    text: 'It\'s okay. I had some issues at the start but now it works.',
-    text_fr: 'C\'est bien. J\'ai eu quelques soucis au départ mais maintenant ça fonctionne.',
-    author: 'Lil Freeze4U', date: '4 years ago', date_fr: 'Il y a 4 ans', badge: '8k', badgeLabel: '⛰ Landscape Packs'
-  }
-];
-
-/* ============================================================
-   BUILD CARDS
-============================================================ */
-function buildReviews() {
-  var grid = document.getElementById('reviews-grid');
-  REVIEWS.forEach(function(r, i) {
-    var card = document.createElement('div');
-    card.className = 'rv-card';
-    card.style.transitionDelay = (i * 0.06) + 's';
-
-    var badgeClass = 'rv-badge rv-badge--' + r.badge;
-    var textClass = r.long ? 'rv-text rv-text--long' : 'rv-text';
-
-    var textFr = (r.text_fr || r.text).replace(/"/g, '&quot;');
-    var textEn = r.text.replace(/"/g, '&quot;');
-    var dateFr = r.date_fr || r.date;
-    card.innerHTML =
-      '<div class="rv-card-hdr">' +
-        '<span class="rv-stars">' + r.stars + '</span>' +
-        '<span class="' + badgeClass + '">' + r.badgeLabel + '</span>' +
-      '</div>' +
-      '<div class="' + textClass + '" data-en="' + textEn + '" data-fr="' + textFr + '">' + r.text + '</div>' +
-      '<div class="rv-footer">' +
-        '<span class="rv-author">' + r.author + '</span>' +
-        '<div class="rv-meta">' +
-          '<span class="rv-date" data-en="' + r.date + '" data-fr="' + dateFr + '">' + r.date + '</span>' +
-          '<span class="rv-rating-chip">' + r.rating + '/5</span>' +
-        '</div>' +
-      '</div>';
-
-    /* Mouse tracking */
-    card.addEventListener('mousemove', function(e) {
-      var rect = card.getBoundingClientRect();
-      var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
-      var y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
-      card.style.setProperty('--mouse-x', x);
-      card.style.setProperty('--mouse-y', y);
-    });
-
-    grid.appendChild(card);
-  });
-}
-buildReviews();
-
-/* ============================================================
-   SCROLL REVEAL
-============================================================ */
-var revCards = document.querySelectorAll('.rv-card');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
-revCards.forEach(function(c) { observer.observe(c); });
-
-/* ============================================================
-   LANGUAGE TOGGLE
-============================================================ */
-var currentLang = 'en';
-function applyLang(lang) {
-  localStorage.setItem('kalysteon-lang', lang);
-  currentLang = lang;
-  document.querySelectorAll('[data-en]').forEach(function(el) {
-    var val = lang === 'fr' ? el.getAttribute('data-fr') : el.getAttribute('data-en');
-    if (val) el.textContent = val;
-  });
-  document.querySelectorAll('.lang-btn').forEach(function(b) {
-    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-  });
-}
-document.querySelectorAll('.lang-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() { applyLang(btn.getAttribute('data-lang')); });
-});
-applyLang(localStorage.getItem('kalysteon-lang') || 'en');
 </script>
   <script src="mobile-nav.js"></script>
 </body>
 </html>
-
-

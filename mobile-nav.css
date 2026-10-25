@@ -176,6 +176,16 @@
      even if relocation didn't run (e.g. desktop loaded then resized). */
   header .curr-toggle, header .lang-toggle { display: none !important; }
 }
-@media (min-width: 769px) {
+/* Tablets and small laptops: the five sections no longer fit beside the logo and the header
+   buttons, so the burger takes over; currency and language stay in the header at this width */
+@media (max-width: 1100px) {
+  .mnav-toggle { display: flex; }
+  header .header-nav { display: none !important; }
+}
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* nav hidden: keep the header buttons on the right, next to the burger */
+  header > .header-right, header > .lang-toggle { margin-left: auto; margin-right: 14px; }
+}
+@media (min-width: 1101px) {
   .mnav-overlay { display: none; }
 }

@@ -3075,3 +3075,17 @@ select optgroup {
 .ps-hint { font-size: 10.5px; color: var(--fg-dim); line-height: 1.45; margin-top: 4px; }
 #pv-photo-panel { min-width: 280px; padding: 12px 14px; }
 
+
+/* Verrou de seed (etape Gaea) */
+.seed-lock { display:flex; align-items:center; gap:7px; width:100%; text-align:left;
+  background:var(--bg-panel); border:1px solid var(--line-soft); border-radius:var(--r-sm);
+  padding:5px 8px; font-size:11.5px; color:var(--fg-dim); cursor:pointer; overflow:hidden;
+  transition:border-color .15s, color .15s, background .15s; }
+.seed-lock:hover { border-color:var(--line); color:var(--fg); }
+.seed-lock.on { border-color:var(--accent); color:var(--fg);
+  background:color-mix(in oklab, var(--accent) 10%, transparent); }
+.seed-lock-ico { font-size:11px; flex-shrink:0; filter:grayscale(1); opacity:.7; }
+.seed-lock.on .seed-lock-ico { filter:none; opacity:1; }
+.seed-lock-name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.seed-lock-type { font-family:var(--font-mono); font-size:8.5px; letter-spacing:.06em;
+  color:var(--fg-faint); flex-shrink:0; }
