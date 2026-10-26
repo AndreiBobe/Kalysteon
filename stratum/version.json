@@ -1,6 +1,6 @@
 {
-  "version": "1.0.1",
-  "date": "2026-09-17",
+  "version": "1.1.0",
+  "date": "2026-10-26",
   "url": "https://kalysteon.com/stratum/download",
-  "notes": "Stratum 1.0.1\n- Les licences achetées sont bien reconnues.\n- Mises à jour incluses : la date de fin est affichée dans Réglages, Licence, avec un bouton pour renouveler.\n- Numéro de version corrigé à l'installation."
+  "notes": "- Verrou de seed par nœud Gaea : faites varier les formes d'une variante à l'autre en gardant les mêmes couleurs.\n- Mode « Dupliquer dans ce pack » pour le master material, dans Unreal et Unity : le master est copié dans le dossier du pack avec ses material functions, sous-graphes et textures, pour un pack complet.\n- Reprise automatique d'un import Unreal ou Unity interrompu : relancez, ce qui était déjà importé est sauté.\n- Le master material est cherché dans tout le projet, et son nom accepte {Style}, {Project} et {Variant}.\n- Unreal compile un mesh à la fois et libère la mémoire entre deux variantes : fini les crashs de mémoire sur les gros packs.\n- Unity saute le collider et les LOD au-delà de 2 millions de triangles, au lieu de bloquer pendant des heures.\n- Le nettoyage du moteur retire aussi les masters et material functions copiés dans le pack.\n- La barre d'avancement compte les variantes déjà importées lors d'une reprise.\n- Le bouton d'arrêt restait bloqué sur « arrêt en cours » pendant un import Unity.\n- L'aperçu ne trouvait aucun mesh dans le dossier choisi avec Parcourir quand les fichiers du projet avaient été déplacés."
 }

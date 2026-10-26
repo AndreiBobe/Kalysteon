@@ -1,66 +1,235 @@
 [
   {
+    "version": "1.1.0",
+    "date": "2026-10-26",
+    "items": [
+      {
+        "type": "new",
+        "en": "Seed lock per Gaea node: vary the shapes from one variant to the next while keeping the same colours.",
+        "fr": "Verrou de seed par nœud Gaea : faites varier les formes d'une variante à l'autre en gardant les mêmes couleurs."
+      },
+      {
+        "type": "new",
+        "en": "\"Duplicate into this pack\" mode for the master material, in Unreal and Unity: the master is copied into the pack folder with its material functions, sub-graphs and textures, so the pack ships complete.",
+        "fr": "Mode « Dupliquer dans ce pack » pour le master material, dans Unreal et Unity : le master est copié dans le dossier du pack avec ses material functions, sous-graphes et textures, pour un pack complet."
+      },
+      {
+        "type": "new",
+        "en": "An interrupted Unreal or Unity import resumes on its own: run it again and what was already imported is skipped.",
+        "fr": "Reprise automatique d'un import Unreal ou Unity interrompu : relancez, ce qui était déjà importé est sauté."
+      },
+      {
+        "type": "imp",
+        "en": "The master material is searched across the whole project, and its name accepts {Style}, {Project} and {Variant}.",
+        "fr": "Le master material est cherché dans tout le projet, et son nom accepte {Style}, {Project} et {Variant}."
+      },
+      {
+        "type": "imp",
+        "en": "Unreal compiles one mesh at a time and frees memory between two variants: no more out-of-memory crashes on big packs.",
+        "fr": "Unreal compile un mesh à la fois et libère la mémoire entre deux variantes : fini les crashs de mémoire sur les gros packs."
+      },
+      {
+        "type": "imp",
+        "en": "Unity skips the collider and LODs above 2 million triangles, instead of hanging for hours.",
+        "fr": "Unity saute le collider et les LOD au-delà de 2 millions de triangles, au lieu de bloquer pendant des heures."
+      },
+      {
+        "type": "imp",
+        "en": "Engine clean-up also removes the masters and material functions copied into the pack.",
+        "fr": "Le nettoyage du moteur retire aussi les masters et material functions copiés dans le pack."
+      },
+      {
+        "type": "imp",
+        "en": "The progress bar counts the variants already imported when an import resumes.",
+        "fr": "La barre d'avancement compte les variantes déjà importées lors d'une reprise."
+      },
+      {
+        "type": "fix",
+        "en": "The stop button stayed stuck on \"stopping\" during a Unity import.",
+        "fr": "Le bouton d'arrêt restait bloqué sur « arrêt en cours » pendant un import Unity."
+      },
+      {
+        "type": "fix",
+        "en": "The preview found no mesh in the folder picked with Browse when the project files had been moved.",
+        "fr": "L'aperçu ne trouvait aucun mesh dans le dossier choisi avec Parcourir quand les fichiers du projet avaient été déplacés."
+      }
+    ]
+  },
+  {
     "version": "1.0.1",
     "date": "2026-09-17",
     "items": [
-      { "type": "fix", "en": "Version number shown correctly at install and in About.", "fr": "Numéro de version affiché correctement à l'installation et dans « À propos »." }
+      {
+        "type": "fix",
+        "en": "Version number shown correctly at install and in About.",
+        "fr": "Numéro de version affiché correctement à l'installation et dans « À propos »."
+      }
     ]
   },
   {
     "version": "1.0.0",
     "date": "2026-09-15",
-    "summary": { "en": "First public release.", "fr": "Première version publique." },
+    "summary": {
+      "en": "First public release.",
+      "fr": "Première version publique."
+    },
     "groups": [
       {
-        "name": { "en": "Gaea", "fr": "Gaea" },
+        "name": {
+          "en": "Gaea",
+          "fr": "Gaea"
+        },
         "items": [
-          { "type": "new", "en": "Variant grid, up to 26 terrains per project. Only what changed is rebuilt.", "fr": "Grille de variantes, jusqu'à 26 terrains par projet. Seul ce qui a changé est refait." },
-          { "type": "new", "en": "Seeds in Auto, Random or Custom mode.", "fr": "Seeds en mode Auto, Aléatoire ou Personnalisé." },
-          { "type": "new", "en": "Pick the nodes to export, with an export added automatically to nodes that have none.", "fr": "Choix des nœuds à exporter, avec export ajouté automatiquement aux nœuds qui n'en ont pas." },
-          { "type": "new", "en": "Warning when the resolution is too low for a mesh (VPS).", "fr": "Alerte quand la résolution est trop basse pour un mesh (VPS)." },
-          { "type": "new", "en": "Detection of .terrain files from an older Gaea version, with the steps to follow.", "fr": "Détection des fichiers .terrain d'une ancienne version de Gaea, avec la marche à suivre." },
-          { "type": "new", "en": "Gaea build cache, with an adjustable maximum size.", "fr": "Cache des builds Gaea, avec une taille maximale réglable." }
+          {
+            "type": "new",
+            "en": "Variant grid, up to 26 terrains per project. Only what changed is rebuilt.",
+            "fr": "Grille de variantes, jusqu'à 26 terrains par projet. Seul ce qui a changé est refait."
+          },
+          {
+            "type": "new",
+            "en": "Seeds in Auto, Random or Custom mode.",
+            "fr": "Seeds en mode Auto, Aléatoire ou Personnalisé."
+          },
+          {
+            "type": "new",
+            "en": "Pick the nodes to export, with an export added automatically to nodes that have none.",
+            "fr": "Choix des nœuds à exporter, avec export ajouté automatiquement aux nœuds qui n'en ont pas."
+          },
+          {
+            "type": "new",
+            "en": "Warning when the resolution is too low for a mesh (VPS).",
+            "fr": "Alerte quand la résolution est trop basse pour un mesh (VPS)."
+          },
+          {
+            "type": "new",
+            "en": "Detection of .terrain files from an older Gaea version, with the steps to follow.",
+            "fr": "Détection des fichiers .terrain d'une ancienne version de Gaea, avec la marche à suivre."
+          },
+          {
+            "type": "new",
+            "en": "Gaea build cache, with an adjustable maximum size.",
+            "fr": "Cache des builds Gaea, avec une taille maximale réglable."
+          }
         ]
       },
       {
-        "name": { "en": "Naming and sorting", "fr": "Nommage et rangement" },
+        "name": {
+          "en": "Naming and sorting",
+          "fr": "Nommage et rangement"
+        },
         "items": [
-          { "type": "new", "en": "Naming rules applied to every file and asset, from Gaea to your engine, and undoable.", "fr": "Règles de nommage appliquées à chaque fichier et asset, de Gaea jusqu'au moteur, avec annulation possible." },
-          { "type": "new", "en": "Destination composer (style, type, variant, project) to sort assets your way.", "fr": "Composeur de destination (style, type, variante, projet) pour ranger les assets à votre façon." }
+          {
+            "type": "new",
+            "en": "Naming rules applied to every file and asset, from Gaea to your engine, and undoable.",
+            "fr": "Règles de nommage appliquées à chaque fichier et asset, de Gaea jusqu'au moteur, avec annulation possible."
+          },
+          {
+            "type": "new",
+            "en": "Destination composer (style, type, variant, project) to sort assets your way.",
+            "fr": "Composeur de destination (style, type, variante, projet) pour ranger les assets à votre façon."
+          }
         ]
       },
       {
-        "name": { "en": "Houdini", "fr": "Houdini" },
+        "name": {
+          "en": "Houdini",
+          "fr": "Houdini"
+        },
         "items": [
-          { "type": "new", "en": "Reorderable modifier chain, each link can be switched on or off and filtered by style.", "fr": "Chaîne de modificateurs réordonnable, chaque maillon activable et filtrable par style." },
-          { "type": "new", "en": "Plug in your own HDA, with a check of its input and output.", "fr": "Branchement de votre propre HDA, avec vérification de son entrée et de sa sortie." }
+          {
+            "type": "new",
+            "en": "Reorderable modifier chain, each link can be switched on or off and filtered by style.",
+            "fr": "Chaîne de modificateurs réordonnable, chaque maillon activable et filtrable par style."
+          },
+          {
+            "type": "new",
+            "en": "Plug in your own HDA, with a check of its input and output.",
+            "fr": "Branchement de votre propre HDA, avec vérification de son entrée et de sa sortie."
+          }
         ]
       },
       {
-        "name": { "en": "Engines", "fr": "Moteurs" },
+        "name": {
+          "en": "Engines",
+          "fr": "Moteurs"
+        },
         "items": [
-          { "type": "new", "en": "Import into Unreal Engine 5 (Nanite, collision, LOD, master material, one instance per variant, normal maps).", "fr": "Import dans Unreal Engine 5 (Nanite, collision, LOD, master material, instance par variante, normal maps)." },
-          { "type": "new", "en": "Import into Unity, in URP, HDRP or Built-in (ShaderGraph or existing material, Material Variants, prefabs, collider).", "fr": "Import dans Unity, en URP, HDRP ou Built-in (ShaderGraph ou matériau existant, Material Variants, prefabs, collider)." },
-          { "type": "new", "en": "Clean-up of what Stratum placed in the engine, sent to the recycle bin.", "fr": "Nettoyage de ce que Stratum a posé dans le moteur, envoyé à la corbeille." }
+          {
+            "type": "new",
+            "en": "Import into Unreal Engine 5 (Nanite, collision, LOD, master material, one instance per variant, normal maps).",
+            "fr": "Import dans Unreal Engine 5 (Nanite, collision, LOD, master material, instance par variante, normal maps)."
+          },
+          {
+            "type": "new",
+            "en": "Import into Unity, in URP, HDRP or Built-in (ShaderGraph or existing material, Material Variants, prefabs, collider).",
+            "fr": "Import dans Unity, en URP, HDRP ou Built-in (ShaderGraph ou matériau existant, Material Variants, prefabs, collider)."
+          },
+          {
+            "type": "new",
+            "en": "Clean-up of what Stratum placed in the engine, sent to the recycle bin.",
+            "fr": "Nettoyage de ce que Stratum a posé dans le moteur, envoyé à la corbeille."
+          }
         ]
       },
       {
-        "name": { "en": "Preview and library", "fr": "Aperçu et bibliothèque" },
+        "name": {
+          "en": "Preview and library",
+          "fr": "Aperçu et bibliothèque"
+        },
         "items": [
-          { "type": "new", "en": "3D preview (texture, wireframe, grid, normals, lighting presets).", "fr": "Aperçu 3D (texture, fil de fer, grille, normales, presets d'éclairage)." },
-          { "type": "new", "en": "Live ambient occlusion, adjustable in the Light panel.", "fr": "Occlusion ambiante en direct, réglable dans le panneau Lumière." },
-          { "type": "new", "en": "Photo studio, captures up to 4K.", "fr": "Studio photo, captures jusqu'en 4K." },
-          { "type": "new", "en": "Library of every mesh from every project.", "fr": "Bibliothèque de tous les meshes de tous les projets." }
+          {
+            "type": "new",
+            "en": "3D preview (texture, wireframe, grid, normals, lighting presets).",
+            "fr": "Aperçu 3D (texture, fil de fer, grille, normales, presets d'éclairage)."
+          },
+          {
+            "type": "new",
+            "en": "Live ambient occlusion, adjustable in the Light panel.",
+            "fr": "Occlusion ambiante en direct, réglable dans le panneau Lumière."
+          },
+          {
+            "type": "new",
+            "en": "Photo studio, captures up to 4K.",
+            "fr": "Studio photo, captures jusqu'en 4K."
+          },
+          {
+            "type": "new",
+            "en": "Library of every mesh from every project.",
+            "fr": "Bibliothèque de tous les meshes de tous les projets."
+          }
         ]
       },
       {
-        "name": { "en": "General", "fr": "Général" },
+        "name": {
+          "en": "General",
+          "fr": "Général"
+        },
         "items": [
-          { "type": "new", "en": "Several projects, run history and end-of-run summary.", "fr": "Plusieurs projets, historique des runs et résumé de fin de run." },
-          { "type": "new", "en": "Tools detected automatically, checks before every run.", "fr": "Outils détectés automatiquement, vérifications avant chaque run." },
-          { "type": "new", "en": "Variants deleted through the Windows recycle bin.", "fr": "Suppression de variantes via la corbeille de Windows." },
-          { "type": "new", "en": "Update alert, “Report a problem” button.", "fr": "Alerte de mise à jour, bouton « Signaler un problème »." },
-          { "type": "new", "en": "Interface in 5 languages, works fully offline.", "fr": "Interface en 5 langues, fonctionne entièrement hors ligne." }
+          {
+            "type": "new",
+            "en": "Several projects, run history and end-of-run summary.",
+            "fr": "Plusieurs projets, historique des runs et résumé de fin de run."
+          },
+          {
+            "type": "new",
+            "en": "Tools detected automatically, checks before every run.",
+            "fr": "Outils détectés automatiquement, vérifications avant chaque run."
+          },
+          {
+            "type": "new",
+            "en": "Variants deleted through the Windows recycle bin.",
+            "fr": "Suppression de variantes via la corbeille de Windows."
+          },
+          {
+            "type": "new",
+            "en": "Update alert, “Report a problem” button.",
+            "fr": "Alerte de mise à jour, bouton « Signaler un problème »."
+          },
+          {
+            "type": "new",
+            "en": "Interface in 5 languages, works fully offline.",
+            "fr": "Interface en 5 langues, fonctionne entièrement hors ligne."
+          }
         ]
       }
     ]
