@@ -4,7 +4,7 @@
   "redirects": [
     {
       "source": "/stratum/download",
-      "destination": "https://github.com/AndreiBobe/stratum-releases/releases/latest/download/Stratum-Setup.exe",
+      "destination": "https://github.com/AndreiBobe/StratumReleases/releases/latest/download/Stratum-Setup.exe",
       "permanent": false
     }
   ]
