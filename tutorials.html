@@ -41,7 +41,7 @@ body.tu-lock { overflow: hidden; }
 .tu-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: rgba(2,10,22,0.6); border: 1px solid rgba(255,255,255,0.5); color: #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .tu-play svg { width: 20px; height: 20px; margin-left: 3px; fill: currentColor; }
 .tu-dur { position: absolute; right: 10px; bottom: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(2,10,22,0.85); font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--tu-ink); }
-.tu-new { position: absolute; left: 10px; top: 10px; padding: 3px 9px; border-radius: 6px; background: rgba(2,10,22,0.85); border: 1px solid rgba(242,215,119,0.5); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tu-gold); }
+.tu-new { position: absolute; right: 10px; top: 10px; padding: 3px 9px; border-radius: 6px; background: rgba(2,10,22,0.85); border: 1px solid rgba(242,215,119,0.5); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tu-gold); }
 
 /* Spotlight */
 .tu-feat { display: grid; grid-template-columns: 1.25fr 1fr; gap: 44px; align-items: center; padding: 26px; border-radius: 18px; border: 1px solid rgba(242,196,61,0.22); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)); }
@@ -340,6 +340,20 @@ const YT_CHANNEL = 'https://www.youtube.com/@kalysteon';
 
 const TUTORIALS = [
   {
+    yt: 'UITD_l3UqZY',
+    cat: 'gaea',
+    slug: 'export-gaea-unreal-unity',
+    // Same project file and making-of as the cliffs tutorial: the video exports that terrain
+    download: 'https://drive.google.com/uc?export=download&id=1TYqKHLUxhrxBsAakx7CfaCqwvhAYXj6g',
+    artstation: 'https://www.artstation.com/artwork/lExBBk',
+    duration: '13:21',
+    date_en: 'Oct 2026', date_fr: 'Octobre 2026',
+    title_en: 'Export your Gaea assets properly into Unreal Engine & Unity',
+    title_fr: 'Exportez proprement vos assets Gaea dans Unreal Engine et Unity',
+    desc_en: 'Your Gaea terrain looks amazing… until you import it. Let\'s fix that.\n\nIn this tutorial, I\'ll show you how to export your Gaea 2 assets as clean meshes and import them properly into Unreal Engine 5 and Unity: the right Mesher settings, normals, UVs, color and AO maps, and every trap that ruins your terrain on the way.\n\nYou\'ll learn why exporting in 8K is a bad idea, how to fix the rotation and scale when Gaea meshes land in Unreal, how to set up a realistic material (mountains aren\'t plastic), how to fix washed-out textures and flipped normals, and how to build the same result in Unity with URP, HDRP and Shader Graph.',
+    desc_fr: 'Votre terrain Gaea est superbe… jusqu\'à ce que vous l\'importiez. Réglons ça.\n\nDans ce tutoriel, je vous montre comment exporter vos assets Gaea 2 en meshes propres et les importer correctement dans Unreal Engine 5 et Unity : les bons réglages du Mesher, les normales, les UV, les maps de couleur et d\'AO, et tous les pièges qui ruinent votre terrain en chemin.\n\nVous apprendrez pourquoi exporter en 8K est une mauvaise idée, comment corriger la rotation et l\'échelle quand les meshes Gaea arrivent dans Unreal, comment monter un matériau réaliste (les montagnes ne sont pas en plastique), comment corriger les textures délavées et les normales inversées, et comment obtenir le même résultat dans Unity avec URP, HDRP et Shader Graph.'
+  },
+  {
     yt: 'X_6t6l31QFk',
     cat: 'gaea',
     slug: 'dark-fantasy-spikes-gaea-2',
@@ -482,13 +496,12 @@ function renderLegend() {
   });
 }
 
-// ── Grid: title only; the player holds the rest. The spotlight video isn't repeated. ──
+// ── Grid: title only; the player holds the rest. Every video is listed, the spotlight one included, so the count matches. ──
 function renderGrid() {
   var grid = document.getElementById('tu-grid');
   grid.innerHTML = '';
-  var feat = live()[0];
   var newIds = live().slice(0, 2).map(function (t) { return t.yt; });
-  var list = TUTORIALS.filter(function (t) { return t !== feat && (activeTool === 'all' || t.cat === activeTool); });
+  var list = TUTORIALS.filter(function (t) { return (activeTool === 'all' || t.cat === activeTool); });
   if (!list.length) { grid.appendChild(bi('div', 'tu-empty', 'No tutorial here yet, coming soon.', 'Pas encore de tutoriel ici, bientôt.')); return; }
   list.forEach(function (t) {
     var tool = toolById(t.cat);
