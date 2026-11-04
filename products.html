@@ -2027,7 +2027,7 @@ var PRODUCTS = [
   {id:'386fc789-f1d7-402f-89d4-a80913f2db2f',t:'Frostholm Glaciers Cartoon',p:89.99,col:'frostholm',st:'cartoon',thl:'img/products/frostholm-glaciers-cartoon.webp',th:'https://media.fab.com/image_previews/gallery_images/3d681940-6d10-405a-a7ec-f6beb0cef3b5/6873e8a0-86f5-412f-a33e-1cd948dba9f6.jpg',vf:'PkkmyndfI2Y',vs:'z0CtDTxMvWE'},
   // ── 8K PACKS ──────────────────────────────────────────────────────────
   {id:'85fe6436-38a3-475b-95d7-9ec0f4a57733',t:'Arctic Landscape Pack',p:34.99,col:'8k',v:1,bi:'c',b2:'Ice',thl:'img/products/8k-arctic.webp',th:'https://media.fab.com/image_previews/gallery_images/67ab9f45-45a9-4d70-a543-fafc3908133e/295f999b-f6d4-40d5-b29e-7a04b207fcc9.jpg',vs:'wQZuS7E9588',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/8k-arctic-landscape-pack-291741',pa:'https://www.artstation.com/marketplace/p/kMB9/8k-arctic-landscape-pack'},
-  {id:'72f2e599-e00d-454e-a1c3-1227b12fe90e',t:'Island Landscape Pack',p:34.99,col:'8k',v:2,bi:'l',b2:'Coast',thl:'img/products/8k-island.webp',th:'https://media.fab.com/image_previews/gallery_images/34e7043d-74c6-4b6c-a5e4-2bd1f2c30178/51744388-746d-4e40-80dc-5160ad6e503d.jpg',vs:'Az2pWjcJwZ0',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/8k-island-landscape-pack-294443',pa:'https://www.artstation.com/marketplace/p/JNNk/8k-island-landscape-pack'},
+  {id:'72f2e599-e00d-454e-a1c3-1227b12fe90e',t:'Island Landscape Pack',p:34.99,col:'8k',v:2,bi:'l',b2:'Coast',thl:'img/products/8k-island.webp',th:'https://media.fab.com/image_previews/gallery_images/34e7043d-74c6-4b6c-a5e4-2bd1f2c30178/51744388-746d-4e40-80dc-5160ad6e503d.jpg',vs:'Az2pWjcJwZ0',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/island-landscape-pack-294443',pa:'https://www.artstation.com/marketplace/p/JNNk/8k-island-landscape-pack'},
   {id:'d1cc7e58-1282-4985-84de-722052e1f263',t:'Canyon Landscape Pack',p:34.99,col:'8k',v:3,bi:'m',b2:'Desert',thl:'img/products/8k-canyon.webp',th:'https://media.fab.com/image_previews/gallery_images/f5b6bfdb-1a25-427a-8326-c2e466e5d95b/5a2ce11a-19d3-4eb4-8ddd-32c1500b6fa0.jpg',vs:'ZUwPlwBBY54',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/8k-canyon-landscape-pack-297171',pa:'https://www.artstation.com/marketplace/p/7Gyd/8k-canyon-landscape-pack'},
   {id:'2d95efdd-74f4-40e2-8189-8402aec130c4',t:'Volcano Landscape Pack',p:34.99,col:'8k',v:5,bi:'a',b2:'Volcanic',thl:'img/products/8k-volcano.webp',th:'https://media.fab.com/image_previews/gallery_images/856b46ac-6946-4386-a169-e146be3aefd3/38059709-cf00-474b-807a-e7db3d7315c9.jpg',vs:'G833u3tenyE',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/8k-volcano-landscape-pack-300480',pa:'https://www.artstation.com/marketplace/p/n7k2V/8k-volcano-landscape-pack'},
   {id:'6d867688-80b8-4c45-9c83-ddddd52eafcf',t:'Alpine Landscape Pack',p:34.99,col:'8k',v:1,bi:'m',b2:'Snow',thl:'img/products/8k-alpine.webp',th:'https://media.fab.com/image_previews/gallery_images/e85f0f85-1e43-4a79-9eae-ce14dc0355b5/9fe4a5d7-7c2c-40d2-ab08-036438aefff0.jpg',vs:'gVUtd2-DbaM',pu:'https://assetstore.unity.com/packages/3d/environments/landscapes/8k-alpine-landscape-pack-305335'},
@@ -2394,7 +2394,7 @@ var PRODUCT_SPECS = {
     {k:'Materials',  v:'Sand \u00b7 Grass \u00b7 Rock'},
     {k:'Textures',   v:'Full PBR (albedo, normal, roughness)'},
     {k:'Format',     v:'PNG heightmaps'},
-    {k:'Rendering',  v:'Nanite \u00b7 Lumen \u00b7 HDRP'}
+    {k:'Rendering',  v:'Nanite \u00b7 Lumen \u00b7 HDRP \u00b7 URP'}
   ],
   '85fe6436': [
     {k:'Engine',     v:'UE 5.3 to 5.7'},
@@ -2404,7 +2404,7 @@ var PRODUCT_SPECS = {
     {k:'Materials',  v:'Ice \u00b7 Cliff \u00b7 Mud'},
     {k:'Textures',   v:'Full PBR (albedo, normal, roughness)'},
     {k:'Format',     v:'PNG heightmaps'},
-    {k:'Rendering',  v:'Nanite \u00b7 Lumen \u00b7 HDRP'}
+    {k:'Rendering',  v:'Nanite \u00b7 Lumen \u00b7 HDRP \u00b7 URP'}
   ],
   '6d867688': [
     {k:'Engine',     v:'UE 5.3 to 5.7'},
@@ -3419,6 +3419,10 @@ var PRODUCT_RICH_DESC = {
       '<div class="rdesc-mats">',
         '<div class="rdesc-mat"><b>Heightmaps</b>10 unique island landscapes at 8192\u00d78192 native resolution \u00b7 Ready to import in any engine</div>',
         '<div class="rdesc-mat"><b>Materials</b>3 fully customizable PBR landscape materials \u00b7 Sand \u00b7 Grass \u00b7 Rock \u00b7 Each with albedo, normal and roughness layers</div>',
+        '<div class="rdesc-mat"><b>V2 for Unity</b>Terrain system rebuilt from the ground up: one shader and one material for HDRP and URP</div>',
+        '<div class="rdesc-mat"><b>Unity terrain material</b>5 surfaces blended by height: Leaves \u00b7 Cliff \u00b7 Mud \u00b7 Sand \u00b7 Wet Sand \u00b7 Tessellation on HDRP \u00b7 Procedural anti-tiling</div>',
+        '<div class="rdesc-mat"><b>Unity scatter tool</b>Terrain Mask Scatter places trees, rocks, props and ground cover from your painted masks, with one-click presets</div>',
+        '<div class="rdesc-mat"><b>Unity content</b>18 prefabs with LODs and colliders \u00b7 50 hand-painted masks up to 8K \u00b7 Water for HDRP and URP \u00b7 Demo scenes for both \u00b7 PDF documentation</div>',
       '</div>',
     '</div>',
   ].join(''),
@@ -3439,6 +3443,10 @@ var PRODUCT_RICH_DESC = {
       '<div class="rdesc-mats">',
         '<div class="rdesc-mat"><b>Heightmaps</b>10 unique arctic landscapes at 8192\u00d78192 native resolution \u00b7 Ready to import in any engine</div>',
         '<div class="rdesc-mat"><b>Materials</b>3 fully customizable PBR landscape materials \u00b7 Ice \u00b7 Cliff \u00b7 Mud \u00b7 Each with albedo, normal and roughness layers</div>',
+        '<div class="rdesc-mat"><b>V2 for Unity</b>Terrain system rebuilt from the ground up: one shader and one material for HDRP and URP</div>',
+        '<div class="rdesc-mat"><b>Unity terrain material</b>5 blended surfaces: Snow \u00b7 Ice \u00b7 Cliff \u00b7 Mud, plus a free slot for your textures \u00b7 Tessellation on HDRP \u00b7 Procedural anti-tiling</div>',
+        '<div class="rdesc-mat"><b>Unity scatter tool</b>Terrain Mask Scatter places trees, rocks, props and ground cover from your painted masks, with one-click presets</div>',
+        '<div class="rdesc-mat"><b>Unity content</b>40 hand-painted masks up to 8K \u00b7 Demo scenes for HDRP and URP \u00b7 Volume profiles for both \u00b7 PDF documentation</div>',
       '</div>',
     '</div>',
   ].join(''),
@@ -3838,7 +3846,10 @@ var ASSET_COUNT_8K = {
 };
 
 /* Unity screenshots per product (8-char id → [url]). Any other gallery image is an Unreal capture. */
-var GALLERY_UNITY = {};
+var GALLERY_UNITY = {
+  '72f2e599': ['https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/fc4aac59-932d-466b-8943-a1412be71040_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/cd64c17e-3f86-4e3e-8182-8fa12fdd42ac_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/fd684a2a-7ac9-4029-b5d6-a0ad1e647639_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/49193083-05ed-444d-a674-798b3cb6477b_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/edfdcd24-1ad2-4fd2-a9f8-fc0a968264f7_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/7ef843a6-10b2-4ce9-9a3a-cf26d90aefb9_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/d0c64e1d-73f9-443f-91b7-5231fdd2f2cc_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/d7121ba0-1fb6-40aa-b02c-ddb32720472c_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/3a91906e-b5a5-4cda-8424-a8560978a8e4_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/cc753246-ae42-4a3f-b740-8e6fcc09dfbd_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/770b6b83-2905-4148-a47e-b8f6dd0f9a73_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/45947e8b-fe4c-4dba-b05a-a5a906e7d8d5_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/eac8756f-627f-469b-a6ae-e2ce92b16b51_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/ea03c088-2ab5-4c2b-8c4b-aa40f02a802b_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/5d4fded3-6f3e-40b0-b7b4-b3f6d8ebc1c6_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/8723491d-11cc-4dd2-ba70-e42b68b01b97_scaled.jpg'],
+  '85fe6436': ['https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/5beec80a-056a-436e-8b90-dde5b21b0a1e_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/29217449-b525-46d3-b20c-146ec75b1796_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/f167cd98-1a34-45fa-8bf1-6c2d29ebcfef_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/2039fd21-b344-497d-aa8b-f5a832dd1018_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e5b5b238-e16e-487b-b558-8fbaa4483e31_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/50a573a2-00c6-4d3c-b52f-5fdf7ad6e10d_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/b2921c20-41a9-4fcd-ae98-db603fec05a2_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/9f610101-a6b2-41c6-bd97-7d2f46436dab_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/2b2ccd9e-b5db-41d9-800e-1d063288d00a_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/2fefe654-f3fa-4bcf-aa3a-68bb16cd36a8_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/958aa395-0eae-4a02-8373-1da4001c37f9_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/30720f3e-76c2-4719-a074-9a0c5fb0d42e_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/84f81e2c-c437-4f4c-bcb7-88cd1a68e552_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/9be58da8-84d3-4bf0-9b8a-5421a2ec0c98_scaled.jpg','https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/326d5321-da1a-4797-b2bb-31e692088afc_scaled.jpg']
+};
 
 /* Versions delivered with a direct purchase */
 var DW_INCLUDED = { '8k': ['ue', 'unity', 'raw'], arctic: ['ue', 'unity', 'raw'], bundles: ['ue', 'unity', 'raw'], frostholm: ['ue'] };
@@ -4127,11 +4138,41 @@ function _dwRenderGet() {
     s.map(function(x){ return '<div class="dw-stat"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join('') + '</div>' : '';
 }
 
+/* French descriptions, pack by pack; a pack without one keeps its English text */
+var PRODUCT_RICH_DESC_FR = {
+  '72f2e599': [
+    '<p class="rdesc-intro">Inspir\u00e9 des \u00eeles du monde, avec des <b>plages de sable</b>, des collines d\u2019un vert profond et des paysages tropicaux d\u2019une beaut\u00e9 naturelle et exotique. Un <span style="color:var(--gold-bright)">pack de heightmaps pr\u00eat pour la production</span> avec <b>10 paysages uniques</b> en 8K natif.</p>',
+    '<div class="rdesc-block">',
+      '<div class="rdesc-mats">',
+        '<div class="rdesc-mat"><b>Heightmaps</b>10 paysages d\u2019\u00eeles uniques en 8192\u00d78192 \u00b7 Pr\u00eats \u00e0 importer dans tout moteur</div>',
+        '<div class="rdesc-mat"><b>Mat\u00e9riaux</b>3 mat\u00e9riaux de paysage PBR personnalisables \u00b7 Sable \u00b7 Herbe \u00b7 Roche \u00b7 Chacun avec albedo, normales et roughness</div>',
+        '<div class="rdesc-mat"><b>V2 pour Unity</b>Syst\u00e8me de terrain r\u00e9\u00e9crit de z\u00e9ro : un seul shader et un seul mat\u00e9riau pour HDRP et URP</div>',
+        '<div class="rdesc-mat"><b>Mat\u00e9riau de terrain Unity</b>5 surfaces m\u00eal\u00e9es selon la hauteur : Feuillage \u00b7 Falaise \u00b7 Boue \u00b7 Sable \u00b7 Sable mouill\u00e9 \u00b7 Tessellation en HDRP \u00b7 Anti-r\u00e9p\u00e9tition proc\u00e9dural</div>',
+        '<div class="rdesc-mat"><b>Outil de placement Unity</b>Terrain Mask Scatter place arbres, rochers, props et couvre-sol depuis vos masques peints, avec des r\u00e9glages en un clic</div>',
+        '<div class="rdesc-mat"><b>Contenu Unity</b>18 prefabs avec LOD et colliders \u00b7 50 masques peints \u00e0 la main, jusqu\u2019en 8K \u00b7 Eau pour HDRP et URP \u00b7 Sc\u00e8nes de d\u00e9mo pour les deux \u00b7 Documentation PDF</div>',
+      '</div>',
+    '</div>',
+  ].join(''),
+  '85fe6436': [
+    '<p class="rdesc-intro">Inspir\u00e9 des paysages glac\u00e9s de l\u2019Arctique, avec des <b>montagnes enneig\u00e9es</b>, des sommets monumentaux et un relief sculpt\u00e9 par l\u2019\u00e9rosion. Un <span style="color:var(--gold-bright)">pack de heightmaps pr\u00eat pour la production</span> avec <b>10 paysages uniques</b> en 8K natif.</p>',
+    '<div class="rdesc-block">',
+      '<div class="rdesc-mats">',
+        '<div class="rdesc-mat"><b>Heightmaps</b>10 paysages arctiques uniques en 8192\u00d78192 \u00b7 Pr\u00eats \u00e0 importer dans tout moteur</div>',
+        '<div class="rdesc-mat"><b>Mat\u00e9riaux</b>3 mat\u00e9riaux de paysage PBR personnalisables \u00b7 Glace \u00b7 Falaise \u00b7 Boue \u00b7 Chacun avec albedo, normales et roughness</div>',
+        '<div class="rdesc-mat"><b>V2 pour Unity</b>Syst\u00e8me de terrain r\u00e9\u00e9crit de z\u00e9ro : un seul shader et un seul mat\u00e9riau pour HDRP et URP</div>',
+        '<div class="rdesc-mat"><b>Mat\u00e9riau de terrain Unity</b>5 surfaces m\u00eal\u00e9es : Neige \u00b7 Glace \u00b7 Falaise \u00b7 Boue, plus un emplacement libre pour vos textures \u00b7 Tessellation en HDRP \u00b7 Anti-r\u00e9p\u00e9tition proc\u00e9dural</div>',
+        '<div class="rdesc-mat"><b>Outil de placement Unity</b>Terrain Mask Scatter place arbres, rochers, props et couvre-sol depuis vos masques peints, avec des r\u00e9glages en un clic</div>',
+        '<div class="rdesc-mat"><b>Contenu Unity</b>40 masques peints \u00e0 la main, jusqu\u2019en 8K \u00b7 Sc\u00e8nes de d\u00e9mo pour HDRP et URP \u00b7 Profils de volume pour les deux \u00b7 Documentation PDF</div>',
+      '</div>',
+    '</div>',
+  ].join('')
+};
+
 /* ── About: built from the existing rich description, without highlights, links and repeats ── */
 function _dwParseRich(p) {
   var k = _dwKey(p);
   var out = { intro: '', types: [], rows: [], more: [], moreLabel: '', doc: '' };
-  var src = PRODUCT_RICH_DESC[k];
+  var src = (_t('en', 'fr') === 'fr' && PRODUCT_RICH_DESC_FR[k]) || PRODUCT_RICH_DESC[k];
   if (!src) {
     if (p.col === 'frostholm') out.intro = LANDSCAPE_INTRO[(p.t.split(' ')[1] || '')] || '';
     else if (p.col === '8k') out.intro = DESC_8K[k] || '';
